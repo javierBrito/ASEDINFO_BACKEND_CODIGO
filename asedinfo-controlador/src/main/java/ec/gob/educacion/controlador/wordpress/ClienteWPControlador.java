@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ec.gob.educacion.controlador.util.Constantes;
+import ec.gob.educacion.modelo.catalogo.Persona;
 import ec.gob.educacion.modelo.competencia.Participante;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
 import ec.gob.educacion.modelo.wordpress.ClienteWP;
+import ec.gob.educacion.servicio.catalogo.PersonaServicio;
 import ec.gob.educacion.servicio.competencia.ParticipanteServicio;
 import ec.gob.educacion.servicio.wordpress.ClienteWPServicio;
 
@@ -24,6 +26,8 @@ public class ClienteWPControlador {
 	private ClienteWPServicio clienteWPServicio;
 	@Autowired
 	private ParticipanteServicio participanteServicio;
+	@Autowired
+	private PersonaServicio personaServicio;
 
 	@GetMapping(value = "listarTodosClienteWP")
 	public ResponseGenerico<ClienteWP> listarTodosClienteWP() {
@@ -44,6 +48,22 @@ public class ClienteWPControlador {
 		if (listaClienteWP.size() > 0) {
 			for (ClienteWP clienteWP : listaClienteWP) {
 				System.out.println("clienteWP.getCustomerId() = "+clienteWP.getCustomerId());
+				// Mover datos desde ClienteWP a Persona
+				Persona persona = new Persona();
+				persona.setIdentificacion(clienteWP.getEmail());
+				//persona.setCedula(clienteWP.getCedula());
+				persona.setNombres(clienteWP.getFirstName());
+				persona.setApellidos(clienteWP.getLastName());
+				//persona.setFechaNacimiento(clienteWP.getBirthday())
+				persona.setCorreo(clienteWP.getEmail());
+				//persona.setCelular(clienteWP.getCelular);
+				persona.setEstado("A");
+				
+				// Guardar el registro
+				personaServicio.registrar(persona);
+				System.out.println("persona.getCodigo() = "+persona.getCodigo());
+
+				System.out.println("clienteWP.getCustomerId() = "+clienteWP.getCustomerId());
 				// Mover datos desde ClienteWP a Participante
 				Participante participante = new Participante();
 				participante.setCustomerId(clienteWP.getCustomerId());
@@ -54,6 +74,7 @@ public class ClienteWPControlador {
 				participante.setLastName(clienteWP.getLastName());
 				participante.setUserId(clienteWP.getUserId());
 				participante.setUsername(clienteWP.getUsername());
+				participante.setCodPersona(persona.getCodigo());
 				
 				// Guardar el registro
 				System.out.println("participante.getCustomerId() = "+participante.getCustomerId());

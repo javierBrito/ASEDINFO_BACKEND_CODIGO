@@ -45,6 +45,18 @@ public class ParticipanteControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarParticipantePorPersona/{codPersona}")
+	public ResponseGenerico<Participante> listarParticipantePorPersona(@PathVariable("codPersona") Long codPersona) {
+		List<Participante> listaParticipante = participanteServicio.listarParticipantePorPersona(codPersona);
+		// Respuesta
+		ResponseGenerico<Participante> response = new ResponseGenerico<>();
+		response.setListado(listaParticipante);
+		response.setTotalRegistros((long) listaParticipante.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 	/**
 	 * REST para obtener Socio
 	 * 

@@ -24,6 +24,11 @@ public class ParticipanteServicioImpl implements ParticipanteServicio {
 	}
 
 	@Override
+	public List<Participante> listarParticipantePorPersona(Long codPersona) {
+		return participanteRepositorio.listarParticipantePorPersona(codPersona);
+	}
+
+	@Override
 	public List<Participante> listarParticipantePorEstado(String estadoPedido) {
 		return participanteRepositorio.listarParticipantePorEstado(estadoPedido);
 	}

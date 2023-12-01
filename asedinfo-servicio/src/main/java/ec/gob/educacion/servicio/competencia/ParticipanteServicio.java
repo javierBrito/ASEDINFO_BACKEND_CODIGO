@@ -21,6 +21,14 @@ public interface ParticipanteServicio {
 	Participante buscarParticipantePorCodigo(Long codigo);
 
 	/**
+	 * Permite obtener lista Socio
+	 * 
+	 * @param codPersona
+	 * @return listaParticipante
+	 */
+	List<Participante> listarParticipantePorPersona(Long codPersona);
+
+	/**
 	 * Permite obtener lista Participante
 	 * 
 	 * @param codPersona
@@ -31,7 +39,7 @@ public interface ParticipanteServicio {
 	/**
 	 * Permite registrar Participante
 	 * 
-	 * @param ClienteWP
+	 * @param ParticipanteWP
 	 * @return Participante
 	 */
 	Participante registrar(Participante participante);
