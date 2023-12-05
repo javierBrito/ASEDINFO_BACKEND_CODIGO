@@ -11,31 +11,36 @@ import ec.gob.educacion.servicio.competencia.PuntajeServicio;
 public class PuntajeServicioImpl implements PuntajeServicio {
 
 	@Autowired
-	private PuntajeRepositorio PuntajeRepositorio;
+	private PuntajeRepositorio puntajeRepositorio;
 
 	@Override
 	public List<Puntaje> listarTodosPuntaje() {
-		return PuntajeRepositorio.findAll();
+		return puntajeRepositorio.findAll();
 	}
 
 	@Override
 	public List<Puntaje> listarPuntajeActivo(String estado) {
-		return PuntajeRepositorio.findByEstadoOrderByCodigo(estado);
+		return puntajeRepositorio.findByEstadoOrderByCodigo(estado);
+	}
+
+	@Override
+	public List<Puntaje> listarPuntajePorSubcategoria(Long codSubcategoria, Long codInstancia) {
+		return puntajeRepositorio.listarPuntajePorSubcategoria(codSubcategoria, codInstancia);
 	}
 
 	@Override
 	public Puntaje buscarPuntajePorCodigo(Long codigo) {
-		return PuntajeRepositorio.findByCodigo(codigo);
+		return puntajeRepositorio.findByCodigo(codigo);
 	}
 
 	@Override
 	public Puntaje registrar(Puntaje puntaje) {
-		return PuntajeRepositorio.save(puntaje);
+		return puntajeRepositorio.save(puntaje);
 	}
 
 	@Override
 	public Puntaje crearPuntaje(Puntaje puntaje) {
-		return PuntajeRepositorio.save(puntaje);
+		return puntajeRepositorio.save(puntaje);
 	}
 	
 }

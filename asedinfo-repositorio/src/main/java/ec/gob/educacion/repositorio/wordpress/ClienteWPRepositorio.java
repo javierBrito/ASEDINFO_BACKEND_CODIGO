@@ -11,7 +11,7 @@ import ec.gob.educacion.modelo.wordpress.ClienteWP;
 public interface ClienteWPRepositorio extends JpaRepository<ClienteWP, Long> {
 
 	@Query(nativeQuery = false, value = "select ped.clienteWP from Pedido ped join ped.clienteWP cli join cli.user use where ped.status = 'wc-completed'")
-	List<ClienteWP> listarClienteWPPorEstado(@Param("estadoPedido") String estadoPedido);
+	List<ClienteWP> migrarClienteWP();
 
 	ClienteWP findByCustomerId(Long customerId);
 }

@@ -26,7 +26,7 @@ public interface ClienteWPServicio {
 	 * @param codPersona
 	 * @return listaClienteWP
 	 */
-	List<ClienteWP> listarClienteWPPorEstado(String estadoPedido);
+	List<ClienteWP> migrarClienteWP();
 
 	/**
 	 * Permite registrar ClienteWP

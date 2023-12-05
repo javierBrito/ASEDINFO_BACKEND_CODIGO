@@ -46,6 +46,18 @@ public class PuntajeControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarPuntajePorSubcategoria/{codSubcategoria}/{codInstancia}")
+	public ResponseGenerico<Puntaje> listarPuntajePorSubcategoria(@PathVariable("codSubcategoria") Long codSubcategoria, @PathVariable("codInstancia") Long codInstancia) {
+		List<Puntaje> listaPuntaje = puntajeServicio.listarPuntajePorSubcategoria(codSubcategoria, codInstancia);
+		// Respuesta
+		ResponseGenerico<Puntaje> response = new ResponseGenerico<>();
+		response.setListado(listaPuntaje);
+		response.setTotalRegistros((long) listaPuntaje.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 	/**
 	 * REST para obtener Puntaje
 	 * 

@@ -59,7 +59,7 @@ public class Puntaje implements java.io.Serializable {
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "cod_sub_categoria", nullable = false)
+	@JoinColumn(name = "cod_subcategoria", nullable = false)
 	private Subcategoria subcategoria;
 	
 	@Transient
@@ -99,7 +99,6 @@ public class Puntaje implements java.io.Serializable {
 	public Long getCodModeloPuntaje() {
 		if (this.modeloPuntaje != null) {
 			codModeloPuntaje = this.modeloPuntaje.getCodigo();
-			desModeloPuntaje = this.modeloPuntaje.getDenominacion();
 		}
 		return codModeloPuntaje;
 	}
@@ -109,6 +108,9 @@ public class Puntaje implements java.io.Serializable {
 	}
 
 	public String getDesModeloPuntaje() {
+		if (this.modeloPuntaje != null) {
+			desModeloPuntaje = this.modeloPuntaje.getDenominacion();
+		}
 		return desModeloPuntaje;
 	}
 
@@ -127,7 +129,6 @@ public class Puntaje implements java.io.Serializable {
 	public Long getCodInstancia() {
 		if (this.instancia != null) {
 			codInstancia = this.instancia.getCodigo();
-			desInstancia = this.instancia.getDenominacion();
 		}
 		return codInstancia;
 	}
@@ -137,6 +138,9 @@ public class Puntaje implements java.io.Serializable {
 	}
 
 	public String getDesInstancia() {
+		if (this.instancia != null) {
+			desInstancia = this.instancia.getDenominacion();
+		}
 		return desInstancia;
 	}
 
@@ -155,7 +159,6 @@ public class Puntaje implements java.io.Serializable {
 	public Long getCodParticipante() {
 		if (this.participante != null) {
 			codParticipante = this.participante.getCodigo();
-			nombreParticipante = this.participante.getFirstName() + " " + this.participante.getLastName();
 		}
 		return codParticipante;
 	}
@@ -165,6 +168,9 @@ public class Puntaje implements java.io.Serializable {
 	}
 
 	public String getNombreParticipante() {
+		if (this.participante != null) {
+			nombreParticipante = this.participante.getFirstName() + " " + this.participante.getLastName();
+		}
 		return nombreParticipante;
 	}
 
@@ -199,7 +205,6 @@ public class Puntaje implements java.io.Serializable {
 	public Long getCodSubcategoria() {
 		if (this.subcategoria != null) {
 			codSubcategoria = this.subcategoria.getCodigo();
-			desSubcategoria = this.subcategoria.getDenominacion();
 		}
 		return codSubcategoria;
 	}
@@ -209,6 +214,9 @@ public class Puntaje implements java.io.Serializable {
 	}
 
 	public String getDesSubcategoria() {
+		if (this.subcategoria != null) {
+			desSubcategoria = this.subcategoria.getDenominacion();
+		}
 		return desSubcategoria;
 	}
 
@@ -219,7 +227,6 @@ public class Puntaje implements java.io.Serializable {
 	public Long getCodCategoria() {
 		if (this.subcategoria != null) {
 			codCategoria = this.subcategoria.getCategoria().getCodigo();
-			desCategoria = this.subcategoria.getCategoria().getDenominacion();
 		}
 		return codCategoria;
 	}
@@ -229,6 +236,9 @@ public class Puntaje implements java.io.Serializable {
 	}
 
 	public String getDesCategoria() {
+		if (this.subcategoria != null) {
+			desCategoria = this.subcategoria.getCategoria().getDenominacion();
+		}
 		return desCategoria;
 	}
 

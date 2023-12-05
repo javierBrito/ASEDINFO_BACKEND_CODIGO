@@ -15,7 +15,7 @@ import ec.gob.educacion.modelo.competencia.Participante;
 import ec.gob.educacion.servicio.competencia.ParticipanteServicio;
 
 @RestController
-@RequestMapping("wordpress/")
+@RequestMapping("competencia/")
 public class ParticipanteControlador {
 
 	@Autowired
@@ -48,6 +48,18 @@ public class ParticipanteControlador {
 	@GetMapping(value = "listarParticipantePorPersona/{codPersona}")
 	public ResponseGenerico<Participante> listarParticipantePorPersona(@PathVariable("codPersona") Long codPersona) {
 		List<Participante> listaParticipante = participanteServicio.listarParticipantePorPersona(codPersona);
+		// Respuesta
+		ResponseGenerico<Participante> response = new ResponseGenerico<>();
+		response.setListado(listaParticipante);
+		response.setTotalRegistros((long) listaParticipante.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
+	@GetMapping(value = "listarParticipantePorSubcategoria/{codSubcategoria}")
+	public ResponseGenerico<Participante> listarParticipantePorSubcategoria(@PathVariable("codSubcategoria") Long codSubcategoria) {
+		List<Participante> listaParticipante = participanteServicio.listarParticipantePorSubcategoria(codSubcategoria);
 		// Respuesta
 		ResponseGenerico<Participante> response = new ResponseGenerico<>();
 		response.setListado(listaParticipante);

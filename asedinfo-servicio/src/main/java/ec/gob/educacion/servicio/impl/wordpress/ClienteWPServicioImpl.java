@@ -24,8 +24,8 @@ public class ClienteWPServicioImpl implements ClienteWPServicio {
 	}
 
 	@Override
-	public List<ClienteWP> listarClienteWPPorEstado(String estadoPedido) {
-		return clienteWPRepositorio.listarClienteWPPorEstado(estadoPedido);
+	public List<ClienteWP> migrarClienteWP() {
+		return clienteWPRepositorio.migrarClienteWP();
 	}
 
 	@Override
