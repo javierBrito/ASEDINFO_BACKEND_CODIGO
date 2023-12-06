@@ -29,6 +29,14 @@ public interface PuntajeServicio {
 	List<Puntaje> listarPuntajePorSubcategoria(Long codSubcategoria, Long codInstancia);
 
 	/**
+	 * Permite listar Puntaje Activo
+	 * 
+	 * @param estado
+	 * @return lista Puntaje
+	 */
+	List<Puntaje> listarPuntajePorParticipante(Long codParticipante, Long codInstancia);
+
+	/**
 	 * Permite obtener Puntaje
 	 * 
 	 * @param codigo

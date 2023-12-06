@@ -16,4 +16,7 @@ public interface PuntajeRepositorio extends JpaRepository<Puntaje, Long> {
 
 	@Query(nativeQuery = false, value = "select r from Puntaje r where r.subcategoria.codigo = :codSubcategoria and  r.instancia.codigo = :codInstancia")
 	List<Puntaje> listarPuntajePorSubcategoria(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);
+
+	@Query(nativeQuery = false, value = "select r from Puntaje r where r.participante.codigo = :codParticipante and  r.instancia.codigo = :codInstancia")
+	List<Puntaje> listarPuntajePorParticipante(@Param("codParticipante") Long codParticipante, @Param("codInstancia") Long codInstancia);
 }
