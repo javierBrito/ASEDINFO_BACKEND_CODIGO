@@ -19,6 +19,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import ec.gob.educacion.modelo.catalogo.Instancia;
 import ec.gob.educacion.modelo.catalogo.Persona;
 import ec.gob.educacion.modelo.catalogo.Subcategoria;
 
@@ -86,6 +87,16 @@ public class Participante implements java.io.Serializable {
 	private Long codCategoria;
 	@Transient
 	private String desCategoria;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "cod_instancia", nullable = false)
+	private Instancia instancia;
+	
+	@Transient
+	private Long codInstancia;
+	@Transient
+	private String desInstancia;
 	
 	public Participante() {
 	}
@@ -243,4 +254,36 @@ public class Participante implements java.io.Serializable {
 	public void setSubcategoria(Subcategoria subcategoria) {
 		this.subcategoria = subcategoria;
 	}
+	
+
+	public Instancia getInstancia() {
+		return instancia;
+	}
+
+	public void setInstancia(Instancia instancia) {
+		this.instancia = instancia;
+	}
+
+	public Long getCodInstancia() {
+		if (this.instancia != null) {
+			codInstancia = this.instancia.getCodigo();
+		}
+		return codInstancia;
+	}
+
+	public void setCodInstancia(Long codInstancia) {
+		this.codInstancia = codInstancia;
+	}
+
+	public String getDesInstancia() {
+		if (this.instancia != null) {
+			desInstancia = this.instancia.getDenominacion();
+		}
+		return desInstancia;
+	}
+
+	public void setDesInstancia(String desInstancia) {
+		this.desInstancia = desInstancia;
+	}
+
 }

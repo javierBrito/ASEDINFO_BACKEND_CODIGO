@@ -69,6 +69,18 @@ public class ParticipanteControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarParticipantePorSubcategoriaInstancia/{codSubcategoria}/{codInstancia}")
+	public ResponseGenerico<Participante> listarParticipantePorSubcategoriaInstancia(@PathVariable("codSubcategoria") Long codSubcategoria, @PathVariable("codInstancia") Long codInstancia) {
+		List<Participante> listaParticipante = participanteServicio.listarParticipantePorSubcategoriaInstancia(codSubcategoria, codInstancia);
+		// Respuesta
+		ResponseGenerico<Participante> response = new ResponseGenerico<>();
+		response.setListado(listaParticipante);
+		response.setTotalRegistros((long) listaParticipante.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 	/**
 	 * REST para obtener Socio
 	 * 

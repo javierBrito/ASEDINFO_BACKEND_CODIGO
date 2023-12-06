@@ -37,6 +37,14 @@ public interface ParticipanteServicio {
 	List<Participante> listarParticipantePorSubcategoria(Long codSubcategoria);
 
 	/**
+	 * Permite listar Participante Activo
+	 * 
+	 * @param estado
+	 * @return lista Participante
+	 */
+	List<Participante> listarParticipantePorSubcategoriaInstancia(Long codSubcategoria, Long codInstancia);
+
+	/**
 	 * Permite obtener lista Participante
 	 * 
 	 * @param codPersona
