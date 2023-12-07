@@ -29,7 +29,6 @@ public class RolAplicacionRecursoServicioImpl implements RolAplicacionRecursoSer
 
 	@Override
 	public List<RolAplicacionRecurso> listarRolAplicacionRecursoActivo(String estado) {
-		System.out.println("estado = "+estado);
 		return rolAplicacionRecursoRepositorio.findByEstadoOrderByCodigo(estado);
 	}
 

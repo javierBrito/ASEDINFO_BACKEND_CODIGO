@@ -29,12 +29,9 @@ public class EnviarWhatsappControlador {
 	 */
 	@RequestMapping(value = "enviarWhatsappTwilio", method = RequestMethod.POST)
 	public ResponseGenerico<ReporteDTO> enviarWhatsappTwilio(@RequestBody @Validated ReporteDTO reporteDTO) {
-		System.out.println("enviarWhatsappTwilio()...");
-
 		ResponseGenerico<ReporteDTO> response = new ResponseGenerico<>();
 
 		String respuesta = enviarWhatsappService.enviarWhatsappTwilio(reporteDTO);
-		System.out.println("respuesta = " + respuesta);
 		if (respuesta == "OK") {
 			response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 			response.setMensaje(respuesta + "Se envío el mensaje al whatsapp => " + reporteDTO.getTo());
@@ -54,12 +51,9 @@ public class EnviarWhatsappControlador {
 	 */
 	@RequestMapping(value = "enviarWhatsappOkhttp3", method = RequestMethod.POST)
 	public ResponseGenerico<ReporteDTO> enviarWhatsappOkhttp3(@RequestBody @Validated ReporteDTO reporteDTO) {
-		System.out.println("enviarWhatsappOkhttp3()...");
-
 		ResponseGenerico<ReporteDTO> response = new ResponseGenerico<>();
 
 		String respuesta = enviarWhatsappService.enviarWhatsappOkhttp3(reporteDTO);
-		System.out.println("respuesta = " + respuesta);
 		if (respuesta == "OK") {
 			response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 			response.setMensaje(respuesta + "Se envío el mensaje al whatsapp => " + reporteDTO.getTo());
@@ -79,12 +73,9 @@ public class EnviarWhatsappControlador {
 	 */
 	@RequestMapping(value = "enviarWhatsappApi", method = RequestMethod.POST)
 	public ResponseGenerico<ReporteDTO> enviarWhatsappApi(@RequestBody @Validated ReporteDTO reporteDTO) {
-		System.out.println("enviarWhatsappApi()...");
-
 		ResponseGenerico<ReporteDTO> response = new ResponseGenerico<>();
 
 		String respuesta = enviarWhatsappService.enviarWhatsappApi(reporteDTO);
-		System.out.println("respuesta = " + respuesta);
 		if (respuesta == "OK") {
 			response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 			response.setMensaje(respuesta + "Se envío el mensaje al whatsapp => " + reporteDTO.getTo());
@@ -104,12 +95,9 @@ public class EnviarWhatsappControlador {
 	 */
 	@RequestMapping(value = "enviarWhatsappDriver", method = RequestMethod.POST)
 	public ResponseGenerico<ReporteDTO> enviarWhatsappDriver(@RequestBody @Validated ReporteDTO reporteDTO) {
-		System.out.println("enviarWhatsappApi()...");
-
 		ResponseGenerico<ReporteDTO> response = new ResponseGenerico<>();
 
 		String respuesta = enviarWhatsappService.enviarWhatsappDriver(reporteDTO);
-		System.out.println("respuesta = " + respuesta);
 		if (respuesta == "OK") {
 			response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 			response.setMensaje(respuesta + "Se envío el mensaje al whatsapp => " + reporteDTO.getTo());
@@ -129,12 +117,9 @@ public class EnviarWhatsappControlador {
 	 */
 	@RequestMapping(value = "enviarWhatsappApiFacebook", method = RequestMethod.POST)
 	public ResponseGenerico<ReporteDTO> enviarWhatsappApiFacebook(@RequestBody @Validated ReporteDTO reporteDTO) {
-		System.out.println("enviarWhatsappApi()...");
-
 		ResponseGenerico<ReporteDTO> response = new ResponseGenerico<>();
 
 		String respuesta = enviarWhatsappService.enviarWhatsappApiFacebook(reporteDTO);
-		System.out.println("respuesta = " + respuesta);
 		if (respuesta == "OK") {
 			response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 			response.setMensaje(respuesta + "Se envío el mensaje al whatsapp => " + reporteDTO.getTo());

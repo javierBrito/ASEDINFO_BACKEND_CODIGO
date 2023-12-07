@@ -70,6 +70,19 @@ public class PuntajeControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarPuntajePorParticipanteRegTotal/{codParticipante}/{codInstancia}/{codModeloPuntaje}")
+	public ResponseGenerico<Puntaje> listarPuntajePorParticipanteRegTotal(@PathVariable("codParticipante") Long codParticipante, @PathVariable("codInstancia") Long codInstancia, @PathVariable("codModeloPuntaje") Long codModeloPuntaje) {
+		List<Puntaje> listaPuntaje = puntajeServicio.listarPuntajePorParticipanteRegTotal(codParticipante, codInstancia, codModeloPuntaje);
+		// Respuesta
+		ResponseGenerico<Puntaje> response = new ResponseGenerico<>();
+		response.setListado(listaPuntaje);
+		response.setTotalRegistros((long) listaPuntaje.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		System.out.println();
+		return response;
+	}
+
 	/**
 	 * REST para obtener Puntaje
 	 * 

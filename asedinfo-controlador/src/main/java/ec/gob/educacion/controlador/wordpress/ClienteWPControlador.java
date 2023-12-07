@@ -54,10 +54,8 @@ public class ClienteWPControlador {
 	@GetMapping(value = "migrarClienteWP")
 	public ResponseGenerico<ClienteWP> migrarClienteWP() {
 		List<ClienteWP> listaClienteWP = clienteWPServicio.migrarClienteWP();
-		System.out.println("listaClienteWP.size() = "+listaClienteWP.size());
 		if (listaClienteWP.size() > 0) {
 			for (ClienteWP clienteWP : listaClienteWP) {
-				System.out.println("clienteWP.getCustomerId() = "+clienteWP.getCustomerId());
 				// Mover datos desde ClienteWP a Persona
 				Persona persona = new Persona();
 				// Verificar si ya existe Persona
@@ -76,7 +74,6 @@ public class ClienteWPControlador {
 				persona.setEstado("A");
 				// Guardar la Persona
 				personaServicio.registrar(persona);
-				System.out.println("persona.getCodigo() = "+persona.getCodigo());
 				
 				// Mover datos desde Persona a Usuario
 				Usuario usuario = new Usuario();
@@ -92,7 +89,6 @@ public class ClienteWPControlador {
 				usuario.setEstado("A");
 				// Guardar el usuario
 				usuarioServicio.registrar(usuario);
-				System.out.println("usuario.getCodigo() = "+usuario.getCodigo());
 
 				// Mover datos desde Usuario a ClaveUsuario y UsuarioDetalleAccion 
 				String claveEncriptada = null;
@@ -105,12 +101,9 @@ public class ClienteWPControlador {
 				}
 				// Guardar Clave Usuario
 				ClaveUsuario claveUsuario = usuarioServicio.crearClaveUsuario(usuario, claveEncriptada);
-				System.out.println("claveUsuario.getCodigo() = "+claveUsuario.getCodigo());
 				// Guardar Usuario Detalle Acción
 				UsuarioDetalleAccion usuarioDetalleAccion = usuarioServicio.crearUsuarioDetalleAccion(usuario, Constantes.TIPO_ACCION_CREACION);
-				System.out.println("usuarioDetalleAccion.getCodigo() = "+usuarioDetalleAccion.getCodigo());
-				
-				System.out.println("clienteWP.getCustomerId() = "+clienteWP.getCustomerId());
+
 				// Mover datos desde ClienteWP a Participante
 				Participante participante = new Participante();
 				// Verificar si ya existe Persona
@@ -129,10 +122,7 @@ public class ClienteWPControlador {
 				participante.setPersona(persona);
 				
 				// Guardar el registro
-				System.out.println("participante.getCustomerId() = "+participante.getCustomerId());
 				participanteServicio.registrar(participante);
-				System.out.println("participante.getCodigo() = "+participante.getCodigo());
-				System.out.println("Registro guardado = "+participante.getFirstName() + "" + participante.getLastName());
 			}
 		}
 		// Respuesta

@@ -98,7 +98,6 @@ public class SedeControlador {
 	@DeleteMapping(value = "eliminarSedePorId/{codigo}")
 	public ResponseGenerico<Sede> eliminarSede(@PathVariable("codigo") Long codigo) {
 		Sede sede = sedeServicio.buscarSedePorCodigo(codigo);
-		System.out.println("sede = "+sede);
 		sede.setEstado(EstadoEnum.INACTIVO.getDescripcion());
 		sedeServicio.registrar(sede);
 		// Respuesta

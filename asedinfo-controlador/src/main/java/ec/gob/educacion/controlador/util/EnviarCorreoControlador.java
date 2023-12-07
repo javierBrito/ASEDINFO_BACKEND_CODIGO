@@ -30,12 +30,9 @@ public class EnviarCorreoControlador {
 	 */
 	@RequestMapping(value = "enviarCorreo", method = RequestMethod.POST)
 	public ResponseGenerico<ReporteDTO> enviarCorreo(@RequestBody @Validated ReporteDTO reporteDTO) {
-		System.out.println("enviarCorreoArchivo()...");
-
 		ResponseGenerico<ReporteDTO> response = new ResponseGenerico<>();
 
 		String respuesta = enviarCorreoService.enviarCorreoAux(reporteDTO);
-		System.out.println("respuesta = " + respuesta);
 		if (respuesta == "OK") {
 			response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 			response.setMensaje(respuesta + "Se envío el mensaje al correo => " + reporteDTO.getTo());

@@ -29,6 +29,9 @@ public class Parametro implements java.io.Serializable {
 	@Column(name = "nemonico")
 	private String nemonico;
 
+	@Column(name = "valor")
+	private int valor;
+
 	@Column(name = "valor_cadena")
 	private String valorCadena;
 
@@ -76,5 +79,13 @@ public class Parametro implements java.io.Serializable {
 
 	public void setValorCadena(String valorCadena) {
 		this.valorCadena = valorCadena;
+	}
+
+	public int getValor() {
+		return valor;
+	}
+
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 }

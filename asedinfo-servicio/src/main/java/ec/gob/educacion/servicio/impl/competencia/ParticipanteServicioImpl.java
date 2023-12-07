@@ -45,7 +45,6 @@ public class ParticipanteServicioImpl implements ParticipanteServicio {
 
 	@Override
 	public Participante registrar(Participante participante) {
-		System.out.println("participante.getCustomerId() Rep = "+participante.getCustomerId());
 		return participanteRepositorio.save(participante);
 	}
 	

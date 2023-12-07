@@ -44,10 +44,14 @@ public class PuntajeServicioImpl implements PuntajeServicio {
 	public List<Puntaje> listarPuntajePorSubcategoria(Long codSubcategoria, Long codInstancia) {
 		return puntajeRepositorio.listarPuntajePorSubcategoria(codSubcategoria, codInstancia);
 	}
-
+	
 	@Override
 	public List<Puntaje> listarPuntajePorParticipante(Long codParticipante, Long codInstancia) {
 		return puntajeRepositorio.listarPuntajePorParticipante(codParticipante, codInstancia);
+	}
+	@Override
+	public List<Puntaje> listarPuntajePorParticipanteRegTotal(Long codParticipante, Long codInstancia, Long codModeloPuntaje) {
+		return puntajeRepositorio.listarPuntajePorParticipanteRegTotal(codParticipante, codInstancia, codModeloPuntaje);
 	}
 
 	@Override
@@ -73,7 +77,6 @@ public class PuntajeServicioImpl implements PuntajeServicio {
 			Subcategoria subcategoria = subcategoriaServicio.buscarSubcategoriaPorCodigo(puntaje.getCodSubcategoria());
 			puntaje.setSubcategoria(subcategoria);
 		} 
-		System.out.println("A grabar");
 		return puntajeRepositorio.save(puntaje);
 	}
 

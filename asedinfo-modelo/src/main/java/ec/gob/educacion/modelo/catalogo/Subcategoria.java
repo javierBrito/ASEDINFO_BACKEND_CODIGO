@@ -41,6 +41,8 @@ public class Subcategoria implements java.io.Serializable {
 
 	@Transient
 	private Long codCategoria;
+	@Transient
+	private String desCategoria;
 
 	public Subcategoria() {
 	}
@@ -86,5 +88,16 @@ public class Subcategoria implements java.io.Serializable {
 
 	public void setCodCategoria(Long codCategoria) {
 		this.codCategoria = codCategoria;
+	}
+
+	public String getDesCategoria() {
+		if (this.categoria != null) {
+			desCategoria = this.categoria.getDenominacion();
+		}
+		return desCategoria;
+	}
+
+	public void setDesCategoria(String desCategoria) {
+		this.desCategoria = desCategoria;
 	}
 }
