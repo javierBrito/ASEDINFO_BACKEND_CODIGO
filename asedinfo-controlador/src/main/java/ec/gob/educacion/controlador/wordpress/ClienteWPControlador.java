@@ -17,9 +17,7 @@ import ec.gob.educacion.controlador.util.EncryptUtils;
 import ec.gob.educacion.modelo.catalogo.Persona;
 import ec.gob.educacion.modelo.competencia.Participante;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
-import ec.gob.educacion.modelo.seguridad.ClaveUsuario;
 import ec.gob.educacion.modelo.seguridad.Usuario;
-import ec.gob.educacion.modelo.seguridad.UsuarioDetalleAccion;
 import ec.gob.educacion.modelo.wordpress.ClienteWP;
 import ec.gob.educacion.servicio.catalogo.PersonaServicio;
 import ec.gob.educacion.servicio.competencia.ParticipanteServicio;
@@ -100,9 +98,9 @@ public class ClienteWPControlador {
 					e.printStackTrace();
 				}
 				// Guardar Clave Usuario
-				ClaveUsuario claveUsuario = usuarioServicio.crearClaveUsuario(usuario, claveEncriptada);
+				usuarioServicio.crearClaveUsuario(usuario, claveEncriptada);
 				// Guardar Usuario Detalle Acción
-				UsuarioDetalleAccion usuarioDetalleAccion = usuarioServicio.crearUsuarioDetalleAccion(usuario, Constantes.TIPO_ACCION_CREACION);
+				usuarioServicio.crearUsuarioDetalleAccion(usuario, Constantes.TIPO_ACCION_CREACION);
 
 				// Mover datos desde ClienteWP a Participante
 				Participante participante = new Participante();

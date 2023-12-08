@@ -10,7 +10,7 @@ import ec.gob.educacion.modelo.DTO.AplicacionDTO;
 import ec.gob.educacion.modelo.seguridad.Aplicacion;
 
 @Repository
-public interface AplicacionRepositorio extends JpaRepository<Aplicacion, Integer> {
+public interface AplicacionRepositorio extends JpaRepository<Aplicacion, Long> {
 	Aplicacion findByPrefijoAndEstado(@Param("prefijo") String prefijo, @Param("estado") String estado);
 
 	List<Aplicacion> findByEstadoOrderByNombre(String estado);
