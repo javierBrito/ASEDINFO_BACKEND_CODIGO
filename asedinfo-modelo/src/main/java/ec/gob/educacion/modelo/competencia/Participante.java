@@ -19,6 +19,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import ec.gob.educacion.modelo.catalogo.EstadoCompetencia;
 import ec.gob.educacion.modelo.catalogo.Instancia;
 import ec.gob.educacion.modelo.catalogo.Persona;
 import ec.gob.educacion.modelo.catalogo.Subcategoria;
@@ -53,7 +54,7 @@ public class Participante implements java.io.Serializable {
 	
 	@Column(name = "email")
 	private String email;
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
 	@Column(name = "date_last_active", length = 23)
@@ -73,6 +74,8 @@ public class Participante implements java.io.Serializable {
 	private Long codPersona;
 	@Transient
 	private String nombrePersona;
+	@Transient
+	private String celular;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -97,6 +100,18 @@ public class Participante implements java.io.Serializable {
 	private Long codInstancia;
 	@Transient
 	private String desInstancia;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "cod_estado_competencia", nullable = false)
+	private EstadoCompetencia estadoCompetencia;
+	
+	@Transient
+	private Long codEstadoCompetencia;
+	@Transient
+	private String desEstadoCompetencia;
+	@Transient
+	private String colorBoton;
 	
 	public Participante() {
 	}
@@ -286,4 +301,52 @@ public class Participante implements java.io.Serializable {
 		this.desInstancia = desInstancia;
 	}
 
+	public String getCelular() {
+		if (this.persona != null) {
+			celular = this.persona.getCelular();
+		}
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+	
+	public Long getCodEstadoCompetencia() {
+		if (this.estadoCompetencia != null) {
+			codEstadoCompetencia = this.estadoCompetencia.getCodigo();
+		}
+		return codEstadoCompetencia;
+	}
+
+	public void setCodEstadoCompetencia(Long codEstadoCompetencia) {
+		this.codEstadoCompetencia = codEstadoCompetencia;
+	}
+
+	public String getDesEstadoCompetencia() {
+		if (this.estadoCompetencia != null) {
+			desEstadoCompetencia = this.estadoCompetencia.getDenominacion();
+		}
+		return desEstadoCompetencia;
+	}
+
+	public void setDesEstadoCompetencia(String desEstadoCompetencia) {
+		this.desEstadoCompetencia = desEstadoCompetencia;
+	}
+
+	public EstadoCompetencia getEstadoCompetencia() {
+		return estadoCompetencia;
+	}
+
+	public void setEstadoCompetencia(EstadoCompetencia estadoCompetencia) {
+		this.estadoCompetencia = estadoCompetencia;
+	}
+
+	public String getColorBoton() {
+		return colorBoton;
+	}
+
+	public void setColorBoton(String colorBoton) {
+		this.colorBoton = colorBoton;
+	}
 }
