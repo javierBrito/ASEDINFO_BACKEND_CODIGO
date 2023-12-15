@@ -28,7 +28,7 @@ public class PedidoProducto implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "order_item__id", unique = true, nullable = false, precision = 10, scale = 0)
+	@Column(name = "order_item_id", unique = true, nullable = false, precision = 10, scale = 0)
 	private Long orderItemId;
 	
 	@JsonIgnore
@@ -44,6 +44,8 @@ public class PedidoProducto implements java.io.Serializable {
 	private ProductoWP productoWP;
 	@Transient
 	private Long productId;	
+	@Transient
+	private String postExcerpt;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -51,7 +53,11 @@ public class PedidoProducto implements java.io.Serializable {
 	private ClienteWP clienteWP;
 	@Transient
 	private Long customerId;
-	
+	/*
+	@OneToOne
+	@JoinColumn(name = "customer_id")
+	private ClienteWP clienteWP;
+	*/
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
 	@Column(name = "date_created", length = 23)
@@ -77,6 +83,9 @@ public class PedidoProducto implements java.io.Serializable {
 	}
 
 	public Long getOrderId() {
+		if (this.pedido != null) {
+			orderId = this.pedido.getOrderId();
+		}
 		return orderId;
 	}
 
@@ -93,6 +102,9 @@ public class PedidoProducto implements java.io.Serializable {
 	}
 
 	public Long getProductId() {
+		if (this.productoWP != null) {
+			productId = this.productoWP.getId();
+		}
 		return productId;
 	}
 
@@ -109,6 +121,9 @@ public class PedidoProducto implements java.io.Serializable {
 	}
 
 	public Long getCustomerId() {
+		if (this.clienteWP != null) {
+			customerId = this.clienteWP.getCustomerId();
+		}
 		return customerId;
 	}
 
@@ -124,4 +139,14 @@ public class PedidoProducto implements java.io.Serializable {
 		this.dateCreated = dateCreated;
 	}
 
+	public String getPostExcerpt() {
+		if (this.productoWP != null) {
+			postExcerpt = this.productoWP.getPostExcerpt();
+		}
+		return postExcerpt;
+	}
+
+	public void setPostExcerpt(String postExcerpt) {
+		this.postExcerpt = postExcerpt;
+	}
 }

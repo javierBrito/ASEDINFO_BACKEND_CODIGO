@@ -19,6 +19,7 @@ import ec.gob.educacion.modelo.competencia.Participante;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
 import ec.gob.educacion.modelo.seguridad.Usuario;
 import ec.gob.educacion.modelo.wordpress.ClienteWP;
+import ec.gob.educacion.modelo.wordpress.PedidoProducto;
 import ec.gob.educacion.servicio.catalogo.PersonaServicio;
 import ec.gob.educacion.servicio.competencia.ParticipanteServicio;
 import ec.gob.educacion.servicio.seguridad.UsuarioServicio;
@@ -51,6 +52,13 @@ public class ClienteWPControlador {
 
 	@GetMapping(value = "migrarClienteWP")
 	public ResponseGenerico<ClienteWP> migrarClienteWP() {
+		List<PedidoProducto> listaPedidoProducto = clienteWPServicio.migrarClienteWPedidoProducto();
+		for (PedidoProducto pedidoProducto : listaPedidoProducto) {
+			System.out.println("pedidoProducto.getOrderId() = "+pedidoProducto.getOrderId());
+			System.out.println("pedidoProducto.getCustomerId() = "+pedidoProducto.getCustomerId());
+			System.out.println("pedidoProducto.getProductId() = "+pedidoProducto.getProductId());
+			System.out.println("pedidoProducto.getPostExcerpt() = "+pedidoProducto.getPostExcerpt());
+		}
 		List<ClienteWP> listaClienteWP = clienteWPServicio.migrarClienteWPCategoria();
 		System.out.println("listaClienteWP.size() = "+listaClienteWP.size());
 		if (listaClienteWP.size() > 0) {
@@ -72,7 +80,7 @@ public class ClienteWPControlador {
 				//persona.setCelular(clienteWP.getCelular);
 				persona.setEstado("A");
 				// Guardar la Persona
-				personaServicio.registrar(persona);
+				persona = personaServicio.registrar(persona);
 				
 				// Mover datos desde Persona a Usuario
 				Usuario usuario = new Usuario();
@@ -118,6 +126,11 @@ public class ClienteWPControlador {
 				participante.setLastName(clienteWP.getLastName());
 				participante.setUserId(clienteWP.getUserId());
 				participante.setUsername(clienteWP.getUsername());
+				participante.setCodSubcategoria(1L);
+				participante.setCodInstancia(1L);
+				participante.setCodEstadoCompetencia(1L);
+				participante.setCodPersona(persona.getCodigo());
+				
 				participante.setPersona(persona);
 				
 				// Guardar el registro

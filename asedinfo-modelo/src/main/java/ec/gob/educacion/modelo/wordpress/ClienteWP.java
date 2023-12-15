@@ -36,6 +36,8 @@ public class ClienteWP implements java.io.Serializable {
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
+	@Transient
+	private Long userId;
 	
 	@Column(name = "username")
 	private String username;
@@ -58,9 +60,13 @@ public class ClienteWP implements java.io.Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
 	@Column(name = "date_registered", length = 23)
 	private Date dateRegistered;
+	/*
+	@OneToOne(mappedBy = "ClienteWP", cascade = CascadeType.ALL)
+	private PedidoProducto pedidoProducto;
+	*/
 
 	@Transient
-	private Long userId;
+	private String postExcerpt;
 
 	public ClienteWP() {
 	}
@@ -138,5 +144,13 @@ public class ClienteWP implements java.io.Serializable {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public String getPostExcerpt() {
+		return postExcerpt;
+	}
+
+	public void setPostExcerpt(String postExcerpt) {
+		this.postExcerpt = postExcerpt;
 	}
 }

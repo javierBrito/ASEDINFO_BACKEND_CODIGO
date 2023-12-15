@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ec.gob.educacion.modelo.wordpress.ClienteWP;
+import ec.gob.educacion.modelo.wordpress.PedidoProducto;
 import ec.gob.educacion.repositorio.wordpress.ClienteWPRepositorio;
 import ec.gob.educacion.servicio.wordpress.ClienteWPServicio;
 
@@ -31,6 +32,11 @@ public class ClienteWPServicioImpl implements ClienteWPServicio {
 	@Override
 	public List<ClienteWP> migrarClienteWPCategoria() {
 		return clienteWPRepositorio.migrarClienteWPCategoria();
+	}
+
+	@Override
+	public List<PedidoProducto> migrarClienteWPedidoProducto() {
+		return clienteWPRepositorio.migrarClienteWPedidoProducto();
 	}
 
 	@Override
