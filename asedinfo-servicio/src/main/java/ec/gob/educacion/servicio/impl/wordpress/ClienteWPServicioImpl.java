@@ -29,6 +29,11 @@ public class ClienteWPServicioImpl implements ClienteWPServicio {
 	}
 
 	@Override
+	public List<ClienteWP> migrarClienteWPCategoria() {
+		return clienteWPRepositorio.migrarClienteWPCategoria();
+	}
+
+	@Override
 	public ClienteWP registrar(ClienteWP ClienteWP) {
 		/*
 		if (ClienteWP.getCodPersona() != null && ClienteWP.getCodPersona() != 0) {

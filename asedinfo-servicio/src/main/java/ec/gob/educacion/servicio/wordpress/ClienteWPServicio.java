@@ -29,6 +29,14 @@ public interface ClienteWPServicio {
 	List<ClienteWP> migrarClienteWP();
 
 	/**
+	 * Permite obtener lista ClienteWP
+	 * 
+	 * @param codPersona
+	 * @return listaClienteWP
+	 */
+	List<ClienteWP> migrarClienteWPCategoria();
+
+	/**
 	 * Permite registrar ClienteWP
 	 * 
 	 * @param ClienteWP

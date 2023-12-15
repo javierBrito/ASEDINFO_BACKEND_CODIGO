@@ -51,7 +51,8 @@ public class ClienteWPControlador {
 
 	@GetMapping(value = "migrarClienteWP")
 	public ResponseGenerico<ClienteWP> migrarClienteWP() {
-		List<ClienteWP> listaClienteWP = clienteWPServicio.migrarClienteWP();
+		List<ClienteWP> listaClienteWP = clienteWPServicio.migrarClienteWPCategoria();
+		System.out.println("listaClienteWP.size() = "+listaClienteWP.size());
 		if (listaClienteWP.size() > 0) {
 			for (ClienteWP clienteWP : listaClienteWP) {
 				// Mover datos desde ClienteWP a Persona
