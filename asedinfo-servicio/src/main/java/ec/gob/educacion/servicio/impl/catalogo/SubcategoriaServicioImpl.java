@@ -14,28 +14,33 @@ import ec.gob.educacion.servicio.catalogo.SubcategoriaServicio;
 public class SubcategoriaServicioImpl implements SubcategoriaServicio {
 
 	@Autowired
-	private SubcategoriaRepositorio SubcategoriaRepositorio;
+	private SubcategoriaRepositorio subcategoriaRepositorio;
 	@Autowired
 	private CategoriaServicio categoriaServicio;
 
 	@Override
 	public List<Subcategoria> listarTodosSubcategoria() {
-		return SubcategoriaRepositorio.findAll();
+		return subcategoriaRepositorio.findAll();
 	}
 
 	@Override
 	public List<Subcategoria> listarSubcategoriaPorCategoria(Long codCategoria) {
-		return SubcategoriaRepositorio.listarSubcategoriaPorCategoria(codCategoria);
+		return subcategoriaRepositorio.listarSubcategoriaPorCategoria(codCategoria);
 	}
 
 	@Override
 	public List<Subcategoria> listarSubcategoriaActivo(String estado) {
-		return SubcategoriaRepositorio.findByEstadoOrderByCodigo(estado);
+		return subcategoriaRepositorio.findByEstadoOrderByCodigo(estado);
 	}
 
 	@Override
 	public Subcategoria buscarSubcategoriaPorCodigo(Long codigo) {
-		return SubcategoriaRepositorio.findByCodigo(codigo);
+		return subcategoriaRepositorio.findByCodigo(codigo);
+	}
+
+	@Override
+	public Subcategoria buscarSubcategoriaPorDenominacion(String denominacion, Long codCategoria) {
+		return subcategoriaRepositorio.buscarSubcategoriaPorDenominacion(denominacion, codCategoria);
 	}
 
 	@Override
@@ -44,7 +49,7 @@ public class SubcategoriaServicioImpl implements SubcategoriaServicio {
 			Categoria categoria = categoriaServicio.buscarCategoriaPorCodigo(subcategoria.getCodCategoria());
 			subcategoria.setCategoria(categoria);
 		}
-		return SubcategoriaRepositorio.save(subcategoria);
+		return subcategoriaRepositorio.save(subcategoria);
 	}
 
 	@Override
@@ -53,7 +58,7 @@ public class SubcategoriaServicioImpl implements SubcategoriaServicio {
 			Categoria categoria = categoriaServicio.buscarCategoriaPorCodigo(subcategoria.getCodCategoria());
 			subcategoria.setCategoria(categoria);
 		}
-		return SubcategoriaRepositorio.save(subcategoria);
+		return subcategoriaRepositorio.save(subcategoria);
 	}
 	
 }

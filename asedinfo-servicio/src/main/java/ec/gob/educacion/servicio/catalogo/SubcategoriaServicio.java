@@ -37,6 +37,14 @@ public interface SubcategoriaServicio {
 	Subcategoria buscarSubcategoriaPorCodigo(Long codigo);
 
 	/**
+	 * Permite obtener Subcategoria
+	 * 
+	 * @param denominacion
+	 * @return Subcategoria
+	 */
+	Subcategoria buscarSubcategoriaPorDenominacion(String denominacion, Long codCategoria);
+
+	/**
 	 * Permite registrar Subcategoria
 	 * 
 	 * @param Subcategoria

@@ -113,6 +113,9 @@ public class Participante implements java.io.Serializable {
 	@Transient
 	private String colorBoton;
 	
+	@Column(name = "num_puntaje_juez")
+	private int numPuntajeJuez;
+	
 	public Participante() {
 	}
 
@@ -348,5 +351,13 @@ public class Participante implements java.io.Serializable {
 
 	public void setColorBoton(String colorBoton) {
 		this.colorBoton = colorBoton;
+	}
+
+	public int getNumPuntajeJuez() {
+		return numPuntajeJuez;
+	}
+
+	public void setNumPuntajeJuez(int numPuntajeJuez) {
+		this.numPuntajeJuez = numPuntajeJuez;
 	}
 }

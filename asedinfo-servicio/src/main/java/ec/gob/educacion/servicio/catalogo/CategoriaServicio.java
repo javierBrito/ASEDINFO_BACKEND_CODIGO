@@ -29,6 +29,14 @@ public interface CategoriaServicio {
 	Categoria buscarCategoriaPorCodigo(Long codigo);
 
 	/**
+	 * Permite obtener Categoria
+	 * 
+	 * @param denominacion
+	 * @return Categoria
+	 */
+	Categoria buscarCategoriaPorDenominacion(String denominacion);
+
+	/**
 	 * Permite registrar Categoria
 	 * 
 	 * @param Categoria

@@ -34,7 +34,7 @@ public interface PuntajeServicio {
 	 * @param estado
 	 * @return lista Puntaje
 	 */
-	List<Puntaje> listarPuntajePorSubcategoriaRegTotal(Long codSubcategoria, Long codInstancia);
+	List<Puntaje> listarPuntajePorSubcategoriaRegTotal(Long codSubcategoria, Long codInstancia, Long codUsuarioJuez);
 
 	/**
 	 * Permite listar Puntaje Activo
@@ -42,7 +42,7 @@ public interface PuntajeServicio {
 	 * @param estado
 	 * @return lista Puntaje
 	 */
-	List<Puntaje> listarPuntajePorParticipanteRegTotal(Long codParticipante, Long codInstancia, Long codModeloPuntaje);
+	List<Puntaje> listarPuntajePorParticipanteRegTotal(Long codParticipante, Long codInstancia, Long codUsuarioJuez, Long codModeloPuntaje);
 
 	/**
 	 * Permite listar Puntaje Activo
@@ -50,7 +50,7 @@ public interface PuntajeServicio {
 	 * @param estado
 	 * @return lista Puntaje
 	 */
-	List<Puntaje> listarPuntajePorParticipante(Long codParticipante, Long codInstancia);
+	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstancia(Long codParticipante, Long codSubcategoria, Long codInstancia, Long codUsuarioJuez);
 
 	/**
 	 * Permite obtener Puntaje

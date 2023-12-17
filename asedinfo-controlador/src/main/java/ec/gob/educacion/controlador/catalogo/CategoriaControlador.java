@@ -64,6 +64,23 @@ public class CategoriaControlador {
 	}
 
 	/**
+	 * REST para obtener Categoria
+	 * 
+	 * @return Categoria
+	 */
+	@GetMapping(value = "buscarCategoriaPorDenominacion/{denominacion}")
+	public ResponseGenerico<Categoria> buscarCategoriaPorDenominacion(@PathVariable("denominacion") String denominacion) {
+		Categoria categoria = categoriaServicio.buscarCategoriaPorDenominacion(denominacion);
+		// Respuesta
+		ResponseGenerico<Categoria> response = new ResponseGenerico<>();
+		response.setObjeto(categoria);
+		response.setTotalRegistros((long) (1));
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
+	/**
 	 * REST para guardar o actualizar Categoria
 	 * 
 	 * @return guardar

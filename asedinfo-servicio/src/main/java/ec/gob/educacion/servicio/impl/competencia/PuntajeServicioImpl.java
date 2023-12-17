@@ -3,7 +3,6 @@ package ec.gob.educacion.servicio.impl.competencia;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ec.gob.educacion.modelo.catalogo.Instancia;
 import ec.gob.educacion.modelo.catalogo.ModeloPuntaje;
 import ec.gob.educacion.modelo.catalogo.Subcategoria;
@@ -46,17 +45,17 @@ public class PuntajeServicioImpl implements PuntajeServicio {
 	}
 
 	@Override
-	public List<Puntaje> listarPuntajePorSubcategoriaRegTotal(Long codSubcategoria, Long codInstancia) {
-		return puntajeRepositorio.listarPuntajePorSubcategoriaRegTotal(codSubcategoria, codInstancia);
+	public List<Puntaje> listarPuntajePorSubcategoriaRegTotal(Long codSubcategoria, Long codInstancia, Long codUsuarioJuez) {
+		return puntajeRepositorio.listarPuntajePorSubcategoriaRegTotal(codSubcategoria, codInstancia, codUsuarioJuez);
 	}
 	
 	@Override
-	public List<Puntaje> listarPuntajePorParticipante(Long codParticipante, Long codInstancia) {
-		return puntajeRepositorio.listarPuntajePorParticipante(codParticipante, codInstancia);
+	public List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstancia(Long codParticipante, Long codSubcategoria, Long codInstancia, Long codUsuarioJuez) {
+		return puntajeRepositorio.listarPuntajePorParticipanteSubcategoriaInstancia(codParticipante, codSubcategoria, codInstancia, codUsuarioJuez);
 	}
 	@Override
-	public List<Puntaje> listarPuntajePorParticipanteRegTotal(Long codParticipante, Long codInstancia, Long codModeloPuntaje) {
-		return puntajeRepositorio.listarPuntajePorParticipanteRegTotal(codParticipante, codInstancia, codModeloPuntaje);
+	public List<Puntaje> listarPuntajePorParticipanteRegTotal(Long codParticipante, Long codInstancia, Long codUsuarioJuez, Long codModeloPuntaje) {
+		return puntajeRepositorio.listarPuntajePorParticipanteRegTotal(codParticipante, codInstancia, codUsuarioJuez, codModeloPuntaje);
 	}
 
 	@Override
@@ -81,7 +80,16 @@ public class PuntajeServicioImpl implements PuntajeServicio {
 		if (puntaje.getCodSubcategoria() != 0) {
 			Subcategoria subcategoria = subcategoriaServicio.buscarSubcategoriaPorCodigo(puntaje.getCodSubcategoria());
 			puntaje.setSubcategoria(subcategoria);
-		} 
+		}
+		System.out.println("puntaje.getCodUsuarioJuez() = "+puntaje.getCodUsuarioJuez());
+		/*
+		if (puntaje.getCodUsuarioJuez() != 0) {
+			Usuario usuario = usuarioServicio.buscarUsuarioPorCodigo(puntaje.getCodUsuarioJuez());
+			System.out.println("usuario = "+usuario);
+			System.out.println("usuario.getCodigo() = "+usuario.getCodigo());
+			puntaje.setUsuarioJuez(usuario);
+		}
+		*/
 		return puntajeRepositorio.save(puntaje);
 	}
 

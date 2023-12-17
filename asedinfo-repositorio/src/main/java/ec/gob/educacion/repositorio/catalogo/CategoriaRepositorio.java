@@ -10,5 +10,7 @@ public interface CategoriaRepositorio extends JpaRepository<Categoria, Long> {
 
 	List<Categoria> findByEstadoOrderByCodigo(String estado);
 
+	Categoria findByDenominacion(String denominacion);
+
 	Categoria findByCodigo(Long codigo);
 }

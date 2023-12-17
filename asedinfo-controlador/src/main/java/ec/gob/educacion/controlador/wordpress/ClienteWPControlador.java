@@ -14,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ec.gob.educacion.controlador.util.Constantes;
 import ec.gob.educacion.controlador.util.EncryptUtils;
+import ec.gob.educacion.modelo.catalogo.Categoria;
 import ec.gob.educacion.modelo.catalogo.Persona;
+import ec.gob.educacion.modelo.catalogo.Subcategoria;
 import ec.gob.educacion.modelo.competencia.Participante;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
 import ec.gob.educacion.modelo.seguridad.Usuario;
 import ec.gob.educacion.modelo.wordpress.ClienteWP;
 import ec.gob.educacion.modelo.wordpress.PedidoProducto;
+import ec.gob.educacion.servicio.catalogo.CategoriaServicio;
 import ec.gob.educacion.servicio.catalogo.PersonaServicio;
+import ec.gob.educacion.servicio.catalogo.SubcategoriaServicio;
 import ec.gob.educacion.servicio.competencia.ParticipanteServicio;
 import ec.gob.educacion.servicio.seguridad.UsuarioServicio;
 import ec.gob.educacion.servicio.wordpress.ClienteWPServicio;
@@ -37,6 +41,10 @@ public class ClienteWPControlador {
 	private PersonaServicio personaServicio;
 	@Autowired
 	private UsuarioServicio usuarioServicio;
+	@Autowired
+	private CategoriaServicio categoriaServicio;
+	@Autowired
+	private SubcategoriaServicio subcategoriaServicio;
 
 	@GetMapping(value = "listarTodosClienteWP")
 	public ResponseGenerico<ClienteWP> listarTodosClienteWP() {
@@ -51,18 +59,16 @@ public class ClienteWPControlador {
 	}
 
 	@GetMapping(value = "migrarClienteWP")
-	public ResponseGenerico<ClienteWP> migrarClienteWP() {
+	public ResponseGenerico<PedidoProducto> migrarClienteWP() {
 		List<PedidoProducto> listaPedidoProducto = clienteWPServicio.migrarClienteWPedidoProducto();
-		for (PedidoProducto pedidoProducto : listaPedidoProducto) {
-			System.out.println("pedidoProducto.getOrderId() = "+pedidoProducto.getOrderId());
-			System.out.println("pedidoProducto.getCustomerId() = "+pedidoProducto.getCustomerId());
-			System.out.println("pedidoProducto.getProductId() = "+pedidoProducto.getProductId());
-			System.out.println("pedidoProducto.getPostExcerpt() = "+pedidoProducto.getPostExcerpt());
-		}
-		List<ClienteWP> listaClienteWP = clienteWPServicio.migrarClienteWPCategoria();
-		System.out.println("listaClienteWP.size() = "+listaClienteWP.size());
-		if (listaClienteWP.size() > 0) {
-			for (ClienteWP clienteWP : listaClienteWP) {
+		System.out.println("listaPedidoProducto.size() = "+listaPedidoProducto.size());
+		if (listaPedidoProducto.size() > 0) {
+			ClienteWP clienteWP = new ClienteWP();
+			Categoria categoria = new Categoria(); 
+			Subcategoria subcategoria = new Subcategoria(); 
+			
+			for (PedidoProducto pedidoProducto : listaPedidoProducto) {
+				clienteWP = pedidoProducto.getClienteWP();
 				// Mover datos desde ClienteWP a Persona
 				Persona persona = new Persona();
 				// Verificar si ya existe Persona
@@ -126,21 +132,41 @@ public class ClienteWPControlador {
 				participante.setLastName(clienteWP.getLastName());
 				participante.setUserId(clienteWP.getUserId());
 				participante.setUsername(clienteWP.getUsername());
-				participante.setCodSubcategoria(1L);
+				// Datos por default al migrar
 				participante.setCodInstancia(1L);
 				participante.setCodEstadoCompetencia(1L);
+				// Datos de la persona relacionada
 				participante.setCodPersona(persona.getCodigo());
-				
 				participante.setPersona(persona);
+
+				// Valor por default de la Subcategoria
+				participante.setCodSubcategoria(1L);
+				
+				System.out.println("Categoria = "+pedidoProducto.getPostExcerpt());
+				// Obtener la Categoria por denominacion
+				categoria = categoriaServicio.buscarCategoriaPorDenominacion(pedidoProducto.getPostExcerpt());
+				if (categoria != null) {
+					System.out.println("categoria.getCodigo() = "+categoria.getCodigo());
+					System.out.println("categoria.getDenominacion()() = "+categoria.getDenominacion());
+					// Obtener la Subcategoria desde su categoria
+					System.out.println("Subcategoria = "+pedidoProducto.getPostTitle());
+					// Obtener la Categoria por denominacion
+					subcategoria = subcategoriaServicio.buscarSubcategoriaPorDenominacion(pedidoProducto.getPostExcerpt(), categoria.getCodigo());
+					if (subcategoria != null) {
+						System.out.println("subcategoria.getCodigo() = "+subcategoria.getCodigo());
+						System.out.println("subcategoria.getDenominacion()() = "+subcategoria.getDenominacion());
+						participante.setCodSubcategoria(subcategoria.getCodigo());
+					}
+				}
 				
 				// Guardar el registro
 				participanteServicio.registrar(participante);
 			}
 		}
 		// Respuesta
-		ResponseGenerico<ClienteWP> response = new ResponseGenerico<>();
-		response.setListado(listaClienteWP);
-		response.setTotalRegistros((long) listaClienteWP.size());
+		ResponseGenerico<PedidoProducto> response = new ResponseGenerico<>();
+		response.setListado(listaPedidoProducto);
+		response.setTotalRegistros((long) listaPedidoProducto.size());
 		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 		response.setMensaje(Constantes.MENSAJE_OK);
 		return response;

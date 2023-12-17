@@ -17,12 +17,15 @@ public interface PuntajeRepositorio extends JpaRepository<Puntaje, Long> {
 	@Query(nativeQuery = false, value = "select r from Puntaje r where r.subcategoria.codigo = :codSubcategoria and  r.instancia.codigo = :codInstancia")
 	List<Puntaje> listarPuntajePorSubcategoria(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);
 	
-	@Query(nativeQuery = false, value = "select r from Puntaje r where r.subcategoria.codigo = :codSubcategoria and  r.instancia.codigo = :codInstancia and r.modeloPuntaje.codigo = 99")
-	List<Puntaje> listarPuntajePorSubcategoriaRegTotal(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);
+	@Query(nativeQuery = false, value = "select r from Puntaje r where r.subcategoria.codigo = :codSubcategoria and r.instancia.codigo = :codInstancia and r.codUsuarioJuez = :codUsuarioJuez and r.modeloPuntaje.codigo = 99")
+	List<Puntaje> listarPuntajePorSubcategoriaRegTotal(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia, @Param("codUsuarioJuez") Long codUsuarioJuez);
 
 	@Query(nativeQuery = false, value = "select r from Puntaje r where r.participante.codigo = :codParticipante and r.instancia.codigo = :codInstancia")
 	List<Puntaje> listarPuntajePorParticipante(@Param("codParticipante") Long codParticipante, @Param("codInstancia") Long codInstancia);
 
-	@Query(nativeQuery = false, value = "select r from Puntaje r where r.participante.codigo = :codParticipante and r.instancia.codigo = :codInstancia and r.modeloPuntaje.codigo = :codModeloPuntaje")
-	List<Puntaje> listarPuntajePorParticipanteRegTotal(@Param("codParticipante") Long codParticipante, @Param("codInstancia") Long codInstancia, @Param("codModeloPuntaje") Long codModeloPuntaje);
+	@Query(nativeQuery = false, value = "select r from Puntaje r where r.participante.codigo = :codParticipante and r.subcategoria.codigo = :codSubcategoria and r.instancia.codigo = :codInstancia and r.codUsuarioJuez = :codUsuarioJuez")
+	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstancia(@Param("codParticipante") Long codParticipante, @Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia, @Param("codUsuarioJuez") Long codUsuarioJuez);
+
+	@Query(nativeQuery = false, value = "select r from Puntaje r where r.participante.codigo = :codParticipante and r.instancia.codigo = :codInstancia and r.codUsuarioJuez = :codUsuarioJuez and r.modeloPuntaje.codigo = :codModeloPuntaje")
+	List<Puntaje> listarPuntajePorParticipanteRegTotal(@Param("codParticipante") Long codParticipante, @Param("codInstancia") Long codInstancia, @Param("codUsuarioJuez") Long codUsuarioJuez, @Param("codModeloPuntaje") Long codModeloPuntaje);
 }

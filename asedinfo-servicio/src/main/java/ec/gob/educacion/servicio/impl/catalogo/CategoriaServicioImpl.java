@@ -29,6 +29,11 @@ public class CategoriaServicioImpl implements CategoriaServicio {
 	}
 
 	@Override
+	public Categoria buscarCategoriaPorDenominacion(String denominacion) {
+		return CategoriaRepositorio.findByDenominacion(denominacion);
+	}
+
+	@Override
 	public Categoria registrar(Categoria categoria) {
 		return CategoriaRepositorio.save(categoria);
 	}

@@ -14,10 +14,10 @@ public interface ClienteWPRepositorio extends JpaRepository<ClienteWP, Long> {
 	List<ClienteWP> migrarClienteWP();
 
 	//@Query(nativeQuery = false, value = "select distinct(ped.clienteWP) from PedidoProducto pp join pp.pedido ped join pp.clienteWP cli join cli.user use join pp.productoWP pro where pro.postType = 'product' and ped.status = 'wc-completed'")
-	@Query(nativeQuery = false, value = "select distinct(cli.customerId), use.Id as userId, cli.username, cli.firstName, cli.lastName, cli.dateLastActive, cli.dateRegistered, pp.postExcerpt as postExcerpt from PedidoProducto pp join pp.pedido ped join pp.clienteWP cli join cli.user use join pp.productoWP pro where pro.postType = 'product' and ped.status = 'wc-completed'")
+	@Query(nativeQuery = false, value = "select distinct(pp.clienteWP) from PedidoProducto pp join pp.pedido ped join pp.clienteWP cli join cli.user use join pp.productoWP pro where pro.postType = 'product' and ped.status = 'wc-completed'")
 	List<ClienteWP> migrarClienteWPCategoria();
 
-	@Query(nativeQuery = false, value = "select pp from PedidoProducto pp join pp.pedido ped join ped.clienteWP cli join cli.user use join pp.productoWP pro where pro.postType = 'product' and ped.status = 'wc-completed'")
+	@Query(nativeQuery = false, value = "select distinct(pp) from PedidoProducto pp join pp.pedido ped join ped.clienteWP cli join cli.user use join pp.productoWP pro where pro.postType = 'product' and ped.status = 'wc-completed' and pro.postExcerpt <> ''")
 	List<PedidoProducto> migrarClienteWPedidoProducto();
 
 	ClienteWP findByCustomerId(Long customerId);

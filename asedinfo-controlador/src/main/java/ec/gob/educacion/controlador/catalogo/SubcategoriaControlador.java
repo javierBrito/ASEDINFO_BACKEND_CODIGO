@@ -76,6 +76,23 @@ public class SubcategoriaControlador {
 	}
 
 	/**
+	 * REST para obtener Categoria
+	 * 
+	 * @return Categoria
+	 */
+	@GetMapping(value = "buscarSubcategoriaPorDenominacion/{denominacion}/{codCategoria}")
+	public ResponseGenerico<Subcategoria> buscarCategoriaPorDenominacion(@PathVariable("denominacion") String denominacion, @PathVariable("codCategoria") Long codCategoria) {
+		Subcategoria subcategoria = subcategoriaServicio.buscarSubcategoriaPorDenominacion(denominacion, codCategoria);
+		// Respuesta
+		ResponseGenerico<Subcategoria> response = new ResponseGenerico<>();
+		response.setObjeto(subcategoria);
+		response.setTotalRegistros((long) (1));
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
+	/**
 	 * REST para guardar o actualizar Subcategoria
 	 * 
 	 * @return guardar

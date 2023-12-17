@@ -61,7 +61,6 @@ public class Puntaje implements java.io.Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cod_subcategoria", nullable = false)
 	private Subcategoria subcategoria;
-	
 	@Transient
 	private Long codSubcategoria;
 	@Transient
@@ -76,6 +75,15 @@ public class Puntaje implements java.io.Serializable {
 
 	@Column(name = "estado", nullable = false, length = 1)
 	private String estado;
+	/*
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "cod_usuario_juez", nullable = false)
+	private Usuario usuarioJuez;
+	@Transient
+	*/
+	@Column(name = "cod_usuario_juez")
+	private Long codUsuarioJuez;
 
 	public Puntaje() {
 	}
@@ -244,5 +252,27 @@ public class Puntaje implements java.io.Serializable {
 
 	public void setDesCategoria(String desCategoria) {
 		this.desCategoria = desCategoria;
+	}
+	/*
+	public Usuario getUsuarioJuez() {
+		return usuarioJuez;
+	}
+
+	public void setUsuarioJuez(Usuario usuarioJuez) {
+		this.usuarioJuez = usuarioJuez;
+	}
+
+	public Long getCodUsuarioJuez() {
+		if (this.usuarioJuez != null) {
+			codUsuarioJuez = this.usuarioJuez.getCodigo();
+		}
+		return codUsuarioJuez;
+	}
+	*/
+	public Long getCodUsuarioJuez() {
+		return codUsuarioJuez;
+	}
+	public void setCodUsuarioJuez(Long codUsuarioJuez) {
+		this.codUsuarioJuez = codUsuarioJuez;
 	}
 }

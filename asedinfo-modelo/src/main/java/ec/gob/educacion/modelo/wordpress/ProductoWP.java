@@ -23,8 +23,13 @@ public class ProductoWP implements java.io.Serializable {
 	@Column(name = "id", unique = true, nullable = false, precision = 10, scale = 0)
 	private Long Id;
 	
+	// Categoria
 	@Column(name = "post_excerpt")
 	private String postExcerpt;
+	
+	// Subcategoria
+	@Column(name = "post_title")
+	private String postTitle;
 	
 	@Column(name = "post_type")
 	private String postType;
@@ -56,4 +61,11 @@ public class ProductoWP implements java.io.Serializable {
 		this.postType = postType;
 	}
 
+	public String getPostTitle() {
+		return postTitle;
+	}
+
+	public void setPostTitle(String postTitle) {
+		this.postTitle = postTitle;
+	}
 }

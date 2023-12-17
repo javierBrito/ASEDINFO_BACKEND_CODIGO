@@ -46,9 +46,9 @@ public class PuntajeControlador {
 		return response;
 	}
 
-	@GetMapping(value = "listarPuntajePorSubcategoriaRegTotal/{codSubcategoria}/{codInstancia}")
-	public ResponseGenerico<Puntaje> listarPuntajePorSubcategoriaRegTotal(@PathVariable("codSubcategoria") Long codSubcategoria, @PathVariable("codInstancia") Long codInstancia) {
-		List<Puntaje> listaPuntaje = puntajeServicio.listarPuntajePorSubcategoriaRegTotal(codSubcategoria, codInstancia);
+	@GetMapping(value = "listarPuntajePorSubcategoriaRegTotal/{codSubcategoria}/{codInstancia}/{codUsuarioJuez}")
+	public ResponseGenerico<Puntaje> listarPuntajePorSubcategoriaRegTotal(@PathVariable("codSubcategoria") Long codSubcategoria, @PathVariable("codInstancia") Long codInstancia, @PathVariable("codUsuarioJuez") Long codUsuarioJuez) {
+		List<Puntaje> listaPuntaje = puntajeServicio.listarPuntajePorSubcategoriaRegTotal(codSubcategoria, codInstancia, codUsuarioJuez);
 		// Respuesta
 		ResponseGenerico<Puntaje> response = new ResponseGenerico<>();
 		response.setListado(listaPuntaje);
@@ -70,9 +70,9 @@ public class PuntajeControlador {
 		return response;
 	}
 
-	@GetMapping(value = "listarPuntajePorParticipante/{codParticipante}/{codInstancia}")
-	public ResponseGenerico<Puntaje> listarPuntajePorParticipante(@PathVariable("codParticipante") Long codParticipante, @PathVariable("codInstancia") Long codInstancia) {
-		List<Puntaje> listaPuntaje = puntajeServicio.listarPuntajePorParticipante(codParticipante, codInstancia);
+	@GetMapping(value = "listarPuntajePorParticipanteSubcategoriaInstancia/{codParticipante}/{codSubcategoria}/{codInstancia}/{codUsuarioJuez}")
+	public ResponseGenerico<Puntaje> listarPuntajePorParticipanteSubcategoriaInstancia(@PathVariable("codParticipante") Long codParticipante, @PathVariable("codSubcategoria") Long codSubcategoria, @PathVariable("codInstancia") Long codInstancia, @PathVariable("codUsuarioJuez") Long codUsuarioJuez) {
+		List<Puntaje> listaPuntaje = puntajeServicio.listarPuntajePorParticipanteSubcategoriaInstancia(codParticipante, codSubcategoria, codInstancia, codUsuarioJuez);
 		// Respuesta
 		ResponseGenerico<Puntaje> response = new ResponseGenerico<>();
 		response.setListado(listaPuntaje);
@@ -82,9 +82,9 @@ public class PuntajeControlador {
 		return response;
 	}
 
-	@GetMapping(value = "listarPuntajePorParticipanteRegTotal/{codParticipante}/{codInstancia}/{codModeloPuntaje}")
-	public ResponseGenerico<Puntaje> listarPuntajePorParticipanteRegTotal(@PathVariable("codParticipante") Long codParticipante, @PathVariable("codInstancia") Long codInstancia, @PathVariable("codModeloPuntaje") Long codModeloPuntaje) {
-		List<Puntaje> listaPuntaje = puntajeServicio.listarPuntajePorParticipanteRegTotal(codParticipante, codInstancia, codModeloPuntaje);
+	@GetMapping(value = "listarPuntajePorParticipanteRegTotal/{codParticipante}/{codInstancia}/{codUsuarioJuez}/{codModeloPuntaje}")
+	public ResponseGenerico<Puntaje> listarPuntajePorParticipanteRegTotal(@PathVariable("codParticipante") Long codParticipante, @PathVariable("codInstancia") Long codInstancia, @PathVariable("codUsuarioJuez") Long codUsuarioJuez, @PathVariable("codModeloPuntaje") Long codModeloPuntaje) {
+		List<Puntaje> listaPuntaje = puntajeServicio.listarPuntajePorParticipanteRegTotal(codParticipante, codInstancia, codUsuarioJuez, codModeloPuntaje);
 		// Respuesta
 		ResponseGenerico<Puntaje> response = new ResponseGenerico<>();
 		response.setListado(listaPuntaje);

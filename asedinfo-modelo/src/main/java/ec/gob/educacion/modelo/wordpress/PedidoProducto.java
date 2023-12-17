@@ -46,6 +46,8 @@ public class PedidoProducto implements java.io.Serializable {
 	private Long productId;	
 	@Transient
 	private String postExcerpt;
+	@Transient
+	private String postTitle;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -148,5 +150,16 @@ public class PedidoProducto implements java.io.Serializable {
 
 	public void setPostExcerpt(String postExcerpt) {
 		this.postExcerpt = postExcerpt;
+	}
+
+	public String getPostTitle() {
+		if (this.productoWP != null) {
+			postTitle = this.productoWP.getPostTitle();
+		}
+		return postTitle;
+	}
+
+	public void setPostTitle(String postTitle) {
+		this.postTitle = postTitle;
 	}
 }

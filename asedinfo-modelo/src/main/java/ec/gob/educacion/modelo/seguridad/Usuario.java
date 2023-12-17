@@ -103,13 +103,6 @@ public class Usuario implements java.io.Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(Long codigo, String cambioClave, String actualizacionDatos, String estado) {
-		this.codigo = codigo;
-		this.cambioClave = cambioClave;
-		this.actualizacionDatos = actualizacionDatos;
-		this.estado = estado;
-	}
-
 	public Long getCodigo() {
 		return this.codigo;
 	}

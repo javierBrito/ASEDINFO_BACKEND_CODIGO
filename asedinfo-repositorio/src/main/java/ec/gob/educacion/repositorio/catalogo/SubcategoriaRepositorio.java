@@ -15,5 +15,8 @@ public interface SubcategoriaRepositorio extends JpaRepository<Subcategoria, Lon
 	@Query(nativeQuery = false, value = "select subc from Subcategoria subc where subc.categoria.codigo = :codCategoria and subc.estado = 'A'")
 	List<Subcategoria> listarSubcategoriaPorCategoria(@Param("codCategoria") Long codCategoria);
 
+	@Query(nativeQuery = false, value = "select subc from Subcategoria subc where subc.denominacion = :denominacion and subc.categoria.codigo = :codCategoria and subc.estado = 'A'")
+	Subcategoria buscarSubcategoriaPorDenominacion(String denominacion, Long codCategoria);
+
 	Subcategoria findByCodigo(Long codigo);
 }
