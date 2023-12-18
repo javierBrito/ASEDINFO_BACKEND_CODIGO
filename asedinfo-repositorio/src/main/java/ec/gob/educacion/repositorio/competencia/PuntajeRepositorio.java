@@ -28,7 +28,13 @@ public interface PuntajeRepositorio extends JpaRepository<Puntaje, Long> {
 
 	@Query(nativeQuery = false, value = "select r from Puntaje r where r.participante.codigo = :codParticipante and r.instancia.codigo = :codInstancia and r.codUsuarioJuez = :codUsuarioJuez and r.modeloPuntaje.codigo = :codModeloPuntaje")
 	List<Puntaje> listarPuntajePorParticipanteRegTotal(@Param("codParticipante") Long codParticipante, @Param("codInstancia") Long codInstancia, @Param("codUsuarioJuez") Long codUsuarioJuez, @Param("codModeloPuntaje") Long codModeloPuntaje);
+	
+	@Query(nativeQuery = true, value = 
+			  " select avg(wpu.puntaje) as puntaje, wpu.cod_subcategoria, wpu.cod_instancia, wpu.cod_participante, concat(wpa.first_name, ' ', wpa.last_name) as nombreParticipante, "
+			+ "        wpu.codigo, wpu.cod_modelo_puntaje, wpu.estado " 
+			+ "   from wp_puntaje wpu, wp_participante wpa "
+			+ "  where wpu.cod_modelo_puntaje = 99 and wpu.cod_participante = wpa.codigo " 
+			+ "  group by wpu.cod_subcategoria, wpu.cod_instancia, wpu.cod_participante " ) 
+	List<Object[]> listarPuntajePorSubcategoriaInstanciaRegAVG(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);;
 
-	@Query(nativeQuery = false, value = "select r.codigo as codigo, avg(r.puntaje) as puntaje, r.subcategoria.codigo as codSubcategoria, r.instancia.codigo as codInstancia, r.participante.codigo as codParticipante, r.estado, r.modeloPuntaje.codigo as codModeloPuntaje, r.codUsuarioJuez from Puntaje r where r.subcategoria.codigo = :codSubcategoria and r.instancia.codigo = :codInstancia and r.modeloPuntaje.codigo = 99 group by r.subcategoria.codigo, r.instancia.codigo, r.participante.codigo")
-	List<Puntaje> listarPuntajePorSubcategoriaInstanciaRegAVG(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);
 }

@@ -60,6 +60,7 @@ public class ClienteWPControlador {
 
 	@GetMapping(value = "migrarClienteWP")
 	public ResponseGenerico<PedidoProducto> migrarClienteWP() {
+		Long codSubcategoria = 0L;
 		List<PedidoProducto> listaPedidoProducto = clienteWPServicio.migrarClienteWPedidoProducto();
 		System.out.println("listaPedidoProducto.size() = "+listaPedidoProducto.size());
 		if (listaPedidoProducto.size() > 0) {
@@ -116,13 +117,30 @@ public class ClienteWPControlador {
 				usuarioServicio.crearClaveUsuario(usuario, claveEncriptada);
 				// Guardar Usuario Detalle Acción
 				usuarioServicio.crearUsuarioDetalleAccion(usuario, Constantes.TIPO_ACCION_CREACION);
-
+				
+				// Obtener la Categoria por denominacion desdes el dato de pedidoProducto.getPostExcerpt()
+				//categoria = categoriaServicio.buscarCategoriaPorDenominacion(pedidoProducto.getPostExcerpt());
+				categoria = categoriaServicio.buscarCategoriaPorDenominacion("Infantil (9-12 años)");
+				if (categoria != null) {
+					// Obtener la Subcategoria desde su categoria
+					subcategoria = subcategoriaServicio.buscarSubcategoriaPorDenominacion(pedidoProducto.getPostTitle(), categoria.getCodigo());
+					if (subcategoria != null) {
+						codSubcategoria = subcategoria.getCodigo();
+					}
+				}
+				
 				// Mover datos desde ClienteWP a Participante
 				Participante participante = new Participante();
 				// Verificar si ya existe Persona
 				List<Participante> listaParticipante = participanteServicio.listarParticipantePorPersona(persona.getCodigo());
 				if (listaParticipante.size() > 0) {
-					participante = listaParticipante.get(0);
+					// Verificar si ya existe el participante con la Subcategoria
+					for (Participante participanteAux : listaParticipante) {
+						if (participanteAux.getCodSubcategoria() == codSubcategoria) {
+							participante = participanteAux;
+							break;
+						}
+					}
 				}
 				participante.setCustomerId(clienteWP.getCustomerId());
 				participante.setDateLastActive(clienteWP.getDateLastActive());
@@ -141,22 +159,8 @@ public class ClienteWPControlador {
 
 				// Valor por default de la Subcategoria
 				participante.setCodSubcategoria(1L);
-				
-				System.out.println("Categoria = "+pedidoProducto.getPostExcerpt());
-				// Obtener la Categoria por denominacion
-				categoria = categoriaServicio.buscarCategoriaPorDenominacion(pedidoProducto.getPostExcerpt());
-				if (categoria != null) {
-					System.out.println("categoria.getCodigo() = "+categoria.getCodigo());
-					System.out.println("categoria.getDenominacion()() = "+categoria.getDenominacion());
-					// Obtener la Subcategoria desde su categoria
-					System.out.println("Subcategoria = "+pedidoProducto.getPostTitle());
-					// Obtener la Categoria por denominacion
-					subcategoria = subcategoriaServicio.buscarSubcategoriaPorDenominacion(pedidoProducto.getPostExcerpt(), categoria.getCodigo());
-					if (subcategoria != null) {
-						System.out.println("subcategoria.getCodigo() = "+subcategoria.getCodigo());
-						System.out.println("subcategoria.getDenominacion()() = "+subcategoria.getDenominacion());
-						participante.setCodSubcategoria(subcategoria.getCodigo());
-					}
+				if (codSubcategoria != 0) {
+					participante.setCodSubcategoria(codSubcategoria);
 				}
 				
 				// Guardar el registro
