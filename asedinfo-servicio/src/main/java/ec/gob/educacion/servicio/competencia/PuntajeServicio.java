@@ -50,6 +50,14 @@ public interface PuntajeServicio {
 	 * @param estado
 	 * @return lista Puntaje
 	 */
+	List<Puntaje> listarPuntajePorSubcategoriaInstanciaRegAVG(Long codSubcategoria, Long codInstancia);
+
+	/**
+	 * Permite listar Puntaje Activo
+	 * 
+	 * @param estado
+	 * @return lista Puntaje
+	 */
 	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstancia(Long codParticipante, Long codSubcategoria, Long codInstancia, Long codUsuarioJuez);
 
 	/**
