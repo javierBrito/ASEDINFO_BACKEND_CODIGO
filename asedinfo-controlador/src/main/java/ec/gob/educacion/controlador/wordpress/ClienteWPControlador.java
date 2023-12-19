@@ -62,7 +62,6 @@ public class ClienteWPControlador {
 	public ResponseGenerico<PedidoProducto> migrarClienteWP() {
 		Long codSubcategoria = 0L;
 		List<PedidoProducto> listaPedidoProducto = clienteWPServicio.migrarClienteWPedidoProducto();
-		System.out.println("listaPedidoProducto.size() = "+listaPedidoProducto.size());
 		if (listaPedidoProducto.size() > 0) {
 			ClienteWP clienteWP = new ClienteWP();
 			Categoria categoria = new Categoria(); 

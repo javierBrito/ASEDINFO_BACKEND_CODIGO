@@ -38,6 +38,11 @@ public class ClienteServicioImpl implements ClienteServicio {
 	}
 
 	@Override
+	public List<Cliente> listarClientePorPersonaIdentificacion(String identificacion) {
+		return clienteRepositorio.listarClientePorPersonaIdentificacion(identificacion);
+	}
+
+	@Override
 	public Cliente registrar(Cliente cliente) {
 		if (cliente.getCodPersona() != null && cliente.getCodPersona() != 0) {
 			Persona persona = new Persona();

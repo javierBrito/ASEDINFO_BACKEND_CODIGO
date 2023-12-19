@@ -38,6 +38,14 @@ public interface ClienteServicio {
 	List<Cliente> listarClientePorPersona(Long codPersona);
 
 	/**
+	 * Permite obtener lista Cliente
+	 * 
+	 * @param identificacion
+	 * @return listaCliente
+	 */
+	List<Cliente> listarClientePorPersonaIdentificacion(String identificacion);
+
+	/**
 	 * Permite registrar Socio
 	 * 
 	 * @param Socio

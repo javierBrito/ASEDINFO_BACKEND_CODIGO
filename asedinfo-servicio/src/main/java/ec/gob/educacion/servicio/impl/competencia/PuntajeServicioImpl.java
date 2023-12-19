@@ -124,15 +124,6 @@ public class PuntajeServicioImpl implements PuntajeServicio {
 			Subcategoria subcategoria = subcategoriaServicio.buscarSubcategoriaPorCodigo(puntaje.getCodSubcategoria());
 			puntaje.setSubcategoria(subcategoria);
 		}
-		System.out.println("puntaje.getCodUsuarioJuez() = "+puntaje.getCodUsuarioJuez());
-		/*
-		if (puntaje.getCodUsuarioJuez() != 0) {
-			Usuario usuario = usuarioServicio.buscarUsuarioPorCodigo(puntaje.getCodUsuarioJuez());
-			System.out.println("usuario = "+usuario);
-			System.out.println("usuario.getCodigo() = "+usuario.getCodigo());
-			puntaje.setUsuarioJuez(usuario);
-		}
-		*/
 		return puntajeRepositorio.save(puntaje);
 	}
 

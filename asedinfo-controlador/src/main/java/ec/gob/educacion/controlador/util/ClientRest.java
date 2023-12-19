@@ -19,7 +19,6 @@ public class ClientRest {
 
 	@SuppressWarnings("deprecation")
 	public static Map<String, String> doPostRequest(String url, String json) {
-		System.out.println("url:" + url + "json:" + json);
 		String jsonResponse = "{}";
 		RequestBody body = RequestBody.create(JSON, json);
 		Request request = new Request.Builder()
@@ -38,13 +37,11 @@ public class ClientRest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("final:" + mapResult);
 		return mapResult;
 	}
 
 	@SuppressWarnings("deprecation")
 	public static Map<String, Object> doPostRequestMenu(String url, String json) {
-		System.out.println("urlM:" + url + "jsonM:" + json);
 		String jsonResponseM = "{}";
 		RequestBody bodyM = RequestBody.create(JSON, json);
 		Request request = new Request.Builder()
@@ -63,7 +60,6 @@ public class ClientRest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// System.out.println("final:"+ mapResultM);
 		return mapResultM;
 	}
 

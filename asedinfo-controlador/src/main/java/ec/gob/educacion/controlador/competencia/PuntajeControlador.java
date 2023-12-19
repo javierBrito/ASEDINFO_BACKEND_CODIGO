@@ -91,7 +91,6 @@ public class PuntajeControlador {
 		response.setTotalRegistros((long) listaPuntaje.size());
 		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 		response.setMensaje(Constantes.MENSAJE_OK);
-		System.out.println();
 		return response;
 	}
 
@@ -104,7 +103,6 @@ public class PuntajeControlador {
 		response.setTotalRegistros((long) listaPuntaje.size());
 		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 		response.setMensaje(Constantes.MENSAJE_OK);
-		System.out.println();
 		return response;
 	}
 

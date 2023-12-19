@@ -46,13 +46,12 @@ public class EncryptUtils {
         return encripted.equals(newEncripted);
     }
 
-    public static void main(String[] args) {
+    @SuppressWarnings("unused")
+	public static void main(String[] args) {
         try {
             String text = "801564451";
             String key1 = EncryptUtils.applyAlgorithm(text, EncryptUtils.SHA1, EncryptUtils.ISO);
-            System.out.println(key1);
             String key2 = EncryptUtils.applyAlgorithm(text, EncryptUtils.MD5, EncryptUtils.ISO);
-            System.out.println(key2);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
