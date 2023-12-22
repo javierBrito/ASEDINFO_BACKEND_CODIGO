@@ -40,6 +40,9 @@ public class Transaccion implements java.io.Serializable {
 	@Column(name = "precio")
 	private float precio;
 	
+	@Column(name = "monto")
+	private Float monto;
+	
 	@Column(name = "num_producto")
 	private int numProducto;
 	
@@ -94,6 +97,12 @@ public class Transaccion implements java.io.Serializable {
 	private Long codProducto;
 	@Transient
 	private String descripcionProducto;
+	@Transient
+	private float precioCosto;
+	@Transient
+	private int numExistenciaActual;
+	@Transient
+	private float precioMayoreo;
 
 	public Transaccion() {
 	}
@@ -274,5 +283,46 @@ public class Transaccion implements java.io.Serializable {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+
+	public float getPrecioCosto() {
+		if (producto != null) {
+			precioCosto = producto.getPrecioCosto();
+		}
+		return precioCosto;
+	}
+
+	public void setPrecioCosto(float precioCosto) {
+		this.precioCosto = precioCosto;
+	}
+
+	public int getNumExistenciaActual() {
+		if (producto != null) {
+			numExistenciaActual = producto.getNumExistenciaActual();
+		}
+		return numExistenciaActual;
+	}
+
+	public void setNumExistenciaActual(int numExistenciaActual) {
+		this.numExistenciaActual = numExistenciaActual;
+	}
+
+	public Float getMonto() {
+		return monto;
+	}
+
+	public void setMonto(Float monto) {
+		this.monto = monto;
+	}
+
+	public float getPrecioMayoreo() {
+		if (producto != null) {
+			precioMayoreo = producto.getPrecioMayoreo();
+		}
+		return precioMayoreo;
+	}
+
+	public void setPrecioMayoreo(float precioMayoreo) {
+		this.precioMayoreo = precioMayoreo;
 	}
 }

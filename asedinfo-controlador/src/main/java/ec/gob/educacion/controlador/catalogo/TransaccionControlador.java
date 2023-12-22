@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ec.gob.educacion.controlador.util.Constantes;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
+import ec.gob.educacion.modelo.catalogo.Producto;
 import ec.gob.educacion.modelo.catalogo.Transaccion;
 import ec.gob.educacion.venta.resources.EstadoEnum;
+import ec.gob.educacion.servicio.catalogo.ProductoServicio;
 import ec.gob.educacion.servicio.catalogo.TransaccionServicio;
 
 @RestController
@@ -21,6 +23,8 @@ public class TransaccionControlador {
 
 	@Autowired
 	private TransaccionServicio transaccionServicio;
+	@Autowired
+	private ProductoServicio productoServicio;
 
 	@GetMapping(value = "listarTodosTransaccion")
 	public ResponseGenerico<Transaccion> listarTodosTransaccion() {
@@ -107,6 +111,14 @@ public class TransaccionControlador {
 	@PostMapping(value = "guardarTransaccion")
 	public ResponseGenerico<Transaccion> guardarTransaccion(@RequestBody Transaccion transaccion) {
 		transaccion = transaccionServicio.registrar(transaccion);
+		if (transaccion != null) {
+			// Restar la cantidad de productos de la transaccion
+			Producto producto = productoServicio.buscarProductoPorCodigo(transaccion.getCodProducto());
+			if (producto.getNumExistenciaActual() > 0 && producto.getNumExistenciaActual() > transaccion.getNumProducto()) {
+				producto.setNumExistenciaActual(producto.getNumExistenciaActual() - transaccion.getNumProducto());
+				productoServicio.registrar(producto);
+			}
+		}
 		// Respuesta
 		ResponseGenerico<Transaccion> response = new ResponseGenerico<>();
 		response.setObjeto(transaccion);
