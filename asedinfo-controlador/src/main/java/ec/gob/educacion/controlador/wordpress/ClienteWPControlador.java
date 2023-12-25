@@ -118,8 +118,8 @@ public class ClienteWPControlador {
 				usuarioServicio.crearUsuarioDetalleAccion(usuario, Constantes.TIPO_ACCION_CREACION);
 				
 				// Obtener la Categoria por denominacion desdes el dato de pedidoProducto.getPostExcerpt()
-				//categoria = categoriaServicio.buscarCategoriaPorDenominacion(pedidoProducto.getPostExcerpt());
-				categoria = categoriaServicio.buscarCategoriaPorDenominacion("Infantil (9-12 años)");
+				categoria = categoriaServicio.buscarCategoriaPorDenominacion(pedidoProducto.getPostExcerpt());
+				//categoria = categoriaServicio.buscarCategoriaPorDenominacion("Infantil (9-12 años)");
 				if (categoria != null) {
 					// Obtener la Subcategoria desde su categoria
 					subcategoria = subcategoriaServicio.buscarSubcategoriaPorDenominacion(pedidoProducto.getPostTitle(), categoria.getCodigo());

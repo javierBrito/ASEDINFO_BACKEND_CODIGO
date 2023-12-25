@@ -69,9 +69,9 @@ public class ParticipanteControlador {
 		return response;
 	}
 
-	@GetMapping(value = "listarParticipantePorSubcategoriaInstancia/{codSubcategoria}/{codInstancia}")
-	public ResponseGenerico<Participante> listarParticipantePorSubcategoriaInstancia(@PathVariable("codSubcategoria") Long codSubcategoria, @PathVariable("codInstancia") Long codInstancia) {
-		List<Participante> listaParticipante = participanteServicio.listarParticipantePorSubcategoriaInstancia(codSubcategoria, codInstancia);
+	@GetMapping(value = "listarParticipantePorSubcategoriaInstancia/{codSubcategoria}/{codInstancia}/{codEstadoComptetencia}")
+	public ResponseGenerico<Participante> listarParticipantePorSubcategoriaInstancia(@PathVariable("codSubcategoria") Long codSubcategoria, @PathVariable("codInstancia") Long codInstancia, @PathVariable("codEstadoComptetencia") Long codEstadoComptetencia) {
+		List<Participante> listaParticipante = participanteServicio.listarParticipantePorSubcategoriaInstancia(codSubcategoria, codInstancia, codEstadoComptetencia);
 		// Respuesta
 		ResponseGenerico<Participante> response = new ResponseGenerico<>();
 		response.setListado(listaParticipante);

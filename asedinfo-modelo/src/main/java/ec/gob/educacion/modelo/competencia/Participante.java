@@ -76,6 +76,12 @@ public class Participante implements java.io.Serializable {
 	private String nombrePersona;
 	@Transient
 	private String celular;
+	@Transient
+	private String nombres;
+	@Transient
+	private String apellidos;
+	@Transient
+	private String correo;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -359,5 +365,38 @@ public class Participante implements java.io.Serializable {
 
 	public void setNumPuntajeJuez(int numPuntajeJuez) {
 		this.numPuntajeJuez = numPuntajeJuez;
+	}
+
+	public String getNombres() {
+		if (this.persona != null) {
+			nombres = this.persona.getNombres();
+		}
+		return nombres;
+	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+
+	public String getApellidos() {
+		if (this.persona != null) {
+			apellidos = this.persona.getApellidos();
+		}
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getCorreo() {
+		if (this.persona != null) {
+			correo = this.persona.getCorreo();
+		}
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 }

@@ -42,7 +42,7 @@ public interface ParticipanteServicio {
 	 * @param estado
 	 * @return lista Participante
 	 */
-	List<Participante> listarParticipantePorSubcategoriaInstancia(Long codSubcategoria, Long codInstancia);
+	List<Participante> listarParticipantePorSubcategoriaInstancia(Long codSubcategoria, Long codInstancia, Long codEstadoComptetencia);
 
 	/**
 	 * Permite obtener lista Participante
