@@ -352,6 +352,9 @@ public class Participante implements java.io.Serializable {
 	}
 
 	public String getColorBoton() {
+		if (this.estadoCompetencia != null) {
+			colorBoton = this.estadoCompetencia.getColorBoton();
+		}
 		return colorBoton;
 	}
 

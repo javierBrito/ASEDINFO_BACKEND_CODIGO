@@ -29,6 +29,9 @@ public class EstadoCompetencia implements java.io.Serializable {
 	@Column(name = "estado", nullable = false, length = 1)
 	private String estado;
 
+	@Column(name = "color_boton")
+	private String colorBoton;
+
 	public EstadoCompetencia() {
 	}
 
@@ -54,5 +57,13 @@ public class EstadoCompetencia implements java.io.Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getColorBoton() {
+		return colorBoton;
+	}
+
+	public void setColorBoton(String colorBoton) {
+		this.colorBoton = colorBoton;
 	}
 }
