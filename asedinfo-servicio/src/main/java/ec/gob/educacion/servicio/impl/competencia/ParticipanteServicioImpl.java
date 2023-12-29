@@ -64,6 +64,11 @@ public class ParticipanteServicioImpl implements ParticipanteServicio {
 	}
 
 	@Override
+	public List<Participante> listarParticipantePorEmail(String email) {
+		return participanteRepositorio.listarParticipantePorEmail(email);
+	}
+
+	@Override
 	public Participante registrar(Participante participante) {
 		if (participante.getCodSubcategoria() != 0) {
 			Subcategoria subcategoria = subcategoriaServicio.buscarSubcategoriaPorCodigo(participante.getCodSubcategoria());

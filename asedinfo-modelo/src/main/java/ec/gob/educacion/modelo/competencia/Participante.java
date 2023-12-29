@@ -55,6 +55,15 @@ public class Participante implements java.io.Serializable {
 	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "country")
+	private String country;
+	
+	@Column(name = "city")
+	private String city;
+	
+	@Column(name = "postcode")
+	private String postcode;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
 	@Column(name = "date_last_active", length = 23)
@@ -401,5 +410,29 @@ public class Participante implements java.io.Serializable {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 }

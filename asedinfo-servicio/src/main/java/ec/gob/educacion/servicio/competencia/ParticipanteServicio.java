@@ -53,6 +53,14 @@ public interface ParticipanteServicio {
 	List<Participante> listarParticipantePorEstado(String estadoPedido);
 
 	/**
+	 * Permite obtener lista Participante
+	 * 
+	 * @param email
+	 * @return listaParticipante
+	 */
+	List<Participante> listarParticipantePorEmail(String email);
+
+	/**
 	 * Permite registrar Participante
 	 * 
 	 * @param ParticipanteWP

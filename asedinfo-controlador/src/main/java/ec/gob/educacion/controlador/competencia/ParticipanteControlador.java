@@ -69,6 +69,18 @@ public class ParticipanteControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarParticipantePorEmail/{email}")
+	public ResponseGenerico<Participante> listarParticipantePorEmail(@PathVariable("email") String email) {
+		List<Participante> listaParticipante = participanteServicio.listarParticipantePorEmail(email);
+		// Respuesta
+		ResponseGenerico<Participante> response = new ResponseGenerico<>();
+		response.setListado(listaParticipante);
+		response.setTotalRegistros((long) listaParticipante.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 	@GetMapping(value = "listarParticipantePorSubcategoriaInstancia/{codSubcategoria}/{codInstancia}/{codEstadoComptetencia}")
 	public ResponseGenerico<Participante> listarParticipantePorSubcategoriaInstancia(@PathVariable("codSubcategoria") Long codSubcategoria, @PathVariable("codInstancia") Long codInstancia, @PathVariable("codEstadoComptetencia") Long codEstadoComptetencia) {
 		List<Participante> listaParticipante = participanteServicio.listarParticipantePorSubcategoriaInstancia(codSubcategoria, codInstancia, codEstadoComptetencia);
@@ -82,9 +94,9 @@ public class ParticipanteControlador {
 	}
 
 	/**
-	 * REST para obtener Socio
+	 * REST para obtener Participante
 	 * 
-	 * @return Socio
+	 * @return Participante
 	 */
 	@GetMapping(value = "buscarParticipantePorCodigo/{codigo}")
 	public ResponseGenerico<Participante> buscarParticipantePorCodigo(@PathVariable("codigo") Long codigo) {

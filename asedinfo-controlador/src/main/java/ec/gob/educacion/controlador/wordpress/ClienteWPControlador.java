@@ -78,7 +78,7 @@ public class ClienteWPControlador {
 				}
 				// Registro nuevo
 				persona.setIdentificacion(clienteWP.getEmail());
-				//persona.setCedula(clienteWP.getCedula());
+				persona.setCedula("Suscriptor");
 				persona.setNombres(clienteWP.getFirstName());
 				persona.setApellidos(clienteWP.getLastName());
 				//persona.setFechaNacimiento(clienteWP.getBirthday())
