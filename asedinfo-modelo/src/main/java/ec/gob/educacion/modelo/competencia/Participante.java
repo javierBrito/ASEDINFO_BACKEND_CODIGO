@@ -91,6 +91,8 @@ public class Participante implements java.io.Serializable {
 	private String apellidos;
 	@Transient
 	private String correo;
+	@Transient
+	private String identificacion;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -434,5 +436,16 @@ public class Participante implements java.io.Serializable {
 
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+
+	public String getIdentificacion() {
+		if (this.persona != null) {
+			identificacion = this.persona.getIdentificacion();
+		}
+		return identificacion;
+	}
+
+	public void setIdentificacion(String identificacion) {
+		this.identificacion = identificacion;
 	}
 }

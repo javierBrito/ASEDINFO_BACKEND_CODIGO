@@ -79,8 +79,8 @@ public class ClienteWPControlador {
 				// Registro nuevo
 				persona.setIdentificacion(clienteWP.getEmail());
 				persona.setCedula("Suscriptor");
-				persona.setNombres(clienteWP.getFirstName());
-				persona.setApellidos(clienteWP.getLastName());
+				persona.setNombres(clienteWP.getFirstName().toUpperCase());
+				persona.setApellidos(clienteWP.getLastName().toUpperCase());
 				//persona.setFechaNacimiento(clienteWP.getBirthday())
 				persona.setCorreo(clienteWP.getEmail());
 				//persona.setCelular(clienteWP.getCelular);
@@ -145,8 +145,8 @@ public class ClienteWPControlador {
 				participante.setDateLastActive(clienteWP.getDateLastActive());
 				participante.setDateRegistered(clienteWP.getDateRegistered());
 				participante.setEmail(clienteWP.getEmail());
-				participante.setFirstName(clienteWP.getFirstName());
-				participante.setLastName(clienteWP.getLastName());
+				participante.setFirstName(clienteWP.getFirstName().toUpperCase());
+				participante.setLastName(clienteWP.getLastName().toUpperCase());
 				participante.setUserId(clienteWP.getUserId());
 				participante.setUsername(clienteWP.getUsername());
 				// Datos por default al migrar
