@@ -36,6 +36,9 @@ public class Transaccion implements java.io.Serializable {
 
 	@Column(name = "descripcion")
 	private String descripcion;
+
+	@Column(name = "clave_cuenta")
+	private String claveCuenta;
 	
 	@Column(name = "precio")
 	private float precio;
@@ -64,6 +67,11 @@ public class Transaccion implements java.io.Serializable {
 	@Column(name = "fecha_fin", length = 23)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
 	private Date fechaFin;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "fecha_cambia", length = 23)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
+	private Date fechaCambia;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "fecha_registra", length = 23)
@@ -324,5 +332,21 @@ public class Transaccion implements java.io.Serializable {
 
 	public void setPrecioMayoreo(float precioMayoreo) {
 		this.precioMayoreo = precioMayoreo;
+	}
+
+	public String getClaveCuenta() {
+		return claveCuenta;
+	}
+
+	public void setClaveCuenta(String claveCuenta) {
+		this.claveCuenta = claveCuenta;
+	}
+
+	public Date getFechaCambia() {
+		return fechaCambia;
+	}
+
+	public void setFechaCambia(Date fechaCambia) {
+		this.fechaCambia = fechaCambia;
 	}
 }
