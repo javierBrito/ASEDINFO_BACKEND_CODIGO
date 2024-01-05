@@ -3,6 +3,7 @@ package ec.gob.educacion.servicio.venta;
 import java.util.List;
 
 import ec.gob.educacion.modelo.venta.Cliente;
+import ec.gob.educacion.modelo.venta.DataClientes;
 
 public interface ClienteServicio {
 	/**
@@ -44,6 +45,8 @@ public interface ClienteServicio {
 	 * @return listaCliente
 	 */
 	List<Cliente> listarClientePorPersonaIdentificacion(String identificacion);
+
+	List<DataClientes> listarDataClientes();
 
 	/**
 	 * Permite registrar Socio

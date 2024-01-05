@@ -1,5 +1,6 @@
 package ec.gob.educacion.controlador.venta;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ec.gob.educacion.controlador.util.Constantes;
+import ec.gob.educacion.modelo.catalogo.Persona;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
 import ec.gob.educacion.modelo.venta.Cliente;
+import ec.gob.educacion.modelo.venta.DataClientes;
+import ec.gob.educacion.servicio.catalogo.PersonaServicio;
 import ec.gob.educacion.servicio.venta.ClienteServicio;
 import ec.gob.educacion.venta.resources.EstadoEnum;
 
@@ -21,6 +25,8 @@ public class ClienteControlador {
 
 	@Autowired
 	private ClienteServicio clienteServicio;
+	@Autowired
+	private PersonaServicio personaServicio;
 
 	@GetMapping(value = "listarTodosCliente")
 	public ResponseGenerico<Cliente> listarTodosCliente() {
@@ -120,4 +126,55 @@ public class ClienteControlador {
 		response.setMensaje(Constantes.MENSAJE_OK_ELIMINADO);
 		return response;
 	}
+
+	@GetMapping(value = "migrarCliente")
+	public ResponseGenerico<DataClientes> migrarCliente() {
+		List<DataClientes> listaDataClientes = clienteServicio.listarDataClientes();
+		if (listaDataClientes.size() > 0) {
+			for (DataClientes dataClientes : listaDataClientes) {
+				// Mover datos desde DataClientes a Persona
+				Persona persona = new Persona();
+				// Verificar si ya existe Persona
+				List<Persona> listaPersona = personaServicio.buscarPorIdentificacion(dataClientes.getIdentificacion());
+				if (listaPersona.size() > 0) {
+					persona = listaPersona.get(0);
+				}
+				// Registro nuevo
+				persona.setIdentificacion(dataClientes.getIdentificacion());
+				persona.setNombres(dataClientes.getNombre().substring(0, dataClientes.getNombre().indexOf(" ")).toUpperCase());
+				persona.setApellidos(dataClientes.getNombre().substring(dataClientes.getNombre().indexOf(" ")+1).toUpperCase());
+				persona.setCorreo(dataClientes.getCorreo());
+				persona.setCelular(dataClientes.getCelular());
+				persona.setEstado("A");
+				// Guardar la Persona
+				persona = personaServicio.registrar(persona);
+				
+				// Mover datos desde DataClientes a Cliente
+				Cliente cliente = new Cliente();
+				// Verificar si ya existe Cliente
+				List<Cliente> listaCliente = clienteServicio.listarClientePorPersona(persona.getCodigo());
+				if (listaCliente.size() > 0) {
+					cliente = listaCliente.get(0);
+				}
+				// Datos por default al migrar
+				cliente.setFechaInicio(new Date());
+				cliente.setTipoCliente("REGULAR");;
+				cliente.setEstado("A");;
+				// Datos de la persona relacionada
+				cliente.setCodPersona(persona.getCodigo());
+				cliente.setPersona(persona);
+				
+				// Guardar el registro
+				clienteServicio.registrar(cliente);
+			}
+		}
+		// Respuesta
+		ResponseGenerico<DataClientes> response = new ResponseGenerico<>();
+		response.setListado(listaDataClientes);
+		response.setTotalRegistros((long) listaDataClientes.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+	
 }
