@@ -30,6 +30,11 @@ public class ClienteServicioImpl implements ClienteServicio {
 	}
 
 	@Override
+	public List<Cliente> listarClienteActivoOrdenNombre() {
+		return clienteRepositorio.listarClienteActivoOrdenNombre();
+	}
+
+	@Override
 	public Cliente buscarClientePorCodigo(Long codigo) {
 		return clienteRepositorio.findByCodigo(codigo);
 	}

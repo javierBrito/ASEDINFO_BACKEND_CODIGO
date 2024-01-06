@@ -52,6 +52,18 @@ public class ClienteControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarClienteActivoOrdenNombre")
+	public ResponseGenerico<Cliente> listarClienteActivoOrdenNombre() {
+		List<Cliente> listaCliente = clienteServicio.listarClienteActivoOrdenNombre();
+		// Respuesta
+		ResponseGenerico<Cliente> response = new ResponseGenerico<>();
+		response.setListado(listaCliente);
+		response.setTotalRegistros((long) listaCliente.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 	@GetMapping(value = "listarClientePorPersona/{codPersona}")
 	public ResponseGenerico<Cliente> listarClientePorPersona(@PathVariable("codPersona") Long codPersona) {
 		List<Cliente> listaCliente = clienteServicio.listarClientePorPersona(codPersona);
@@ -141,8 +153,13 @@ public class ClienteControlador {
 				}
 				// Registro nuevo
 				persona.setIdentificacion(dataClientes.getIdentificacion());
-				persona.setNombres(dataClientes.getNombre().substring(0, dataClientes.getNombre().indexOf(" ")).toUpperCase());
-				persona.setApellidos(dataClientes.getNombre().substring(dataClientes.getNombre().indexOf(" ")+1).toUpperCase());
+				if (dataClientes.getNombre().indexOf(" ") == -1) {
+					persona.setNombres(dataClientes.getNombre().toUpperCase());
+					persona.setApellidos(dataClientes.getNombre().toUpperCase());
+				} else {
+					persona.setNombres(dataClientes.getNombre().substring(0, dataClientes.getNombre().indexOf(" ")).toUpperCase());
+					persona.setApellidos(dataClientes.getNombre().substring(dataClientes.getNombre().indexOf(" ")+1).toUpperCase());
+				}
 				persona.setCorreo(dataClientes.getCorreo());
 				persona.setCelular(dataClientes.getCelular());
 				persona.setEstado("A");

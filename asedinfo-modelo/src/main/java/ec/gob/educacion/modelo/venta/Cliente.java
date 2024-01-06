@@ -32,18 +32,18 @@ public class Cliente implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo", unique = true, nullable = false, precision = 10, scale = 0)
 	private Long codigo;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
 	@Column(name = "fecha_inicio", length = 23)
 	private Date fechaInicio;
-	
+
 	@Column(name = "estado", nullable = false, length = 1)
 	private String estado;
 
 	@Column(name = "tipo_cliente")
 	private String tipoCliente;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cod_persona", nullable = false)
@@ -51,6 +51,25 @@ public class Cliente implements java.io.Serializable {
 
 	@Transient
 	private Long codPersona;
+	@Transient
+	private String nombrePersona;
+	@Transient
+	private String celular;
+	@Transient
+	private String nombres;
+	@Transient
+	private String apellidos;
+	@Transient
+	private String correo;
+	@Transient
+	private String identificacion;
+	@Transient
+	private String direccion;
+
+	@Transient
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
+	private Date fechaNacimiento;
 
 	public Cliente() {
 	}
@@ -106,4 +125,90 @@ public class Cliente implements java.io.Serializable {
 	public void setCodPersona(Long codPersona) {
 		this.codPersona = codPersona;
 	}
+
+	public String getIdentificacion() {
+		if (this.persona != null) {
+			identificacion = this.persona.getIdentificacion();
+		}
+		return identificacion;
+	}
+
+	public void setIdentificacion(String identificacion) {
+		this.identificacion = identificacion;
+	}
+
+	public String getNombres() {
+		if (this.persona != null) {
+			nombres = this.persona.getNombres();
+		}
+		return nombres;
+	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+
+	public String getApellidos() {
+		if (this.persona != null) {
+			apellidos = this.persona.getApellidos();
+		}
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getCorreo() {
+		if (this.persona != null) {
+			correo = this.persona.getCorreo();
+		}
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getCelular() {
+		if (this.persona != null) {
+			celular = this.persona.getCelular();
+		}
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getNombrePersona() {
+		if (this.persona != null) {
+			nombrePersona = this.persona.getNombres() + " " + this.persona.getApellidos();
+		}
+		return nombrePersona;
+	}
+
+	public void setNombrePersona(String nombrePersona) {
+		this.nombrePersona = nombrePersona;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		if (this.persona != null) {
+			direccion = this.persona.getDireccion();
+		}
+		this.direccion = direccion;
+	}
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
 }

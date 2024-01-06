@@ -12,6 +12,9 @@ public interface ClienteRepositorio extends JpaRepository<Cliente, Long> {
 	
 	List<Cliente> findByEstadoOrderByCodigo(String estado);
 
+	@Query(nativeQuery = false, value = "select r from Cliente r where r.estado = 'A' order by r.persona.nombres")
+	List<Cliente> listarClienteActivoOrdenNombre();
+
 	@Query(nativeQuery = false, value = "select r from Cliente r where r.persona.codigo = :codPersona and r.estado = 'A'")
 	List<Cliente> listarClientePorPersona(@Param("codPersona") Long codPersona);
 

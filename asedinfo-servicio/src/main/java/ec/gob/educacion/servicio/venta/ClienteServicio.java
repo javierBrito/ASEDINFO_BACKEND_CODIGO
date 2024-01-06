@@ -23,6 +23,14 @@ public interface ClienteServicio {
 	List<Cliente> listarClienteActivo(String estado);
 
 	/**
+	 * Permite listar Socio Activo
+	 * 
+	 * @param estado
+	 * @return lista Socio
+	 */
+	List<Cliente> listarClienteActivoOrdenNombre();
+
+	/**
 	 * Permite obtener Socio
 	 * 
 	 * @param codigo
