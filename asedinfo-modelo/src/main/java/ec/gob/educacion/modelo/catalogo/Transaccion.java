@@ -112,6 +112,11 @@ public class Transaccion implements java.io.Serializable {
 	@Transient
 	private float precioMayoreo;
 
+	@Transient
+	private String colorFila;
+	@Transient
+	private String colorColumna;
+
 	public Transaccion() {
 	}
 
@@ -348,5 +353,21 @@ public class Transaccion implements java.io.Serializable {
 
 	public void setFechaCambia(Date fechaCambia) {
 		this.fechaCambia = fechaCambia;
+	}
+
+	public String getColorFila() {
+		return colorFila;
+	}
+
+	public void setColorFila(String colorFila) {
+		this.colorFila = colorFila;
+	}
+
+	public String getColorColumna() {
+		return colorColumna;
+	}
+
+	public void setColorColumna(String colorColumna) {
+		this.colorColumna = colorColumna;
 	}
 }

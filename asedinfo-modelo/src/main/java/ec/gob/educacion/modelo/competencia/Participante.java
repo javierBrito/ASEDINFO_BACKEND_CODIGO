@@ -64,6 +64,9 @@ public class Participante implements java.io.Serializable {
 	@Column(name = "postcode")
 	private String postcode;
 	
+	@Column(name = "nombre_cancion")
+	private String nombreCancion;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
 	@Column(name = "date_last_active", length = 23)
@@ -447,5 +450,13 @@ public class Participante implements java.io.Serializable {
 
 	public void setIdentificacion(String identificacion) {
 		this.identificacion = identificacion;
+	}
+
+	public String getNombreCancion() {
+		return nombreCancion;
+	}
+
+	public void setNombreCancion(String nombreCancion) {
+		this.nombreCancion = nombreCancion;
 	}
 }
