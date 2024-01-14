@@ -132,6 +132,8 @@ public class Participante implements java.io.Serializable {
 	private String desEstadoCompetencia;
 	@Transient
 	private String colorBoton;
+	@Transient
+	private String displayNoneGrupo;
 	
 	@Column(name = "num_puntaje_juez")
 	private int numPuntajeJuez;
@@ -458,5 +460,13 @@ public class Participante implements java.io.Serializable {
 
 	public void setNombreCancion(String nombreCancion) {
 		this.nombreCancion = nombreCancion;
+	}
+
+	public String getDisplayNoneGrupo() {
+		return displayNoneGrupo;
+	}
+
+	public void setDisplayNoneGrupo(String displayNoneGrupo) {
+		this.displayNoneGrupo = displayNoneGrupo;
 	}
 }

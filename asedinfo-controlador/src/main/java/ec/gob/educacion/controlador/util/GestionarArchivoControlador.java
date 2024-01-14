@@ -33,8 +33,6 @@ public class GestionarArchivoControlador {
 	// Cargar archivo PDF a una carpeta
 	@PostMapping("cargarArchivo")
 	public ResponseEntity<String> cargarArchivo(@RequestParam("files") MultipartFile[] files) {
-		System.out.println("uploadFiles JB ");
-		System.out.println("Constantes.UPLOADED_FOLDER = "+Constantes.nombreDirectorio);
 		String message = "";
 		try {
 			List<String> fileNames = new ArrayList<>();
@@ -44,7 +42,6 @@ public class GestionarArchivoControlador {
 			});
 
 			message = "Se subieron los archivos correctamente " + fileNames;
-			System.out.println("upload message = "+message);
 			return ResponseEntity.status(HttpStatus.OK).body(message);
 		} catch (Exception e) {
 			message = "Fallo al subir los archivos";
@@ -54,17 +51,12 @@ public class GestionarArchivoControlador {
 
 	@GetMapping("descargarArchivos")
 	public ResponseEntity<List<GestionarArchivoModelo>> descargarArchivos() {
-		System.out.println("getFiles()...");
 		List<GestionarArchivoModelo> fileInfos = gestionarArchivoServicio.descargarArchivos().map(path -> {
 			String fileName = path.getFileName().toString();
-			System.out.println("fileInfos fileName() = "+fileName);
-			System.out.println("path.getFileName().toString() = "+path.getFileName().toString());
 			String url = MvcUriComponentsBuilder
 					.fromMethodName(GestionarArchivoControlador.class, "getFile", path.getFileName().toString()).build().toString();
-			System.out.println("url = "+url);
 			return new GestionarArchivoModelo(fileName, url);
 		}).collect(Collectors.toList());
-		System.out.println("getFiles()...OK");
 		return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
 	}
 
@@ -78,21 +70,17 @@ public class GestionarArchivoControlador {
 
 	@GetMapping("delete/{filename:.+}")
 	public ResponseEntity<String> deleteFile(@PathVariable String filename) {
-		System.out.println("deleteFile(@PathVariable String filename)");
 		String message = "";
 		try {
 			message = gestionarArchivoServicio.deleteFile(filename);
-			System.out.println("deleteFile(@PathVariable message = "+message);
 			return ResponseEntity.status(HttpStatus.OK).body(message);
 		} catch (IOException e) {
-			System.out.println("deleteFile(@PathVariable e.getMessage() = "+e.getMessage());
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error eliminar archivo...");
 		}
 	}
 
 	@GetMapping(value = "descargarArchivo/{filename:.+}/{titCedula}")
 	public ResponseEntity<Resource> descargarArchivo(@PathVariable String filename, @PathVariable String titCedula) {
-		System.out.println("downloadFile()...");
 		Resource file = gestionarArchivoServicio.descargarArchivo(filename, Constantes.nombreDirectorio + "//");
 		Path path;
 		try {
@@ -101,8 +89,6 @@ public class GestionarArchivoControlador {
 					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 					.body(file);
 		} catch (IOException e) {
-			//e.printStackTrace();
-			System.out.println("No se descargo el archivo e.getMessage() = "+e.getMessage());
 			return null;
 		}
 	}

@@ -26,7 +26,6 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 	private Path pathLocation;
 	
 	public void iniciaPathLocation() {
-		System.out.println("void init()");
 		try {
 			pathLocation = Paths.get(nombreDirectorio);
 
@@ -42,11 +41,9 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 
 	@Override
 	public void cargarArchivo(MultipartFile file) {
-		System.out.println("save(MultipartFile file)");
 		this.iniciaPathLocation();
 		try {
 			// copy (que queremos copiar, a donde queremos copiar)
-			System.out.println("Files.copy");
 			Files.copy(file.getInputStream(), this.pathLocation.resolve(file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 			throw new RuntimeException("No se puede guardar el archivo. Error = " + e.getMessage());
@@ -101,11 +98,9 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 		// Relativize sirve para crear una ruta relativa entre la ruta dada y esta ruta
 		this.iniciaPathLocation();
 		try {
-			System.out.println("this.pathLocation = " + this.pathLocation);
 			return Files.walk(this.pathLocation, 1).filter(path -> !path.equals(this.pathLocation))
 					.map(this.pathLocation::relativize);
 		} catch (RuntimeException | IOException e) {
-			System.out.println("loadAll() e.getMessage() = " + e.getMessage());
 			throw new RuntimeException("No se pueden cargar los archivos ");
 		}
 	}
