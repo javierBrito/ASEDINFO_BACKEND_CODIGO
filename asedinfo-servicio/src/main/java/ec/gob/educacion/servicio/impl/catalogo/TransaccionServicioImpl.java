@@ -48,7 +48,12 @@ public class TransaccionServicioImpl implements TransaccionServicio {
 
 	@Override
 	public List<Transaccion> listarTransaccionPorDescripcion(String descripcion) {
-		return transaccionRepositorio.findByDescripcion(descripcion);
+		return transaccionRepositorio.listarTransaccionPorDescripcion(descripcion);
+	}
+
+	@Override
+	public List<Transaccion> listarTransaccionPorClaveCuenta(String claveCuenta) {
+		return transaccionRepositorio.listarTransaccionPorClaveCuenta(claveCuenta);
 	}
 
 	@Override

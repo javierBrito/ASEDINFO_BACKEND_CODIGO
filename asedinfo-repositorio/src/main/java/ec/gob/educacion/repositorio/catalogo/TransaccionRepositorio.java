@@ -18,7 +18,10 @@ public interface TransaccionRepositorio extends JpaRepository<Transaccion, Long>
 	List<Transaccion> listarTransaccionActivo(@Param("nemonicoModulo") String nemonicoModulo);
 
 	@Query(nativeQuery = false, value = "select r from Transaccion r where r.descripcion like %:descripcion% and r.estado = 'A'")
-	List<Transaccion> findByDescripcion(@Param("descripcion") String descripcion);
+	List<Transaccion> listarTransaccionPorDescripcion(@Param("descripcion") String descripcion);
+
+	@Query(nativeQuery = false, value = "select r from Transaccion r where r.claveCuenta like %:claveCuenta% and r.estado = 'A'")
+	List<Transaccion> listarTransaccionPorClaveCuenta(@Param("claveCuenta") String claveCuenta);
 
 	@Query(nativeQuery = false, value = "select r from Transaccion r where r.fechaInicio >= :fechaInicio and r.fechaInicio <= :fechaFin and r.estado = 'A'")
 	List<Transaccion> listarTransaccionPorRangoFechas(@Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);

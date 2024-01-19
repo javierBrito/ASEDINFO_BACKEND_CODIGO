@@ -39,6 +39,14 @@ public interface TransaccionServicio {
 	/**
 	 * Permite obtener lista Transaccion
 	 * 
+	 * @param claveCuenta
+	 * @return listaTransaccion
+	 */
+	List<Transaccion> listarTransaccionPorClaveCuenta(String claveCuenta);
+
+	/**
+	 * Permite obtener lista Transaccion
+	 * 
 	 * @param rango fechas
 	 * @return listaTransaccion
 	 */
