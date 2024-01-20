@@ -39,6 +39,15 @@ public interface TransaccionServicio {
 	/**
 	 * Permite obtener lista Transaccion
 	 * 
+	 * @param codCliente
+	 * @return listaTransaccion
+	 */
+
+	List<Transaccion> listarTransaccionPorCliente(Long codCliente);
+
+	/**
+	 * Permite obtener lista Transaccion
+	 * 
 	 * @param claveCuenta
 	 * @return listaTransaccion
 	 */
