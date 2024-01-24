@@ -111,6 +111,8 @@ public class Transaccion implements java.io.Serializable {
 	private int numExistenciaActual;
 	@Transient
 	private float precioMayoreo;
+	@Transient
+	private int numDiasRenovar;
 
 	@Transient
 	private String colorFila;
@@ -369,5 +371,13 @@ public class Transaccion implements java.io.Serializable {
 
 	public void setColorColumna(String colorColumna) {
 		this.colorColumna = colorColumna;
+	}
+
+	public int getNumDiasRenovar() {
+		return numDiasRenovar;
+	}
+
+	public void setNumDiasRenovar(int numDiasRenovar) {
+		this.numDiasRenovar = numDiasRenovar;
 	}
 }
