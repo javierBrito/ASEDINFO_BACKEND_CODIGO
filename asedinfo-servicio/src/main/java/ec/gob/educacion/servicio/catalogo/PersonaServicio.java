@@ -1,6 +1,7 @@
 package ec.gob.educacion.servicio.catalogo;
 
 import java.util.List;
+import ec.gob.educacion.modelo.DTO.PrefijoTelefonicoDTO;
 import ec.gob.educacion.modelo.catalogo.Persona;
 
 public interface PersonaServicio {
@@ -46,5 +47,8 @@ public interface PersonaServicio {
 	Persona crearPersona(Persona persona);
 
 	List<Persona> buscarPorIdentificacion(String identificacion);
+
+	List<PrefijoTelefonicoDTO> listarPrefijoTelefonico();
+
 	
 }

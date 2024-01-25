@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ec.gob.educacion.controlador.util.Constantes;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
+import ec.gob.educacion.modelo.DTO.PrefijoTelefonicoDTO;
 import ec.gob.educacion.modelo.catalogo.Persona;
 import ec.gob.educacion.venta.resources.EstadoEnum;
 import ec.gob.educacion.servicio.catalogo.PersonaServicio;
@@ -108,4 +109,17 @@ public class PersonaControlador {
 		response.setMensaje(Constantes.MENSAJE_OK_ELIMINADO);
 		return response;
 	}
+
+	@GetMapping(value = "listarPrefijoTelefonico")
+	public ResponseGenerico<PrefijoTelefonicoDTO> listarPrefijoTelefonico() {
+		List<PrefijoTelefonicoDTO> listaPrefijoTelefonico = personaServicio.listarPrefijoTelefonico();
+		// Respuesta
+		ResponseGenerico<PrefijoTelefonicoDTO> response = new ResponseGenerico<>();
+		response.setListado(listaPrefijoTelefonico);
+		response.setTotalRegistros((long) listaPrefijoTelefonico.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 }
