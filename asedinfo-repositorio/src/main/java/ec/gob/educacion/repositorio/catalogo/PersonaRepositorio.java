@@ -19,7 +19,7 @@ public interface PersonaRepositorio extends JpaRepository<Persona, Long> {
 
 	@Query(nativeQuery = true, value = 
 			  " select nombre_pais, codigo "
-			+ "   from ca_prefijo_telefonico" ) 
+			+ "   from cat_prefijo_telefonico" ) 
 	List<Object[]> listarPrefijoTelefonico();;
 
 }

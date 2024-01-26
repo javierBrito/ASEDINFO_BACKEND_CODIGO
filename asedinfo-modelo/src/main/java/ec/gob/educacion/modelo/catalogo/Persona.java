@@ -58,6 +58,9 @@ public class Persona implements java.io.Serializable {
 	@Column(name = "estado", nullable = false, length = 1)
 	private String estado;
 
+	@Column(name = "prefijo_telefonico")
+	private String prefijoTelefonico;
+
 	public Persona() {
 	}
 
@@ -139,5 +142,13 @@ public class Persona implements java.io.Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getPrefijoTelefonico() {
+		return prefijoTelefonico;
+	}
+
+	public void setPrefijoTelefonico(String prefijoTelefonico) {
+		this.prefijoTelefonico = prefijoTelefonico;
 	}
 }

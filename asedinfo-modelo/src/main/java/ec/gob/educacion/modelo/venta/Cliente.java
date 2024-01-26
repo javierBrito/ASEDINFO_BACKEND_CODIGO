@@ -56,6 +56,8 @@ public class Cliente implements java.io.Serializable {
 	@Transient
 	private String celular;
 	@Transient
+	private String prefijoTelefonico;
+	@Transient
 	private String nombres;
 	@Transient
 	private String apellidos;
@@ -211,4 +213,14 @@ public class Cliente implements java.io.Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
+	public String getPrefijoTelefonico() {
+		if (this.persona != null) {
+			prefijoTelefonico = this.persona.getPrefijoTelefonico();
+		}
+		return prefijoTelefonico;
+	}
+
+	public void setPrefijoTelefonico(String prefijoTelefonico) {
+		this.prefijoTelefonico = prefijoTelefonico;
+	}
 }
