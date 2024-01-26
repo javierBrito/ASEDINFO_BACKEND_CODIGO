@@ -100,6 +100,8 @@ public class Transaccion implements java.io.Serializable {
 	@Transient
 	private String nombreCliente;
 	@Transient
+	private String prefijoTelefonico;
+	@Transient
 	private String celular;
 	@Transient
 	private Long codProducto;
@@ -379,5 +381,16 @@ public class Transaccion implements java.io.Serializable {
 
 	public void setNumDiasRenovar(int numDiasRenovar) {
 		this.numDiasRenovar = numDiasRenovar;
+	}
+
+	public String getPrefijoTelefonico() {
+		if (cliente != null) {
+			prefijoTelefonico = cliente.getPersona().getPrefijoTelefonico();
+		}
+		return prefijoTelefonico;
+	}
+
+	public void setPrefijoTelefonico(String prefijoTelefonico) {
+		this.prefijoTelefonico = prefijoTelefonico;
 	}
 }
