@@ -50,6 +50,11 @@ public class ClienteServicioImpl implements ClienteServicio {
 	}
 
 	@Override
+	public List<Cliente> listarClientePorPersonaNombre(String nombre) {
+		return clienteRepositorio.listarClientePorPersonaNombre(nombre);
+	}
+
+	@Override
 	public List<DataClientes> listarDataClientes() {
 		List<DataClientes> listaDataClientes = new ArrayList<>();
 		clienteRepositorio.listarDataClientes().forEach(objects -> {

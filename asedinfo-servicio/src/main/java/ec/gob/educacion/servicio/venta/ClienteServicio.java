@@ -52,7 +52,16 @@ public interface ClienteServicio {
 	 * @param identificacion
 	 * @return listaCliente
 	 */
+
 	List<Cliente> listarClientePorPersonaIdentificacion(String identificacion);
+
+	/**
+	 * Permite obtener lista Cliente
+	 * 
+	 * @param nombre
+	 * @return listaCliente
+	 */
+	List<Cliente> listarClientePorPersonaNombre(String nombre);
 
 	List<DataClientes> listarDataClientes();
 

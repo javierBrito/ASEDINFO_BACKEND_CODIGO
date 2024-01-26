@@ -18,8 +18,11 @@ public interface ClienteRepositorio extends JpaRepository<Cliente, Long> {
 	@Query(nativeQuery = false, value = "select r from Cliente r where r.persona.codigo = :codPersona and r.estado = 'A'")
 	List<Cliente> listarClientePorPersona(@Param("codPersona") Long codPersona);
 
+	@Query(nativeQuery = false, value = "select r from Cliente r where r.persona.nombres like %:nombre% and r.estado = 'A'")
+	List<Cliente> listarClientePorPersonaIdentificacion(@Param("nombre") String nombre);
+
 	@Query(nativeQuery = false, value = "select r from Cliente r where r.persona.identificacion = :identificacion and r.estado = 'A'")
-	List<Cliente> listarClientePorPersonaIdentificacion(@Param("identificacion") String identificacion);
+	List<Cliente> listarClientePorPersonaNombre(@Param("identificacion") String identificacion);
 
 	//@Query(nativeQuery = false, value = "select r from DataClientes")
 	//List<DataClientes> listarDataClientes();
