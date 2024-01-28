@@ -76,6 +76,18 @@ public class ClienteControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarClientePorPersonaIdentificacion/{identificacion}")
+	public ResponseGenerico<Cliente> listarClientePorPersonaIdentificacion(@PathVariable("identificacion") String identificacion) {
+		List<Cliente> listaCliente = clienteServicio.listarClientePorPersonaIdentificacion(identificacion);
+		// Respuesta
+		ResponseGenerico<Cliente> response = new ResponseGenerico<>();
+		response.setListado(listaCliente);
+		response.setTotalRegistros((long) listaCliente.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 	@GetMapping(value = "listarClientePorPersonaNombre/{nombre}")
 	public ResponseGenerico<Cliente> listarClientePorPersonaNombre(@PathVariable("nombre") String nombre) {
 		List<Cliente> listaCliente = clienteServicio.listarClientePorPersonaNombre(nombre);
