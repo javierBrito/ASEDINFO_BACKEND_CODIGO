@@ -52,6 +52,9 @@ public class Transaccion implements java.io.Serializable {
 	@Column(name = "num_mes")
 	private int numMes;
 	
+	@Column(name = "num_dias_extra")
+	private int numDiasExtra;
+	
 	@Column(name = "aplica_iva")
 	private int aplica;
 
@@ -392,5 +395,13 @@ public class Transaccion implements java.io.Serializable {
 
 	public void setPrefijoTelefonico(String prefijoTelefonico) {
 		this.prefijoTelefonico = prefijoTelefonico;
+	}
+
+	public int getNumDiasExtra() {
+		return numDiasExtra;
+	}
+
+	public void setNumDiasExtra(int numDiasExtra) {
+		this.numDiasExtra = numDiasExtra;
 	}
 }
