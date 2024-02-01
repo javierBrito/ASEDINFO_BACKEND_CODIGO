@@ -40,11 +40,11 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 	}
 
 	@Override
-	public void cargarArchivo(MultipartFile file) {
+	public void cargarArchivo(MultipartFile file, String nombreArchivo) {
 		this.iniciaPathLocation();
 		try {
 			// copy (que queremos copiar, a donde queremos copiar)
-			Files.copy(file.getInputStream(), this.pathLocation.resolve(file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(file.getInputStream(), this.pathLocation.resolve(nombreArchivo+"_"+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 			throw new RuntimeException("No se puede guardar el archivo. Error = " + e.getMessage());
 		}

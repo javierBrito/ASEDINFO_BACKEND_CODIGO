@@ -31,13 +31,13 @@ public class GestionarArchivoControlador {
 	GestionarArchivoServicio gestionarArchivoServicio;
 
 	// Cargar archivo PDF a una carpeta
-	@PostMapping("cargarArchivo")
-	public ResponseEntity<String> cargarArchivo(@RequestParam("files") MultipartFile[] files) {
+	@PostMapping("cargarArchivo/{nombreArchivo}")
+	public ResponseEntity<String> cargarArchivo(@RequestParam("files") MultipartFile[] files,  @PathVariable String nombreArchivo) {
 		String message = "";
 		try {
 			List<String> fileNames = new ArrayList<>();
 			Arrays.asList(files).stream().forEach(file -> {
-				gestionarArchivoServicio.cargarArchivo(file);
+				gestionarArchivoServicio.cargarArchivo(file, nombreArchivo);
 				fileNames.add(file.getOriginalFilename());
 			});
 

@@ -12,7 +12,7 @@ public interface GestionarArchivoServicio {
 	/*
 	 * Metodo para guardar
 	 */
-	public void cargarArchivo(MultipartFile file);
+	public void cargarArchivo(MultipartFile file, String nombreArchivo);
 
 	/*
 	 * Metodo para cargar un archivo
