@@ -123,6 +123,8 @@ public class Transaccion implements java.io.Serializable {
 	private String colorFila;
 	@Transient
 	private String colorColumna;
+	@Transient
+	private String visibleBoton;
 
 	public Transaccion() {
 	}
@@ -403,5 +405,13 @@ public class Transaccion implements java.io.Serializable {
 
 	public void setNumDiasExtra(int numDiasExtra) {
 		this.numDiasExtra = numDiasExtra;
+	}
+
+	public String getVisibleBoton() {
+		return visibleBoton;
+	}
+
+	public void setVisibleBoton(String visibleBoton) {
+		this.visibleBoton = visibleBoton;
 	}
 }
