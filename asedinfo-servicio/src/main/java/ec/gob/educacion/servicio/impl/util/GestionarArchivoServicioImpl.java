@@ -28,6 +28,7 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 	public void iniciaPathLocation() {
 		try {
 			pathLocation = Paths.get(nombreDirectorio);
+			System.out.println("pathLocation = "+pathLocation);
 
 			// Verificar si el directorio ya existe
 			File directorio = new File(nombreDirectorio);
@@ -41,10 +42,12 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 
 	@Override
 	public void cargarArchivo(MultipartFile file, String nombreArchivo) {
+		System.out.println("nombreArchivo = "+nombreArchivo);
 		this.iniciaPathLocation();
 		try {
 			// copy (que queremos copiar, a donde queremos copiar)
 			Files.copy(file.getInputStream(), this.pathLocation.resolve(nombreArchivo+"_"+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+			System.out.println("Copy ok...");
 		} catch (IOException e) {
 			throw new RuntimeException("No se puede guardar el archivo. Error = " + e.getMessage());
 		}
