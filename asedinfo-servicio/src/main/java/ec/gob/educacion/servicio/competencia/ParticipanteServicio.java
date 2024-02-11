@@ -20,6 +20,8 @@ public interface ParticipanteServicio {
 	 */
 	Participante buscarParticipantePorCodigo(Long codigo);
 
+	Integer obtenerMaxNumParticipante();
+
 	/**
 	 * Permite obtener lista Socio
 	 * 

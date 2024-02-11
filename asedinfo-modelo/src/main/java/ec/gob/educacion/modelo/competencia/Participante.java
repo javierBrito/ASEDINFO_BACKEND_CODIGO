@@ -138,6 +138,9 @@ public class Participante implements java.io.Serializable {
 	@Column(name = "num_puntaje_juez")
 	private int numPuntajeJuez;
 	
+	@Column(name = "num_participante")
+	private int numParticipante;
+	
 	public Participante() {
 	}
 
@@ -468,5 +471,13 @@ public class Participante implements java.io.Serializable {
 
 	public void setDisplayNoneGrupo(String displayNoneGrupo) {
 		this.displayNoneGrupo = displayNoneGrupo;
+	}
+
+	public int getNumParticipante() {
+		return numParticipante;
+	}
+
+	public void setNumParticipante(int numParticipante) {
+		this.numParticipante = numParticipante;
 	}
 }

@@ -40,6 +40,11 @@ public class ParticipanteServicioImpl implements ParticipanteServicio {
 	}
 
 	@Override
+	public Integer obtenerMaxNumParticipante() {
+		return participanteRepositorio.obtenerMaxNumParticipante();
+	}
+
+	@Override
 	public List<Participante> listarParticipantePorPersona(Long codPersona) {
 		return participanteRepositorio.listarParticipantePorPersona(codPersona);
 	}

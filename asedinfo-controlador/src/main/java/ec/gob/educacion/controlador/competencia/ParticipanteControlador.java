@@ -143,4 +143,31 @@ public class ParticipanteControlador {
 		response.setMensaje(Constantes.MENSAJE_OK_ELIMINADO);
 		return response;
 	}
+
+	/**
+	 * REST para actualizar el numero de participante en Participante 
+	 * 
+	 * @return actualizar
+	 */
+	@PostMapping(value = "actualizarListaParticipante")
+	public ResponseGenerico<Participante> actualizarListaParticipante(@RequestBody List<Participante> listaParticipante) {
+		Participante participante = new Participante();
+		int numParticipante = 0;
+		if (listaParticipante.size() > 0) {
+			// Obtener el max de Participante
+			numParticipante = participanteServicio.obtenerMaxNumParticipante();
+			for (Participante participanteAux : listaParticipante) {
+				numParticipante += 1;
+				participanteAux.setNumParticipante(numParticipante);
+				participante = participanteServicio.registrar(participanteAux);
+			}
+		}
+		// Respuesta
+		ResponseGenerico<Participante> response = new ResponseGenerico<>();
+		response.setObjeto(participante);
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK_CREADO);
+		return response;
+	}
+
 }

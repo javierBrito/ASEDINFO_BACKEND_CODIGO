@@ -28,5 +28,8 @@ public interface ParticipanteRepositorio extends JpaRepository<Participante, Lon
 	@Query(nativeQuery = false, value = "select r from Participante r where r.email = :email and r.estadoCompetencia.codigo = 1")
 	List<Participante> listarParticipantePorEmail(@Param("email") String email);
 
+	@Query(nativeQuery = false, value = "select max(r.numParticipante) from Participante r")
+	Integer obtenerMaxNumParticipante();
+
 	Participante findByCodigo(Long codigo);
 }
