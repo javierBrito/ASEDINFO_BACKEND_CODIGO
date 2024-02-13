@@ -27,7 +27,30 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 	
 	public void iniciaPathLocation() {
 		try {
+			System.out.println("user.home = "+System.getProperty("user.home"));
+			System.out.println("File.separator = "+File.separator);
+
+			StringBuilder builder = new StringBuilder();
+			builder.append(System.getProperty("user.home").replace("C:", "D:"));
+			builder.append(File.separator);
+			builder.append("desarrollo_java_1.8");
+			builder.append(File.separator);
+			builder.append("WorkSpaceAsedinfoGit");
+			builder.append(File.separator);
+			builder.append("ASEDINFO_FRONTEND_CODIGO");
+			builder.append(File.separator);
+			builder.append("src");
+			builder.append(File.separator);
+			builder.append("assets");
+			builder.append(File.separator);
+			builder.append("musica");
+			builder.append(File.separator);
+			//builder.append(file.getOriginalFilename());
+			
+			//Path path = Paths.get(builder.toString());
+
 			pathLocation = Paths.get(nombreDirectorio);
+			//pathLocation = Paths.get(builder.toString());
 			System.out.println("pathLocation = "+pathLocation);
 
 			// Verificar si el directorio ya existe
@@ -43,6 +66,7 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 	@Override
 	public void cargarArchivo(MultipartFile file, String nombreArchivo) {
 		System.out.println("nombreArchivo = "+nombreArchivo);
+		
 		this.iniciaPathLocation();
 		try {
 			// copy (que queremos copiar, a donde queremos copiar)
