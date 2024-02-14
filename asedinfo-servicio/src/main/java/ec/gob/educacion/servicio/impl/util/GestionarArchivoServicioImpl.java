@@ -30,26 +30,30 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 			System.out.println("user.home = "+System.getProperty("user.home"));
 			System.out.println("File.separator = "+File.separator);
 
+			// Se arma path para guardar los archivos
 			StringBuilder builder = new StringBuilder();
-			builder.append(System.getProperty("user.home").replace("C:", "D:"));
+			builder.append(System.getProperty("user.home"));
 			builder.append(File.separator);
-			builder.append("desarrollo_java_1.8");
+			builder.append("ASEDINFO_APLICATIVO");
 			builder.append(File.separator);
-			builder.append("WorkSpaceAsedinfoGit");
-			builder.append(File.separator);
-			builder.append("ASEDINFO_FRONTEND_CODIGO");
-			builder.append(File.separator);
-			builder.append("src");
+			builder.append("asedinfo_aplicativo");
 			builder.append(File.separator);
 			builder.append("assets");
 			builder.append(File.separator);
 			builder.append("musica");
 			builder.append(File.separator);
 			//builder.append(file.getOriginalFilename());
+			System.out.println("builder.toString() = "+builder.toString());
+			System.out.println("nombreDirectorio = "+nombreDirectorio);
+			if (builder.toString().contains("/home/")) {
+				pathLocation = Paths.get(builder.toString());
+			} else {
+				// Se toma path de DESA tomado de properties 
+				pathLocation = Paths.get(nombreDirectorio);
+			}
 			
 			//Path path = Paths.get(builder.toString());
-
-			pathLocation = Paths.get(nombreDirectorio);
+			//pathLocation = Paths.get(nombreDirectorio);
 			//pathLocation = Paths.get(builder.toString());
 			System.out.println("pathLocation = "+pathLocation);
 
