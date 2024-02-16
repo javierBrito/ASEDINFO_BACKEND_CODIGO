@@ -141,6 +141,9 @@ public class Participante implements java.io.Serializable {
 	@Column(name = "num_participante")
 	private int numParticipante;
 	
+	@Column(name = "cancion", length = 1000)
+	private byte[] cancion;
+	
 	public Participante() {
 	}
 
@@ -479,5 +482,13 @@ public class Participante implements java.io.Serializable {
 
 	public void setNumParticipante(int numParticipante) {
 		this.numParticipante = numParticipante;
+	}
+
+	public byte[] getCancion() {
+		return cancion;
+	}
+
+	public void setCancion(byte[] cancion) {
+		this.cancion = cancion;
 	}
 }

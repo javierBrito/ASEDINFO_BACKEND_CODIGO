@@ -1,6 +1,9 @@
 package ec.gob.educacion.controlador.competencia;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,11 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import ec.gob.educacion.controlador.util.Constantes;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
 import ec.gob.educacion.modelo.competencia.Participante;
 import ec.gob.educacion.servicio.competencia.ParticipanteServicio;
+import java.io.ByteArrayOutputStream;
+import java.util.zip.DataFormatException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 @RestController
 @RequestMapping("competencia/")
@@ -116,11 +125,11 @@ public class ParticipanteControlador {
 	 * @return guardar
 	 */
 	@PostMapping(value = "guardarParticipante")
-	public ResponseGenerico<Participante> guardarParticipante(@RequestBody Participante Participante) {
-		Participante = participanteServicio.registrar(Participante);
+	public ResponseGenerico<Participante> guardarParticipante(@RequestBody Participante participante) {
+		participante = participanteServicio.registrar(participante);
 		// Respuesta
 		ResponseGenerico<Participante> response = new ResponseGenerico<>();
-		response.setObjeto(Participante);
+		response.setObjeto(participante);
 		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 		response.setMensaje(Constantes.MENSAJE_OK_CREADO);
 		return response;
@@ -169,5 +178,81 @@ public class ParticipanteControlador {
 		response.setMensaje(Constantes.MENSAJE_OK_CREADO);
 		return response;
 	}
+	
+	
+	// Trabajar con Blob eb la base
+	@PostMapping("/upload")
+	public ResponseGenerico<Participante> uplaodImage(@RequestParam("imageFile") MultipartFile file) {
+		Participante participante = new Participante();
+		try {
+			System.out.println("Original Image Byte Size - " + file.getBytes().length);
+			//Participante participante = new Participante(compressBytes(file.getBytes());
+			participante = participanteServicio.buscarParticipantePorCodigo(8L);
+			participante.setCancion(compressBytes(file.getBytes()));
+			participante = participanteServicio.registrar(participante);
+		} catch (IOException e) {
+			System.out.println("Error al traer el archivo e.getMessage() = " + e.getMessage());
+		}
+		// Respuesta
+		ResponseGenerico<Participante> response = new ResponseGenerico<>();
+		response.setObjeto(participante);
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK_CREADO);
+		return response;
+	}
+	
+	@GetMapping(path = { "/get/{imageName}" })
+	public Object getImage(@PathVariable("imageName") String imageName) {
+		//final Optional<Participante> retrievedImage = imageRepository.findByName(imageName);
+		//Participante img = new Participante(retrievedImage.get().getName(), retrievedImage.get().getType(),
+		//		decompressBytes(retrievedImage.get().getPicByte()));
 
+		Participante participante = new Participante();
+		//try {
+			participante = participanteServicio.buscarParticipantePorCodigo(8L);
+			//List<Object> listaObjetos = decompressBytes(participante.getCancion());
+		//} catch (IOException e) {
+		//	System.out.println("Error al traer el archivo e.getMessage() = " + e.getMessage());
+		//}
+		
+		//return participante.setCancion(decompressBytes(participante.getCancion()));
+		return null;
+	}
+	
+	// compress the image bytes before storing it in the database
+	public static byte[] compressBytes(byte[] data) {
+		Deflater deflater = new Deflater();
+		deflater.setInput(data);
+		deflater.finish();
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+		byte[] buffer = new byte[1024];
+		while (!deflater.finished()) {
+			int count = deflater.deflate(buffer);
+			outputStream.write(buffer, 0, count);
+		}
+		try {
+			outputStream.close();
+		} catch (IOException e) {
+		}
+		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+		return outputStream.toByteArray();
+	}
+	
+	// uncompress the image bytes before returning it to the angular application
+	public static byte[] decompressBytes(byte[] data) {
+		Inflater inflater = new Inflater();
+		inflater.setInput(data);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+		byte[] buffer = new byte[1024];
+		try {
+			while (!inflater.finished()) {
+				int count = inflater.inflate(buffer);
+				outputStream.write(buffer, 0, count);
+			}
+			outputStream.close();
+		} catch (IOException ioe) {
+		} catch (DataFormatException e) {
+		}
+		return outputStream.toByteArray();
+	}
 }
