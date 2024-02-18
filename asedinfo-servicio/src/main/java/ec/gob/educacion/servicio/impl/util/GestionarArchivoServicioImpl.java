@@ -27,14 +27,14 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 	
 	public void iniciaPathLocation() {
 		try {
-			System.out.println("user.home = "+System.getProperty("user.home"));
-			System.out.println("File.separator = "+File.separator);
+			//System.out.println("user.home = "+System.getProperty("user.home"));
+			//System.out.println("File.separator = "+File.separator);
 
 			// Se arma path para guardar los archivos
-			StringBuilder builder = new StringBuilder();
-			builder.append(System.getProperty("user.home"));
+			//StringBuilder builder = new StringBuilder();
+			//builder.append(System.getProperty("user.home"));
 			//builder.append("/home");
-			builder.append(File.separator);
+			//builder.append(File.separator);
 			/*
 			builder.append("ASEDINFO_APLICATIVO");
 			builder.append(File.separator);
@@ -43,17 +43,17 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 			builder.append("assets");
 			builder.append(File.separator);
 			*/
-			builder.append("musica");
-			builder.append(File.separator);
+			//builder.append("musica");
+			//builder.append(File.separator);
 			//builder.append(file.getOriginalFilename());
-			System.out.println("builder.toString() = "+builder.toString());
+			//System.out.println("builder.toString() = "+builder.toString());
 			//System.out.println("nombreDirectorio = "+nombreDirectorio);
-			if (builder.toString().contains("/root/")) {
-				pathLocation = Paths.get(builder.toString());
-			} else {
-				// Se toma path de DESA tomado de properties 
+			//if (builder.toString().contains("/root/")) {
+				//pathLocation = Paths.get(builder.toString());
+			//} else {
+				// Se toma path de DESA, tomado de properties 
 				pathLocation = Paths.get(nombreDirectorio);
-			}
+			//}
 			
 			//Path path = Paths.get(builder.toString());
 			//pathLocation = Paths.get(nombreDirectorio);
@@ -62,6 +62,7 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 
 			// Verificar si el directorio ya existe
 			File directorio = new File(nombreDirectorio);
+			System.out.println("directorio.exists() = "+directorio.exists());
 			if (!directorio.exists()) {
 				Files.createDirectory(pathLocation);
 			}
@@ -77,8 +78,7 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 		this.iniciaPathLocation();
 		try {
 			// copy (que queremos copiar, a donde queremos copiar)
-			System.out.println("path final = "+pathLocation+nombreArchivo+"_"+file.getOriginalFilename());
-			System.out.println("path dentro del copy = "+this.pathLocation.resolve(nombreArchivo+"_"+file.getOriginalFilename()));
+			System.out.println("path final dentro del copy = "+this.pathLocation.resolve(nombreArchivo+"_"+file.getOriginalFilename()));
 			Files.copy(file.getInputStream(), this.pathLocation.resolve(nombreArchivo+"_"+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
 			System.out.println("Copy ok...");
 		} catch (IOException e) {

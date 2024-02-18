@@ -2,8 +2,6 @@ package ec.gob.educacion.controlador.competencia;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -207,6 +205,7 @@ public class ParticipanteControlador {
 		//Participante img = new Participante(retrievedImage.get().getName(), retrievedImage.get().getType(),
 		//		decompressBytes(retrievedImage.get().getPicByte()));
 
+		@SuppressWarnings("unused")
 		Participante participante = new Participante();
 		//try {
 			participante = participanteServicio.buscarParticipantePorCodigo(8L);

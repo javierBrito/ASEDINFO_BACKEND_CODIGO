@@ -11,10 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import ec.gob.educacion.modelo.catalogo.ModeloPuntaje;
 import ec.gob.educacion.modelo.seguridad.Usuario;
 
@@ -43,6 +40,9 @@ public class UsuarioModeloPuntaje implements java.io.Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cod_usuario", nullable = false)
 	private Usuario usuario;
+	
+	private transient Long codModeloPuntaje;
+	private transient Long codUsuario;
 
 	public UsuarioModeloPuntaje() {
 	}
@@ -77,5 +77,27 @@ public class UsuarioModeloPuntaje implements java.io.Serializable {
 
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+
+	public Long getCodModeloPuntaje() {
+		if (modeloPuntaje != null) {
+			codModeloPuntaje = modeloPuntaje.getCodigo();
+		}
+		return codModeloPuntaje;
+	}
+
+	public void setCodModeloPuntaje(Long codModeloPuntaje) {
+		this.codModeloPuntaje = codModeloPuntaje;
+	}
+
+	public Long getCodUsuario() {
+		if (usuario != null) {
+			codUsuario = usuario.getCodigo();
+		}
+		return codUsuario;
+	}
+
+	public void setCodUsuario(Long codUsuario) {
+		this.codUsuario = codUsuario;
 	}
 }
