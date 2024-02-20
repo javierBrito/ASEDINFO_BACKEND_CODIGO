@@ -135,7 +135,7 @@ public class IntegranteControlador {
 	 * @return objeto response
 	 */
 	@DeleteMapping(value = "eliminarIntegrantePorId/{codigo}")
-	public ResponseGenerico<Integrante> eliminarIntegrante(@PathVariable("codigo") Long codigo) {
+	public ResponseGenerico<Integrante> eliminarIntegrantePorId(@PathVariable("codigo") Long codigo) {
 		Integrante integrante = integranteServicio.buscarIntegrantePorCodigo(codigo);
 		integrante.setEstado(EstadoEnum.INACTIVO.getDescripcion());
 		integranteServicio.registrar(integrante);

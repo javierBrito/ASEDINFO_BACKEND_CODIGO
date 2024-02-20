@@ -96,6 +96,10 @@ public class Participante implements java.io.Serializable {
 	private String correo;
 	@Transient
 	private String identificacion;
+	@Transient
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
+	private Date fechaNacimiento;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -490,5 +494,16 @@ public class Participante implements java.io.Serializable {
 
 	public void setCancion(byte[] cancion) {
 		this.cancion = cancion;
+	}
+
+	public Date getFechaNacimiento() {
+		if (this.persona != null) {
+			fechaNacimiento = this.persona.getFechaNacimiento();
+		}
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 }

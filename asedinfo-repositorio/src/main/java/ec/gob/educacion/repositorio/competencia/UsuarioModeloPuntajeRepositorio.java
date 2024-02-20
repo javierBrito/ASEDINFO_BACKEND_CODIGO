@@ -12,8 +12,8 @@ public interface UsuarioModeloPuntajeRepositorio extends JpaRepository<UsuarioMo
 
 	List<UsuarioModeloPuntaje> findByEstadoOrderByCodigo(String estado);
 
-	@Query(nativeQuery = false, value = "select i from UsuarioModeloPuntaje i where i.usuario.codigo = :codUsuario and i.estado = 'A'")
-	UsuarioModeloPuntaje listarUsuarioModeloPuntajePorUsuario(@Param("codUsuario") Long codUsuario);
+	@Query(nativeQuery = false, value = "select i from UsuarioModeloPuntaje i where i.codUsuario = :codUsuario and i.estado = 'A'")
+	List<UsuarioModeloPuntaje> listarUsuarioModeloPuntajePorUsuario(@Param("codUsuario") Long codUsuario);
 
 	UsuarioModeloPuntaje findByCodigo(Long codigo);
 }

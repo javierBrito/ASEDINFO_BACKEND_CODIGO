@@ -34,7 +34,7 @@ public interface UsuarioModeloPuntajeServicio {
 	 * @param codUsuario
 	 * @return UsuarioModeloPuntaje
 	 */
-	UsuarioModeloPuntaje listarUsuarioModeloPuntajePorUsuario(Long codUsuario);
+	List<UsuarioModeloPuntaje> listarUsuarioModeloPuntajePorUsuario(Long codUsuario);
 
 	/**
 	 * Permite registrar UsuarioModeloPuntaje

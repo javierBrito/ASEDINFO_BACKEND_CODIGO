@@ -1,5 +1,6 @@
 package ec.gob.educacion.controlador.competencia;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -70,11 +71,11 @@ public class UsuarioModeloPuntajeControlador {
 	 */
 	@GetMapping(value = "listarUsuarioModeloPuntajePorUsuario/{codUsuario}")
 	public ResponseGenerico<UsuarioModeloPuntaje> listarUsuarioModeloPuntajePorUsuario(@PathVariable("codUsuario") Long codUsuario) {
-		UsuarioModeloPuntaje usuarioModeloPuntaje = usuarioModeloPuntajeServicio.listarUsuarioModeloPuntajePorUsuario(codUsuario);
+		List<UsuarioModeloPuntaje> listaUsuarioModeloPuntaje = usuarioModeloPuntajeServicio.listarUsuarioModeloPuntajePorUsuario(codUsuario);
 		// Respuesta
 		ResponseGenerico<UsuarioModeloPuntaje> response = new ResponseGenerico<>();
-		response.setObjeto(usuarioModeloPuntaje);
-		response.setTotalRegistros((long) (1));
+		response.setListado(listaUsuarioModeloPuntaje);
+		response.setTotalRegistros((long) listaUsuarioModeloPuntaje.size());
 		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
 		response.setMensaje(Constantes.MENSAJE_OK);
 		return response;
@@ -87,7 +88,19 @@ public class UsuarioModeloPuntajeControlador {
 	 */
 	@PostMapping(value = "guardarListaUsuarioModeloPuntaje")
 	public ResponseGenerico<UsuarioModeloPuntaje> guardarListaUsuarioModeloPuntaje(@RequestBody List<UsuarioModeloPuntaje> listaUsuarioModeloPuntaje) {
+		Long codUsuario = 0L;
 		UsuarioModeloPuntaje usuarioModeloPuntaje = new UsuarioModeloPuntaje();
+		List<UsuarioModeloPuntaje> listaUsuarioModeloPuntajeEliminar = new ArrayList<>();
+		if (listaUsuarioModeloPuntaje.size() > 0) {
+			codUsuario = listaUsuarioModeloPuntaje.get(0).getCodUsuario();
+			listaUsuarioModeloPuntajeEliminar = usuarioModeloPuntajeServicio.listarUsuarioModeloPuntajePorUsuario(codUsuario);
+			if (listaUsuarioModeloPuntajeEliminar != null) {
+				for (UsuarioModeloPuntaje usuarioModeloPuntajeAux : listaUsuarioModeloPuntajeEliminar) {
+					usuarioModeloPuntajeAux.setEstado(EstadoEnum.INACTIVO.getDescripcion());
+					usuarioModeloPuntajeServicio.registrar(usuarioModeloPuntaje);
+				}	
+			}
+		}
 		if (listaUsuarioModeloPuntaje.size() > 0) {
 			for (UsuarioModeloPuntaje usuarioModeloPuntajeAux : listaUsuarioModeloPuntaje) {
 				usuarioModeloPuntaje = usuarioModeloPuntajeServicio.registrar(usuarioModeloPuntajeAux);
@@ -123,7 +136,7 @@ public class UsuarioModeloPuntajeControlador {
 	 * @return objeto response
 	 */
 	@DeleteMapping(value = "eliminarUsuarioModeloPuntajePorId/{codigo}")
-	public ResponseGenerico<UsuarioModeloPuntaje> eliminarUsuarioModeloPuntaje(@PathVariable("codigo") Long codigo) {
+	public ResponseGenerico<UsuarioModeloPuntaje> eliminarUsuarioModeloPuntajePorId(@PathVariable("codigo") Long codigo) {
 		UsuarioModeloPuntaje usuarioModeloPuntaje = usuarioModeloPuntajeServicio.buscarUsuarioModeloPuntajePorCodigo(codigo);
 		usuarioModeloPuntaje.setEstado(EstadoEnum.INACTIVO.getDescripcion());
 		usuarioModeloPuntajeServicio.registrar(usuarioModeloPuntaje);

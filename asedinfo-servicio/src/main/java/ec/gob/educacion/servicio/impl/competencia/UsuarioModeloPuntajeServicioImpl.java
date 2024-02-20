@@ -37,12 +37,13 @@ public class UsuarioModeloPuntajeServicioImpl implements UsuarioModeloPuntajeSer
 	}
 
 	@Override
-	public UsuarioModeloPuntaje listarUsuarioModeloPuntajePorUsuario(Long codUsuario) {
+	public List<UsuarioModeloPuntaje> listarUsuarioModeloPuntajePorUsuario(Long codUsuario) {
 		return usuarioModeloPuntajeRepositorio.listarUsuarioModeloPuntajePorUsuario(codUsuario);
 	}
 
 	@Override
 	public UsuarioModeloPuntaje registrar(UsuarioModeloPuntaje usuarioModeloPuntaje) {
+		/*
 		if (usuarioModeloPuntaje.getCodModeloPuntaje() != 0) {
 			ModeloPuntaje modeloPuntaje = modeloPuntajeServicio.buscarModeloPuntajePorCodigo(usuarioModeloPuntaje.getCodModeloPuntaje());
 			usuarioModeloPuntaje.setModeloPuntaje(modeloPuntaje);
@@ -51,11 +52,13 @@ public class UsuarioModeloPuntajeServicioImpl implements UsuarioModeloPuntajeSer
 			Usuario usuario = usuarioServicio.buscarUsuarioPorCodigo(usuarioModeloPuntaje.getCodUsuario());
 			usuarioModeloPuntaje.setUsuario(usuario);
 		}
+		*/
 		return usuarioModeloPuntajeRepositorio.save(usuarioModeloPuntaje);
 	}
 
 	@Override
 	public UsuarioModeloPuntaje crearUsuarioModeloPuntaje(UsuarioModeloPuntaje usuarioModeloPuntaje) {
+		/*
 		if (usuarioModeloPuntaje.getCodModeloPuntaje() != 0) {
 			ModeloPuntaje modeloPuntaje = modeloPuntajeServicio.buscarModeloPuntajePorCodigo(usuarioModeloPuntaje.getCodModeloPuntaje());
 			usuarioModeloPuntaje.setModeloPuntaje(modeloPuntaje);
@@ -64,6 +67,7 @@ public class UsuarioModeloPuntajeServicioImpl implements UsuarioModeloPuntajeSer
 			Usuario usuario = usuarioServicio.buscarUsuarioPorCodigo(usuarioModeloPuntaje.getCodUsuario());
 			usuarioModeloPuntaje.setUsuario(usuario);
 		}
+		*/
 		return usuarioModeloPuntajeRepositorio.save(usuarioModeloPuntaje);
 	}
 	
