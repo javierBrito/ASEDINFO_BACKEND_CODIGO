@@ -11,6 +11,7 @@ public class LoginDTO {
 	private boolean accesoConcedido;
 	private String observacion;
 	private String token;
+	private String correo;
 	private Sede sede;
 
 	public Long getCodigoUsuario() {
@@ -75,5 +76,13 @@ public class LoginDTO {
 
 	public void setSede(Sede sede) {
 		this.sede = sede;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 }

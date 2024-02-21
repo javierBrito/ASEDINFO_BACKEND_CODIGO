@@ -27,7 +27,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 
 	@Query(nativeQuery = true, value = "select \r\n" + " u.codigo,\r\n" 
 			+ " p.identificacion,\r\n" + " c.clave,\r\n" + " u.estado, \r\n" 
-			+ " concat(p.apellidos, ' ', p.nombres) as nombre, \r\n" + " u.cod_sede \r\n" 
+			+ " concat(p.apellidos, ' ', p.nombres) as nombre, \r\n" + " u.cod_sede, \r\n" + " p.correo \r\n" 
 			+ " from \r\n" + " seg_usuario u, seg_clave_usuario c, cat_persona p \r\n" 
 			+ " where\r\n" + " p.identificacion = :identificacion and\r\n"
 			+ " c.clave = :clave and\r\n" + " c.estado = 'A' and\r\n" 
@@ -36,7 +36,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 	List<Object[]> listaUsuario(@Param("identificacion") String identificacion, @Param("clave") String clave);
 
 	@Query(nativeQuery = true, value = "select \r\n" + " u.codigo,\r\n" + "	p.identificacion,\r\n" + " p.cedula,\r\n"
-			+ "	concat(p.apellidos, ' ', p.nombres) as nombre,\r\n" + "	u.cod_sede\r\n " 
+			+ "	concat(p.apellidos, ' ', p.nombres) as nombre,\r\n" + "	u.cod_sede,\r\n " + " p.correo\r\n "  
 			+ "from \r\n" + " seg_usuario u\r\n" 
 			+ "	inner join seg_clave_usuario c on u.codigo = c.cod_usuario\r\n" 
 			+ "	inner join cat_persona p on p.codigo = u.cod_persona\r\n" 

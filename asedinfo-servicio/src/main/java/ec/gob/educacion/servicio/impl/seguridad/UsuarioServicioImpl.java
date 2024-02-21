@@ -122,6 +122,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 					cr.setSede(sedeServicio.buscarSedePorCodigo(codigoSede));
 				}
 			}
+			if (objects[5] == null || objects[5] == "") {
+			} else {
+				cr.setCorreo(String.valueOf(objects[5]));
+			}
 
 			consultas.add(cr);
 		});

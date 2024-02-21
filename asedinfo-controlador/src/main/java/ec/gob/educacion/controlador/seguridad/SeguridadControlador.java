@@ -61,6 +61,7 @@ public class SeguridadControlador {
 		LoginDTO loginDTO = new LoginDTO();
 		Long codigo;
 		String identificacion;
+		String correo;
 		String token;
 
 		claveEncriptada = EncryptUtils.applyAlgorithm(parametroLoginDTO.getClave(), EncryptUtils.MD5, EncryptUtils.UTF);
@@ -76,6 +77,7 @@ public class SeguridadControlador {
 			if (listaRespuesta.get(0).isAccesoConcedido()) {
 				codigo = listaRespuesta.get(0).getCodigoUsuario();
 				identificacion = listaRespuesta.get(0).getIdentificacion();
+				correo = listaRespuesta.get(0).getCorreo();
 
 				token = Utils.obtenerToken(codigo, identificacion);
 
@@ -146,6 +148,7 @@ public class SeguridadControlador {
 				} else {
 					outUsuarioLogueado.setIdentificacion(identificacion);
 					outUsuarioLogueado.setCedula(sr.getAttributes().get("postalcode").toString());
+					outUsuarioLogueado.setCorreo(sr.getAttributes().get("email").toString());
 					outUsuarioLogueado.setNombre(sr.getAttributes().get("name").toString());
 					outUsuarioLogueado
 							.setCedula(outUsuarioLogueado.getCedula().toLowerCase().replace("postalcode: ", ""));
@@ -158,7 +161,8 @@ public class SeguridadControlador {
 						outUsuarioLogueado.setCodigoUsuario(0L);
 					} else {
 						outUsuarioLogueado.setCodigoUsuario(infoUsuarioSeguridades.get(0).getCodigo());
-						//outUsuarioLogueado.setCedula(infoUsuarioSeguridades.get(0).getCedula());
+						outUsuarioLogueado.setCedula(infoUsuarioSeguridades.get(0).getPersona().getCedula());
+						outUsuarioLogueado.setCorreo(infoUsuarioSeguridades.get(0).getPersona().getCorreo());
 					}
 
 					token = Utils.obtenerToken(outUsuarioLogueado.getCodigoUsuario(), identificacion);
@@ -225,6 +229,7 @@ public class SeguridadControlador {
 						personaNueva.setCorreo(usuarioLogueadoAD.getMail());
 						personaNueva.setCelular(Constantes.NUMERO_TELEFONO_DEFECTO);
 						personaNueva.setCedula(usuarioLogueadoAD.getCedula());
+						personaNueva.setCorreo(usuarioLogueadoAD.getMail());
 						// Crear Persona
 						Persona personaCreada = personaServicio.crearPersona(personaNueva);
 
@@ -243,6 +248,7 @@ public class SeguridadControlador {
 							usuarioLogin.setCodigoUsuario(usuarioCreado.getCodigo());
 							usuarioLogin.setIdentificacion(personaCreada.getIdentificacion());
 							usuarioLogin.setCedula(personaCreada.getCedula());
+							usuarioLogin.setCorreo(personaCreada.getCorreo());
 							if (personaCreada.getApellidos() == null || personaCreada.getApellidos().isEmpty()) {
 								usuarioLogin.setNombre(personaCreada.getNombres());
 							} else {
@@ -282,6 +288,7 @@ public class SeguridadControlador {
 							usuarioLogin.setCodigoUsuario(usuarioSeg.get(0).getCodigo());
 							usuarioLogin.setIdentificacion(usuarioSeg.get(0).getPersona().getIdentificacion());
 							usuarioLogin.setCedula(usuarioSeg.get(0).getPersona().getCedula());
+							usuarioLogin.setCorreo(usuarioSeg.get(0).getPersona().getCorreo());
 							if (usuarioSeg.get(0).getPersona().getApellidos() == null
 									|| usuarioSeg.get(0).getPersona().getApellidos().isEmpty()) {
 								usuarioLogin.setNombre(usuarioSeg.get(0).getPersona().getNombres());
@@ -305,6 +312,7 @@ public class SeguridadControlador {
 							usuarioLogin.setCodigoUsuario(usuarioSeg.get(0).getCodigo());
 							usuarioLogin.setIdentificacion(usuarioSeg.get(0).getPersona().getIdentificacion());
 							usuarioLogin.setCedula(usuarioSeg.get(0).getPersona().getCedula());
+							usuarioLogin.setCorreo(usuarioSeg.get(0).getPersona().getCorreo());
 							if (usuarioSeg.get(0).getPersona().getApellidos() == null
 									|| usuarioSeg.get(0).getPersona().getApellidos().isEmpty()) {
 								usuarioLogin.setNombre(usuarioSeg.get(0).getPersona().getNombres());
@@ -332,6 +340,7 @@ public class SeguridadControlador {
 							usuarioLogin.setCodigoUsuario(usuarioSeg.get(0).getCodigo());
 							usuarioLogin.setIdentificacion(usuarioSeg.get(0).getPersona().getIdentificacion());
 							usuarioLogin.setCedula(usuarioSeg.get(0).getPersona().getCedula());
+							usuarioLogin.setCorreo(usuarioSeg.get(0).getPersona().getCorreo());
 							if (usuarioSeg.get(0).getPersona().getApellidos() == null
 									|| usuarioSeg.get(0).getPersona().getApellidos().isEmpty()) {
 								usuarioLogin.setNombre(usuarioSeg.get(0).getPersona().getNombres());
@@ -368,6 +377,7 @@ public class SeguridadControlador {
 						usuarioLogin.setCodigoUsuario(usuarioSeg.get(0).getCodigo());
 						usuarioLogin.setIdentificacion(usuarioSeg.get(0).getPersona().getIdentificacion());
 						usuarioLogin.setCedula(usuarioSeg.get(0).getPersona().getCedula());
+						usuarioLogin.setCorreo(usuarioSeg.get(0).getPersona().getCorreo());
 						if (usuarioSeg.get(0).getPersona().getApellidos() == null || usuarioSeg.get(0).getPersona().getApellidos().isEmpty()) {
 							usuarioLogin.setNombre(usuarioSeg.get(0).getPersona().getNombres());
 						} else {
