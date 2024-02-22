@@ -1,6 +1,8 @@
 package ec.gob.educacion.servicio.wordpress;
 
 import java.util.List;
+
+import ec.gob.educacion.modelo.DTO.UsuarioWPDTO;
 import ec.gob.educacion.modelo.wordpress.ClienteWP;
 import ec.gob.educacion.modelo.wordpress.PedidoProducto;
 
@@ -36,6 +38,8 @@ public interface ClienteWPServicio {
 	 * @return listaClienteWP
 	 */
 	List<ClienteWP> migrarClienteWPCategoria();
+
+	List<UsuarioWPDTO> migrarUsuarioWP();
 
 	/**
 	 * Permite obtener lista ClienteWP

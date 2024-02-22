@@ -34,7 +34,7 @@ public class User implements java.io.Serializable {
 	private String userEmail;
 	
 	@Column(name = "display_name")
-	private String display_name;
+	private String displayName;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
@@ -68,19 +68,19 @@ public class User implements java.io.Serializable {
 		this.userEmail = userEmail;
 	}
 
-	public String getDisplay_name() {
-		return display_name;
-	}
-
-	public void setDisplay_name(String display_name) {
-		this.display_name = display_name;
-	}
-
 	public Date getUserRegistered() {
 		return userRegistered;
 	}
 
 	public void setUserRegistered(Date userRegistered) {
 		this.userRegistered = userRegistered;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 }

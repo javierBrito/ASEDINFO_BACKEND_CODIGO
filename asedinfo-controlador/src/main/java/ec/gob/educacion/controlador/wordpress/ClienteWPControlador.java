@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ec.gob.educacion.controlador.util.Constantes;
 import ec.gob.educacion.controlador.util.EncryptUtils;
+import ec.gob.educacion.modelo.DTO.UsuarioWPDTO;
 import ec.gob.educacion.modelo.catalogo.Categoria;
 import ec.gob.educacion.modelo.catalogo.Persona;
 import ec.gob.educacion.modelo.catalogo.Subcategoria;
@@ -176,10 +177,129 @@ public class ClienteWPControlador {
 		return response;
 	}
 
+	@GetMapping(value = "migrarUsuarioWP")
+	public ResponseGenerico<UsuarioWPDTO> migrarUsuarioWP() {
+		Long codSubcategoria = 0L;
+		List<UsuarioWPDTO> listaUsuarioWPDTO = clienteWPServicio.migrarUsuarioWP();
+		if (listaUsuarioWPDTO.size() > 0) {
+			//ClienteWP clienteWP = new ClienteWP();
+			Categoria categoria = new Categoria(); 
+			Subcategoria subcategoria = new Subcategoria(); 
+			
+			for (UsuarioWPDTO usuarioWPDTO : listaUsuarioWPDTO) {
+				//clienteWP = pedidoProducto.getClienteWP();
+				// Mover datos desde ClienteWP a Persona
+				Persona persona = new Persona();
+				// Verificar si ya existe Persona
+				List<Persona> listaPersona = personaServicio.buscarPorIdentificacion(usuarioWPDTO.getEmail().trim());
+				if (listaPersona.size() > 0) {
+					persona = listaPersona.get(0);
+				}
+				// Registro nuevo
+				persona.setIdentificacion(usuarioWPDTO.getEmail());
+				persona.setCedula("Suscriptor");
+				persona.setNombres(usuarioWPDTO.getFirstName().toUpperCase() + " " +usuarioWPDTO.getLastName().toUpperCase());
+				//persona.setApellidos(clienteWP.getLastName().toUpperCase());
+				persona.setApellidos(" ");
+				//persona.setFechaNacimiento(clienteWP.getBirthday())
+				persona.setCorreo(usuarioWPDTO.getEmail());
+				//persona.setCelular(clienteWP.getCelular);
+				persona.setEstado("A");
+				// Guardar la Persona
+				persona = personaServicio.registrar(persona);
+				
+				// Mover datos desde Persona a Usuario
+				Usuario usuario = new Usuario();
+				// Verificar si ya existe usuario
+				List<Usuario> listaUsuario = usuarioServicio.listarUsuarioPorPersona(persona.getCodigo());
+				if (listaUsuario.size() > 0) {
+					usuario = listaUsuario.get(0);
+				}
+				usuario.setCambioClave("NO");
+				usuario.setActualizacionDatos("NO");
+				usuario.setFechaSolicitudClave(new Date());
+				usuario.setPersona(persona);
+				usuario.setEstado("A");
+				// Guardar el usuario
+				usuarioServicio.registrar(usuario);
+
+				// Mover datos desde Usuario a ClaveUsuario y UsuarioDetalleAccion 
+				String claveEncriptada = null;
+				try {
+					claveEncriptada = EncryptUtils.applyAlgorithm("1512", EncryptUtils.MD5, EncryptUtils.UTF);
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				// Guardar Clave Usuario
+				usuarioServicio.crearClaveUsuario(usuario, claveEncriptada);
+				// Guardar Usuario Detalle Acción
+				usuarioServicio.crearUsuarioDetalleAccion(usuario, Constantes.TIPO_ACCION_CREACION);
+				
+				// Obtener la Categoria por denominacion desdes el dato de pedidoProducto.getPostExcerpt()
+				//categoria = categoriaServicio.buscarCategoriaPorDenominacion(pedidoProducto.getPostExcerpt());
+				//categoria = categoriaServicio.buscarCategoriaPorDenominacion("Infantil (9-12 años)");
+				if (categoria != null) {
+					// Obtener la Subcategoria desde su categoria
+					//subcategoria = subcategoriaServicio.buscarSubcategoriaPorDenominacion(pedidoProducto.getPostTitle(), categoria.getCodigo());
+					if (subcategoria != null) {
+						codSubcategoria = subcategoria.getCodigo();
+					}
+				}
+				
+				// Mover datos desde ClienteWP a Participante
+				Participante participante = new Participante();
+				// Verificar si ya existe Persona
+				List<Participante> listaParticipante = participanteServicio.listarParticipantePorPersona(persona.getCodigo());
+				if (listaParticipante.size() > 0) {
+					// Verificar si ya existe el participante con la Subcategoria
+					for (Participante participanteAux : listaParticipante) {
+						if (participanteAux.getCodSubcategoria() == codSubcategoria) {
+							participante = participanteAux;
+							break;
+						}
+					}
+				}
+				//participante.setCustomerId(clienteWP.getCustomerId());
+				participante.setDateLastActive(usuarioWPDTO.getDateLastActive());
+				//participante.setDateRegistered(clienteWP.getDateRegistered());
+				participante.setEmail(usuarioWPDTO.getEmail());
+				participante.setFirstName(usuarioWPDTO.getFirstName().toUpperCase() + " " + usuarioWPDTO.getLastName().toUpperCase());
+				//participante.setLastName(clienteWP.getLastName().toUpperCase());
+				participante.setLastName(" ");
+				//participante.setUserId(clienteWP.getUserId());
+				participante.setUsername(usuarioWPDTO.getUsername());
+				// Datos por default al migrar
+				participante.setCodInstancia(1L);
+				participante.setCodEstadoCompetencia(1L);
+				// Datos de la persona relacionada
+				participante.setCodPersona(persona.getCodigo());
+				participante.setPersona(persona);
+
+				// Valor por default de la Subcategoria
+				participante.setCodSubcategoria(1L);
+				if (codSubcategoria != 0) {
+					participante.setCodSubcategoria(codSubcategoria);
+				}
+				
+				// Guardar el registro
+				participanteServicio.registrar(participante);
+			}
+		}
+		// Respuesta
+		ResponseGenerico<UsuarioWPDTO> response = new ResponseGenerico<>();
+		response.setListado(listaUsuarioWPDTO);
+		response.setTotalRegistros((long) listaUsuarioWPDTO.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 	/**
-	 * REST para obtener Socio
+	 * REST para obtener ClienteWP
 	 * 
-	 * @return Socio
+	 * @return ClienteWP
 	 */
 	@GetMapping(value = "buscarClienteWPPorCodigo/{customerId}")
 	public ResponseGenerico<ClienteWP> buscarClienteWPPorCodigo(@PathVariable("customerId") Long customerId) {

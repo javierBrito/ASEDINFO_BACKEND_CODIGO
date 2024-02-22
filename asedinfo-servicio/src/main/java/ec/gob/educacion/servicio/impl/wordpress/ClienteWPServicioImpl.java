@@ -3,6 +3,8 @@ package ec.gob.educacion.servicio.impl.wordpress;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import ec.gob.educacion.modelo.DTO.UsuarioWPDTO;
 import ec.gob.educacion.modelo.wordpress.ClienteWP;
 import ec.gob.educacion.modelo.wordpress.PedidoProducto;
 import ec.gob.educacion.repositorio.wordpress.ClienteWPRepositorio;
@@ -35,21 +37,17 @@ public class ClienteWPServicioImpl implements ClienteWPServicio {
 	}
 
 	@Override
+	public List<UsuarioWPDTO> migrarUsuarioWP() {
+		return clienteWPRepositorio.migrarUsuarioWP();
+	}
+
+	@Override
 	public List<PedidoProducto> migrarClienteWPedidoProducto() {
 		return clienteWPRepositorio.migrarClienteWPedidoProducto();
 	}
 
 	@Override
 	public ClienteWP registrar(ClienteWP ClienteWP) {
-		/*
-		if (ClienteWP.getCodPersona() != null && ClienteWP.getCodPersona() != 0) {
-			Persona persona = new Persona();
-			persona = personaServicio.buscarPersonaPorCodigo(ClienteWP.getCodPersona());
-			if (persona != null) {
-				ClienteWP.setPersona(persona);
-			}
-		}
-		*/
 		return clienteWPRepositorio.save(ClienteWP);
 	}
 	
