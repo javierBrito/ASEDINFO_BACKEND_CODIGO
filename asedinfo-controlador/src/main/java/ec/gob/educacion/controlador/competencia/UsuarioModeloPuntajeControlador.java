@@ -97,7 +97,7 @@ public class UsuarioModeloPuntajeControlador {
 			if (listaUsuarioModeloPuntajeEliminar != null) {
 				for (UsuarioModeloPuntaje usuarioModeloPuntajeAux : listaUsuarioModeloPuntajeEliminar) {
 					usuarioModeloPuntajeAux.setEstado(EstadoEnum.INACTIVO.getDescripcion());
-					usuarioModeloPuntajeServicio.registrar(usuarioModeloPuntaje);
+					usuarioModeloPuntajeServicio.registrar(usuarioModeloPuntajeAux);
 				}	
 			}
 		}
