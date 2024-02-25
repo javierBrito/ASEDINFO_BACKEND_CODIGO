@@ -28,6 +28,15 @@ public class Categoria implements java.io.Serializable {
 
 	@Column(name = "estado", nullable = false, length = 1)
 	private String estado;
+	
+	@Column(name = "edad_minima")
+	private Float edadMinima;
+	
+	@Column(name = "edad_maxima")
+	private Float edadMaxima;
+	
+	@Column(name = "num_jueces")
+	private int numJueces;
 
 	public Categoria() {
 	}
@@ -54,5 +63,29 @@ public class Categoria implements java.io.Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public Float getEdadMinima() {
+		return edadMinima;
+	}
+
+	public void setEdadMinima(Float edadMinima) {
+		this.edadMinima = edadMinima;
+	}
+
+	public Float getEdadMaxima() {
+		return edadMaxima;
+	}
+
+	public void setEdadMaxima(Float edadMaxima) {
+		this.edadMaxima = edadMaxima;
+	}
+
+	public int getNumJueces() {
+		return numJueces;
+	}
+
+	public void setNumJueces(int numJueces) {
+		this.numJueces = numJueces;
 	}
 }

@@ -36,5 +36,13 @@ public interface PuntajeRepositorio extends JpaRepository<Puntaje, Long> {
 			+ "  where wpu.cod_modelo_puntaje = 99 and wpu.cod_participante = wpa.codigo " 
 			+ "  group by wpu.cod_subcategoria, wpu.cod_instancia, wpu.cod_participante " ) 
 	List<Object[]> listarPuntajePorSubcategoriaInstanciaRegAVG(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);;
+	
+	@Query(nativeQuery = true, value = 
+			  " select sum(wpu.puntaje) as puntaje, wpu.cod_subcategoria, wpu.cod_instancia, wpu.cod_participante, concat(wpa.first_name, ' ', wpa.last_name) as nombreParticipante, "
+			+ "        wpu.codigo, wpu.cod_modelo_puntaje, wpu.estado " 
+			+ "   from wp_puntaje wpu, wp_participante wpa "
+			+ "  where wpu.cod_modelo_puntaje = 99 and wpu.cod_participante = wpa.codigo " 
+			+ "  group by wpu.cod_subcategoria, wpu.cod_instancia, wpu.cod_participante " ) 
+	List<Object[]> listarPuntajePorSubcategoriaInstanciaRegSUMA(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);;
 
 }

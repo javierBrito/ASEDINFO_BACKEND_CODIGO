@@ -43,6 +43,12 @@ public class Subcategoria implements java.io.Serializable {
 	private Long codCategoria;
 	@Transient
 	private String desCategoria;
+	@Transient
+	private Float edadMinima;
+	@Transient
+	private Float edadMaxima;
+	@Transient
+	private int numJueces;
 
 	public Subcategoria() {
 	}
@@ -99,5 +105,38 @@ public class Subcategoria implements java.io.Serializable {
 
 	public void setDesCategoria(String desCategoria) {
 		this.desCategoria = desCategoria;
+	}
+
+	public Float getEdadMinima() {
+		if (this.categoria != null) {
+			edadMinima = this.categoria.getEdadMinima();
+		}
+		return edadMinima;
+	}
+
+	public void setEdadMinima(Float edadMinima) {
+		this.edadMinima = edadMinima;
+	}
+
+	public Float getEdadMaxima() {
+		if (this.categoria != null) {
+			edadMaxima = this.categoria.getEdadMaxima();
+		}
+		return edadMaxima;
+	}
+
+	public void setEdadMaxima(Float edadMaxima) {
+		this.edadMaxima = edadMaxima;
+	}
+
+	public int getNumJueces() {
+		if (this.categoria != null) {
+			numJueces = this.categoria.getNumJueces();
+		}
+		return numJueces;
+	}
+
+	public void setNumJueces(int numJueces) {
+		this.numJueces = numJueces;
 	}
 }

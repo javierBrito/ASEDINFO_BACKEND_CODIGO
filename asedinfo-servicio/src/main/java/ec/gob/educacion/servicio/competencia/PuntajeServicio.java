@@ -52,6 +52,8 @@ public interface PuntajeServicio {
 	 */
 	List<Puntaje> listarPuntajePorSubcategoriaInstanciaRegAVG(Long codSubcategoria, Long codInstancia);
 
+	List<Puntaje> listarPuntajePorSubcategoriaInstanciaRegSUMA(Long codSubcategoria, Long codInstancia);
+
 	/**
 	 * Permite listar Puntaje Activo
 	 * 

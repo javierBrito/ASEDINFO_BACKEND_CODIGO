@@ -1,9 +1,11 @@
 package ec.gob.educacion.servicio.impl.wordpress;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ec.gob.educacion.modelo.DTO.UsuarioWPDTO;
 import ec.gob.educacion.modelo.wordpress.ClienteWP;
 import ec.gob.educacion.modelo.wordpress.PedidoProducto;
@@ -38,7 +40,40 @@ public class ClienteWPServicioImpl implements ClienteWPServicio {
 
 	@Override
 	public List<UsuarioWPDTO> migrarUsuarioWP() {
-		return clienteWPRepositorio.migrarUsuarioWP();
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy"); 
+		//Date fecha = formato.parse("23/11/2015");
+		List<UsuarioWPDTO> listaUsuarioWPDTO = new ArrayList<>();
+		clienteWPRepositorio.migrarUsuarioWP().forEach(objects -> {
+			UsuarioWPDTO usuarioWPDTO = new UsuarioWPDTO();
+
+			if (objects[0] == null || objects[0] == "") {
+				usuarioWPDTO.setEmail(null);
+			} else {
+				usuarioWPDTO.setEmail(String.valueOf(objects[0]));
+			}
+			if (objects[1] == null || objects[1] == "") {
+				usuarioWPDTO.setUsername(null);
+			} else {
+				usuarioWPDTO.setUsername(String.valueOf(objects[1]));
+			}
+			if (objects[2] != null || objects[2] != "") {
+				try {
+					usuarioWPDTO.setDateLastActive(formato.parse(String.valueOf(objects[2])));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			if (objects[3] != null || objects[3] != "") {
+				usuarioWPDTO.setFirstName(String.valueOf(objects[3]));
+			}
+			if (objects[4] != null || objects[4] != "") {
+				usuarioWPDTO.setLastName(String.valueOf(objects[4]));
+			}
+
+			listaUsuarioWPDTO.add(usuarioWPDTO);
+		});
+
+		return listaUsuarioWPDTO;
 	}
 
 	@Override

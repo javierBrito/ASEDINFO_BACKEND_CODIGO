@@ -183,8 +183,8 @@ public class ClienteWPControlador {
 		List<UsuarioWPDTO> listaUsuarioWPDTO = clienteWPServicio.migrarUsuarioWP();
 		if (listaUsuarioWPDTO.size() > 0) {
 			//ClienteWP clienteWP = new ClienteWP();
-			Categoria categoria = new Categoria(); 
-			Subcategoria subcategoria = new Subcategoria(); 
+			//Categoria categoria = new Categoria(); 
+			//Subcategoria subcategoria = new Subcategoria(); 
 			
 			for (UsuarioWPDTO usuarioWPDTO : listaUsuarioWPDTO) {
 				//clienteWP = pedidoProducto.getClienteWP();
@@ -236,19 +236,8 @@ public class ClienteWPControlador {
 				usuarioServicio.crearClaveUsuario(usuario, claveEncriptada);
 				// Guardar Usuario Detalle Acción
 				usuarioServicio.crearUsuarioDetalleAccion(usuario, Constantes.TIPO_ACCION_CREACION);
-				
-				// Obtener la Categoria por denominacion desdes el dato de pedidoProducto.getPostExcerpt()
-				//categoria = categoriaServicio.buscarCategoriaPorDenominacion(pedidoProducto.getPostExcerpt());
-				//categoria = categoriaServicio.buscarCategoriaPorDenominacion("Infantil (9-12 años)");
-				if (categoria != null) {
-					// Obtener la Subcategoria desde su categoria
-					//subcategoria = subcategoriaServicio.buscarSubcategoriaPorDenominacion(pedidoProducto.getPostTitle(), categoria.getCodigo());
-					if (subcategoria != null) {
-						codSubcategoria = subcategoria.getCodigo();
-					}
-				}
-				
-				// Mover datos desde ClienteWP a Participante
+
+				// Mover datos desde UsuarioWP a Participante
 				Participante participante = new Participante();
 				// Verificar si ya existe Persona
 				List<Participante> listaParticipante = participanteServicio.listarParticipantePorPersona(persona.getCodigo());
@@ -276,13 +265,9 @@ public class ClienteWPControlador {
 				// Datos de la persona relacionada
 				participante.setCodPersona(persona.getCodigo());
 				participante.setPersona(persona);
-
 				// Valor por default de la Subcategoria
 				participante.setCodSubcategoria(1L);
-				if (codSubcategoria != 0) {
-					participante.setCodSubcategoria(codSubcategoria);
-				}
-				
+
 				// Guardar el registro
 				participanteServicio.registrar(participante);
 			}

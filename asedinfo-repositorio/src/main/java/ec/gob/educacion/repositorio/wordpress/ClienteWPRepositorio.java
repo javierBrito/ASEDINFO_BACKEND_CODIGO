@@ -4,8 +4,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import ec.gob.educacion.modelo.DTO.UsuarioWPDTO;
 import ec.gob.educacion.modelo.wordpress.ClienteWP;
 import ec.gob.educacion.modelo.wordpress.PedidoProducto;
 
@@ -29,7 +27,7 @@ public interface ClienteWPRepositorio extends JpaRepository<ClienteWP, Long> {
 			+ "   from wp_users us, wp_usermeta um "
 			+ "  where us.ID = um.user_id " 
 			+ "    and um.meta_key='wp_user_level' and um.meta_value='0' " ) 
-	List<UsuarioWPDTO> migrarUsuarioWP();
+	List<Object[]> migrarUsuarioWP();
 
 	ClienteWP findByCustomerId(Long customerId);
 }

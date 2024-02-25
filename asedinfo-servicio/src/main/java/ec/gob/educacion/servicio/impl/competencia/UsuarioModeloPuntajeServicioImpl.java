@@ -3,23 +3,15 @@ package ec.gob.educacion.servicio.impl.competencia;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ec.gob.educacion.modelo.catalogo.ModeloPuntaje;
 import ec.gob.educacion.modelo.competencia.UsuarioModeloPuntaje;
-import ec.gob.educacion.modelo.seguridad.Usuario;
 import ec.gob.educacion.repositorio.competencia.UsuarioModeloPuntajeRepositorio;
-import ec.gob.educacion.servicio.catalogo.ModeloPuntajeServicio;
 import ec.gob.educacion.servicio.competencia.UsuarioModeloPuntajeServicio;
-import ec.gob.educacion.servicio.seguridad.UsuarioServicio;
 
 @Service
 public class UsuarioModeloPuntajeServicioImpl implements UsuarioModeloPuntajeServicio {
 
 	@Autowired
 	private UsuarioModeloPuntajeRepositorio usuarioModeloPuntajeRepositorio;
-	@Autowired
-	private ModeloPuntajeServicio modeloPuntajeServicio;
-	@Autowired
-	private UsuarioServicio usuarioServicio;
 
 	@Override
 	public List<UsuarioModeloPuntaje> listarTodosUsuarioModeloPuntaje() {

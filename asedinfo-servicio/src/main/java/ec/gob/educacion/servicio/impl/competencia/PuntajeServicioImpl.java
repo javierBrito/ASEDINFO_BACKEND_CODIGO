@@ -54,18 +54,55 @@ public class PuntajeServicioImpl implements PuntajeServicio {
 	public List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstancia(Long codParticipante, Long codSubcategoria, Long codInstancia, Long codUsuarioJuez) {
 		return puntajeRepositorio.listarPuntajePorParticipanteSubcategoriaInstancia(codParticipante, codSubcategoria, codInstancia, codUsuarioJuez);
 	}
+	
 	@Override
 	public List<Puntaje> listarPuntajePorParticipanteRegTotal(Long codParticipante, Long codInstancia, Long codUsuarioJuez, Long codModeloPuntaje, Long codSubcategoria) {
 		return puntajeRepositorio.listarPuntajePorParticipanteRegTotal(codParticipante, codInstancia, codUsuarioJuez, codModeloPuntaje, codSubcategoria);
 	}
-	@Override
-	//public List<Puntaje> listarPuntajePorSubcategoriaInstanciaRegAVG(Long codSubcategoria, Long codInstancia) {
-	//	return puntajeRepositorio.listarPuntajePorSubcategoriaInstanciaRegAVG(codSubcategoria, codInstancia);
-	//}
 
+	@Override
 	public List<Puntaje> listarPuntajePorSubcategoriaInstanciaRegAVG(Long codSubcategoria, Long codInstancia) {
 		List<Puntaje> listaPuntaje = new ArrayList<>();
 		puntajeRepositorio.listarPuntajePorSubcategoriaInstanciaRegAVG(codSubcategoria, codInstancia).forEach(objects -> {
+			Puntaje puntaje = new Puntaje();
+
+			if (objects[0] == null || objects[0] == "") {
+				puntaje.setPuntaje(null);
+			} else {
+				puntaje.setPuntaje(Float.parseFloat(String.valueOf(objects[0])));
+			}
+			if (objects[1] != null || objects[1] != "") {
+				puntaje.setCodSubcategoria(Long.parseLong(String.valueOf(objects[1])));
+			}
+			if (objects[2] != null || objects[2] != "") {
+				puntaje.setCodInstancia(Long.parseLong(String.valueOf(objects[2])));
+			}
+			if (objects[3] != null || objects[3] != "") {
+				puntaje.setCodParticipante(Long.parseLong(String.valueOf(objects[3])));
+			}
+			if (objects[4] != null || objects[4] != "") {
+				puntaje.setNombreParticipante(String.valueOf(objects[4]));
+			}
+			if (objects[5] != null || objects[5] != "") {
+				puntaje.setCodigo(Long.parseLong(String.valueOf(objects[5])));
+			}
+			if (objects[6] != null || objects[6] != "") {
+				puntaje.setCodModeloPuntaje(Long.parseLong(String.valueOf(objects[6])));
+			}
+			if (objects[7] != null || objects[7] != "") {
+				puntaje.setEstado(String.valueOf(objects[7]));
+			}
+
+			listaPuntaje.add(puntaje);
+		});
+
+		return listaPuntaje;
+	}
+
+	@Override
+	public List<Puntaje> listarPuntajePorSubcategoriaInstanciaRegSUMA(Long codSubcategoria, Long codInstancia) {
+		List<Puntaje> listaPuntaje = new ArrayList<>();
+		puntajeRepositorio.listarPuntajePorSubcategoriaInstanciaRegSUMA(codSubcategoria, codInstancia).forEach(objects -> {
 			Puntaje puntaje = new Puntaje();
 
 			if (objects[0] == null || objects[0] == "") {
