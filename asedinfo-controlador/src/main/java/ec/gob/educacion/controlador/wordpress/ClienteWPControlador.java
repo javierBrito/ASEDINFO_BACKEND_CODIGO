@@ -179,7 +179,7 @@ public class ClienteWPControlador {
 
 	@GetMapping(value = "migrarUsuarioWP")
 	public ResponseGenerico<UsuarioWPDTO> migrarUsuarioWP() {
-		Long codSubcategoria = 0L;
+		//Long codSubcategoria = 0L;
 		List<UsuarioWPDTO> listaUsuarioWPDTO = clienteWPServicio.migrarUsuarioWP();
 		if (listaUsuarioWPDTO.size() > 0) {
 			//ClienteWP clienteWP = new ClienteWP();
@@ -243,14 +243,18 @@ public class ClienteWPControlador {
 				List<Participante> listaParticipante = participanteServicio.listarParticipantePorPersona(persona.getCodigo());
 				if (listaParticipante.size() > 0) {
 					// Verificar si ya existe el participante con la Subcategoria
+					/*
 					for (Participante participanteAux : listaParticipante) {
 						if (participanteAux.getCodSubcategoria() == codSubcategoria) {
 							participante = participanteAux;
 							break;
 						}
 					}
+					*/
+					participante = listaParticipante.get(0);
 				}
 				//participante.setCustomerId(clienteWP.getCustomerId());
+				//System.out.println("usuarioWPDTO.getDateLastActive() = "+usuarioWPDTO.getDateLastActive());
 				participante.setDateLastActive(usuarioWPDTO.getDateLastActive());
 				//participante.setDateRegistered(clienteWP.getDateRegistered());
 				participante.setEmail(usuarioWPDTO.getEmail());
@@ -259,14 +263,17 @@ public class ClienteWPControlador {
 				participante.setLastName(" ");
 				//participante.setUserId(clienteWP.getUserId());
 				participante.setUsername(usuarioWPDTO.getUsername());
-				// Datos por default al migrar
-				participante.setCodInstancia(1L);
-				participante.setCodEstadoCompetencia(1L);
+				//System.out.println("participante.getCodigo() = "+participante.getCodigo());
+				if (participante.getCodigo() == null) {
+					// Datos por default al migrar
+					participante.setCodInstancia(1L);
+					participante.setCodEstadoCompetencia(1L);
+					participante.setCodSubcategoria(1L);
+				}
+
 				// Datos de la persona relacionada
 				participante.setCodPersona(persona.getCodigo());
 				participante.setPersona(persona);
-				// Valor por default de la Subcategoria
-				participante.setCodSubcategoria(1L);
 
 				// Guardar el registro
 				participanteServicio.registrar(participante);
