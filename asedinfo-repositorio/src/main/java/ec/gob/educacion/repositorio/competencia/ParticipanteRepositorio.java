@@ -10,7 +10,7 @@ import ec.gob.educacion.modelo.competencia.Participante;
 @Repository
 public interface ParticipanteRepositorio extends JpaRepository<Participante, Long> {
 
-	@Query(nativeQuery = false, value = "select par from Participante par order by par.numParticipante")
+	@Query(nativeQuery = false, value = "select par from Participante par where par.persona.estado = 'A' order by par.numParticipante")
 	List<Participante> listarParticipantePorEstado(@Param("estadoPedido") String estadoPedido);
 
 	@Query(nativeQuery = false, value = "select r from Participante r where r.persona.codigo = :codPersona")
@@ -19,13 +19,13 @@ public interface ParticipanteRepositorio extends JpaRepository<Participante, Lon
 	@Query(nativeQuery = false, value = "select r from Participante r where r.subcategoria.codigo = :codSubcategoria")
 	List<Participante> listarParticipantePorSubcategoria(@Param("codSubcategoria") Long codSubcategoria);
 
-	@Query(nativeQuery = false, value = "select r from Participante r where r.subcategoria.codigo = :codSubcategoria and r.instancia.codigo = :codInstancia")
+	@Query(nativeQuery = false, value = "select r from Participante r where r.subcategoria.codigo = :codSubcategoria and r.instancia.codigo = :codInstancia and r.persona.estado = 'A'")
 	List<Participante> listarParticipantePorSubcategoriaInstancia(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);
 
 	@Query(nativeQuery = false, value = "select r from Participante r where r.subcategoria.codigo = :codSubcategoria and r.instancia.codigo = :codInstancia and r.estadoCompetencia.codigo = :codEstadoCompetencia")
 	List<Participante> listarParticipantePorSubcategoriaInstanciaEnEscenario(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia, @Param("codEstadoCompetencia") Long codEstadoCompetencia);
 
-	@Query(nativeQuery = false, value = "select r from Participante r where r.email = :email and r.estadoCompetencia.codigo = 1")
+	@Query(nativeQuery = false, value = "select r from Participante r where r.email = :email and r.estadoCompetencia.codigo = 1 and r.persona.estado = 'A'")
 	List<Participante> listarParticipantePorEmail(@Param("email") String email);
 
 	@Query(nativeQuery = false, value = "select max(r.numParticipante) from Participante r")
