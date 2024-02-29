@@ -181,12 +181,14 @@ public class ClienteWPControlador {
 	public ResponseGenerico<UsuarioWPDTO> migrarUsuarioWP() {
 		//Long codSubcategoria = 0L;
 		List<UsuarioWPDTO> listaUsuarioWPDTO = clienteWPServicio.migrarUsuarioWP();
+		System.out.println("listaUsuarioWPDTO.size() = "+listaUsuarioWPDTO.size());
 		if (listaUsuarioWPDTO.size() > 0) {
 			//ClienteWP clienteWP = new ClienteWP();
 			//Categoria categoria = new Categoria(); 
 			//Subcategoria subcategoria = new Subcategoria(); 
 			
 			for (UsuarioWPDTO usuarioWPDTO : listaUsuarioWPDTO) {
+				System.out.println("usuarioWPDTO.getEmail().trim() = "+usuarioWPDTO.getEmail().trim());
 				//clienteWP = pedidoProducto.getClienteWP();
 				// Mover datos desde ClienteWP a Persona
 				Persona persona = new Persona();

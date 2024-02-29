@@ -22,9 +22,9 @@ public interface ClienteWPRepositorio extends JpaRepository<ClienteWP, Long> {
 
 	@Query(nativeQuery = true, value = 
 			  " select distinct (us.user_email) as email, us.user_login as username, us.user_registered as dateLastActive, "
-			+ "        (select um1.meta_value from wp_usermeta um1 where um1.meta_key='first_name' and um1.user_id=us.ID) as firstName, " 
-			+ "        (select um1.meta_value from wp_usermeta um1 where um1.meta_key='last_name' and um1.user_id=us.ID) as lastName " 
-			+ "   from wp_users us, wp_usermeta um "
+			+ "        (select um1.meta_value from dsm2vxjUGBhZGj.wp_usermeta um1 where um1.meta_key='first_name' and um1.user_id=us.ID) as firstName, " 
+			+ "        (select um1.meta_value from dsm2vxjUGBhZGj.wp_usermeta um1 where um1.meta_key='last_name' and um1.user_id=us.ID) as lastName " 
+			+ "   from dsm2vxjUGBhZGj.wp_users us, dsm2vxjUGBhZGj.wp_usermeta um "
 			+ "  where us.ID = um.user_id " 
 			+ "    and um.meta_key='wp_user_level' and um.meta_value='0' " ) 
 	List<Object[]> migrarUsuarioWP();
