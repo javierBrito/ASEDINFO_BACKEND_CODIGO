@@ -38,6 +38,8 @@ public interface ParticipanteServicio {
 	 */
 	List<Participante> listarParticipantePorSubcategoria(Long codSubcategoria);
 
+	List<Participante> listarParticipanteUsuario();
+
 	/**
 	 * Permite listar Participante Activo
 	 * 

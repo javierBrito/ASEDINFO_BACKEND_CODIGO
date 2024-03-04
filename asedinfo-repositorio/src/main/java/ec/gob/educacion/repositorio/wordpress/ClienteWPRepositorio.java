@@ -27,7 +27,7 @@ public interface ClienteWPRepositorio extends JpaRepository<ClienteWP, Long> {
 			+ "   from dsm2vxjUGBhZGj.wp_users us, dsm2vxjUGBhZGj.wp_usermeta um "
 			+ "  where us.ID = um.user_id " 
 			+ "    and um.meta_key='wp_user_level' and um.meta_value='0' " ) 
-	List<Object[]> migrarUsuarioWP();
+	List<Object[]> listarUsuarioWP();
 
 	ClienteWP findByCustomerId(Long customerId);
 }

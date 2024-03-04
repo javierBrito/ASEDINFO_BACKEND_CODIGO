@@ -177,19 +177,23 @@ public class ClienteWPControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarUsuarioWP")
+	public ResponseGenerico<UsuarioWPDTO> listarUsuarioWP() {
+		List<UsuarioWPDTO> listaUsuarioWPDTO = clienteWPServicio.listarUsuarioWP();
+		// Respuesta
+		ResponseGenerico<UsuarioWPDTO> response = new ResponseGenerico<>();
+		response.setListado(listaUsuarioWPDTO);
+		response.setTotalRegistros((long) listaUsuarioWPDTO.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+	
 	@GetMapping(value = "migrarUsuarioWP")
 	public ResponseGenerico<UsuarioWPDTO> migrarUsuarioWP() {
-		//Long codSubcategoria = 0L;
-		List<UsuarioWPDTO> listaUsuarioWPDTO = clienteWPServicio.migrarUsuarioWP();
-		System.out.println("listaUsuarioWPDTO.size() = "+listaUsuarioWPDTO.size());
+		List<UsuarioWPDTO> listaUsuarioWPDTO = clienteWPServicio.listarUsuarioWP();
 		if (listaUsuarioWPDTO.size() > 0) {
-			//ClienteWP clienteWP = new ClienteWP();
-			//Categoria categoria = new Categoria(); 
-			//Subcategoria subcategoria = new Subcategoria(); 
-			
 			for (UsuarioWPDTO usuarioWPDTO : listaUsuarioWPDTO) {
-				System.out.println("usuarioWPDTO.getEmail().trim() = "+usuarioWPDTO.getEmail().trim());
-				//clienteWP = pedidoProducto.getClienteWP();
 				// Mover datos desde ClienteWP a Persona
 				Persona persona = new Persona();
 				// Verificar si ya existe Persona
@@ -205,7 +209,6 @@ public class ClienteWPControlador {
 				persona.setApellidos(" ");
 				//persona.setFechaNacimiento(clienteWP.getBirthday())
 				persona.setCorreo(usuarioWPDTO.getEmail());
-				//persona.setCelular(clienteWP.getCelular);
 				persona.setEstado("A");
 				// Guardar la Persona
 				persona = personaServicio.registrar(persona);
@@ -244,19 +247,9 @@ public class ClienteWPControlador {
 				// Verificar si ya existe Persona
 				List<Participante> listaParticipante = participanteServicio.listarParticipantePorPersona(persona.getCodigo());
 				if (listaParticipante.size() > 0) {
-					// Verificar si ya existe el participante con la Subcategoria
-					/*
-					for (Participante participanteAux : listaParticipante) {
-						if (participanteAux.getCodSubcategoria() == codSubcategoria) {
-							participante = participanteAux;
-							break;
-						}
-					}
-					*/
 					participante = listaParticipante.get(0);
 				}
 				//participante.setCustomerId(clienteWP.getCustomerId());
-				//System.out.println("usuarioWPDTO.getDateLastActive() = "+usuarioWPDTO.getDateLastActive());
 				participante.setDateLastActive(usuarioWPDTO.getDateLastActive());
 				//participante.setDateRegistered(clienteWP.getDateRegistered());
 				participante.setEmail(usuarioWPDTO.getEmail());
@@ -265,7 +258,6 @@ public class ClienteWPControlador {
 				participante.setLastName(" ");
 				//participante.setUserId(clienteWP.getUserId());
 				participante.setUsername(usuarioWPDTO.getUsername());
-				//System.out.println("participante.getCodigo() = "+participante.getCodigo());
 				if (participante.getCodigo() == null) {
 					// Datos por default al migrar
 					participante.setCodInstancia(1L);

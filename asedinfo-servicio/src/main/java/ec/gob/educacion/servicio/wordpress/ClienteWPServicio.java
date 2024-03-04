@@ -39,7 +39,7 @@ public interface ClienteWPServicio {
 	 */
 	List<ClienteWP> migrarClienteWPCategoria();
 
-	List<UsuarioWPDTO> migrarUsuarioWP();
+	List<UsuarioWPDTO> listarUsuarioWP();
 
 	/**
 	 * Permite obtener lista ClienteWP

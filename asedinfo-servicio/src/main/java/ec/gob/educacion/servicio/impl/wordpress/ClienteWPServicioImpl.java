@@ -39,11 +39,11 @@ public class ClienteWPServicioImpl implements ClienteWPServicio {
 	}
 
 	@Override
-	public List<UsuarioWPDTO> migrarUsuarioWP() {
+	public List<UsuarioWPDTO> listarUsuarioWP() {
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"); 
 		//Date fecha = formato.parse("23/11/2015");
 		List<UsuarioWPDTO> listaUsuarioWPDTO = new ArrayList<>();
-		clienteWPRepositorio.migrarUsuarioWP().forEach(objects -> {
+		clienteWPRepositorio.listarUsuarioWP().forEach(objects -> {
 			UsuarioWPDTO usuarioWPDTO = new UsuarioWPDTO();
 
 			if (objects[0] == null || objects[0] == "") {

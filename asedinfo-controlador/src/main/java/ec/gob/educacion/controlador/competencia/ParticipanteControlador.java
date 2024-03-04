@@ -52,6 +52,18 @@ public class ParticipanteControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarParticipanteUsuario")
+	public ResponseGenerico<Participante> listarParticipanteUsuario() {
+		List<Participante> listaParticipante = participanteServicio.listarParticipanteUsuario();
+		// Respuesta
+		ResponseGenerico<Participante> response = new ResponseGenerico<>();
+		response.setListado(listaParticipante);
+		response.setTotalRegistros((long) listaParticipante.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 	@GetMapping(value = "listarParticipantePorPersona/{codPersona}")
 	public ResponseGenerico<Participante> listarParticipantePorPersona(@PathVariable("codPersona") Long codPersona) {
 		List<Participante> listaParticipante = participanteServicio.listarParticipantePorPersona(codPersona);

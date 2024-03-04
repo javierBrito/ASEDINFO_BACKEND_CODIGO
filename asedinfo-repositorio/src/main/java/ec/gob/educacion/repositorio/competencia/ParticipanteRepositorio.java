@@ -19,6 +19,9 @@ public interface ParticipanteRepositorio extends JpaRepository<Participante, Lon
 	@Query(nativeQuery = false, value = "select r from Participante r where r.subcategoria.codigo = :codSubcategoria")
 	List<Participante> listarParticipantePorSubcategoria(@Param("codSubcategoria") Long codSubcategoria);
 
+	@Query(nativeQuery = false, value = "select r from Participante r join r.persona where r.persona.codigo = (select u.persona.codigo from Usuario u where u.persona.codigo = r.persona.codigo)")
+	List<Participante> listarParticipanteUsuario();
+
 	@Query(nativeQuery = false, value = "select r from Participante r where r.subcategoria.codigo = :codSubcategoria and r.instancia.codigo = :codInstancia and r.persona.estado = 'A'")
 	List<Participante> listarParticipantePorSubcategoriaInstancia(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);
 

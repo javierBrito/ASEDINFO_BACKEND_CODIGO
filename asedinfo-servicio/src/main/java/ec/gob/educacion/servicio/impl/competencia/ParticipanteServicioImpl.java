@@ -55,6 +55,11 @@ public class ParticipanteServicioImpl implements ParticipanteServicio {
 	}
 
 	@Override
+	public List<Participante> listarParticipanteUsuario() {
+		return participanteRepositorio.listarParticipanteUsuario();
+	}
+
+	@Override
 	public List<Participante> listarParticipantePorSubcategoriaInstancia(Long codSubcategoria, Long codInstancia, Long codEstadoComptetencia) {
 		if (codEstadoComptetencia == 0) {
 			return participanteRepositorio.listarParticipantePorSubcategoriaInstancia(codSubcategoria, codInstancia);
