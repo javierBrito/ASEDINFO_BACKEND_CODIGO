@@ -48,7 +48,7 @@ public class PersonaControlador {
 	}
 
 	@GetMapping(value = "listarPersonaPorIdentificacion/{identificacion}")
-	public ResponseGenerico<Persona> listarPersonaPorAplicacion(@PathVariable("identificacion") String identificacion) {
+	public ResponseGenerico<Persona> listarPersonaPorIdentificacion(@PathVariable("identificacion") String identificacion) {
 		List<Persona> listaPersona = personaServicio.listarPersonaPorIdentificacion(identificacion);
 		// Respuesta
 		ResponseGenerico<Persona> response = new ResponseGenerico<>();

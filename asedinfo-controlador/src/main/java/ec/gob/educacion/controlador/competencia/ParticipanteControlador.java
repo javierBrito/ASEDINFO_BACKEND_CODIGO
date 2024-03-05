@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ec.gob.educacion.controlador.util.Constantes;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
 import ec.gob.educacion.modelo.competencia.Participante;
+import ec.gob.educacion.servicio.catalogo.PersonaServicio;
 import ec.gob.educacion.servicio.competencia.ParticipanteServicio;
 import java.io.ByteArrayOutputStream;
 import java.util.zip.DataFormatException;
@@ -27,6 +28,8 @@ public class ParticipanteControlador {
 
 	@Autowired
 	private ParticipanteServicio participanteServicio;
+	@Autowired
+	private PersonaServicio personaServicio;
 
 	@GetMapping(value = "listarTodosParticipante")
 	public ResponseGenerico<Participante> listarTodosParticipante() {
@@ -103,6 +106,18 @@ public class ParticipanteControlador {
 	@GetMapping(value = "listarParticipantePorSubcategoriaInstancia/{codSubcategoria}/{codInstancia}/{codEstadoComptetencia}")
 	public ResponseGenerico<Participante> listarParticipantePorSubcategoriaInstancia(@PathVariable("codSubcategoria") Long codSubcategoria, @PathVariable("codInstancia") Long codInstancia, @PathVariable("codEstadoComptetencia") Long codEstadoComptetencia) {
 		List<Participante> listaParticipante = participanteServicio.listarParticipantePorSubcategoriaInstancia(codSubcategoria, codInstancia, codEstadoComptetencia);
+		// Respuesta
+		ResponseGenerico<Participante> response = new ResponseGenerico<>();
+		response.setListado(listaParticipante);
+		response.setTotalRegistros((long) listaParticipante.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
+	@GetMapping(value = "listarParticipantePorEstadoCompetencia/{codEstadoComptetencia}")
+	public ResponseGenerico<Participante> listarParticipantePorEstadoCompetencia(@PathVariable("codEstadoComptetencia") Long codEstadoComptetencia) {
+		List<Participante> listaParticipante = participanteServicio.listarParticipantePorEstadoCompetencia(codEstadoComptetencia);
 		// Respuesta
 		ResponseGenerico<Participante> response = new ResponseGenerico<>();
 		response.setListado(listaParticipante);

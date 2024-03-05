@@ -101,6 +101,7 @@ public class IntegranteControlador {
 	public ResponseGenerico<Integrante> guardarListaIntegrante(@RequestBody List<Integrante> listaIntegrante) {
 		Integrante integrante = new Integrante();
 		if (listaIntegrante.size() > 0) {
+			Integer respuesta = integranteServicio.eliminarIntegrantePorCodParticipante(listaIntegrante.get(0).getCodParticipante());
 			for (Integrante integranteAux : listaIntegrante) {
 				integrante = integranteServicio.registrar(integranteAux);
 			}

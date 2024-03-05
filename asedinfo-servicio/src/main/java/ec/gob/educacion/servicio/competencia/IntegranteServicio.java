@@ -27,6 +27,8 @@ public interface IntegranteServicio {
 	 * @return lista Integrante
 	 */
 	List<Integrante> listarIntegrantePorParticipante(Long codParticipante);
+	
+	Integer eliminarIntegrantePorCodParticipante(Long codParticipante);
 
 	/**
 	 * Permite obtener Integrante

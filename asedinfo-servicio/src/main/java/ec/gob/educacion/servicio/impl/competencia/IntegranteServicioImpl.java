@@ -27,6 +27,11 @@ public class IntegranteServicioImpl implements IntegranteServicio {
 	public List<Integrante> listarIntegrantePorParticipante(Long codParticipante) {
 		return integranteRepositorio.listarIntegrantePorParticipante(codParticipante);
 	}
+	
+	@Override
+	public Integer eliminarIntegrantePorCodParticipante(Long codParticipante) {
+		return integranteRepositorio.eliminarIntegrantePorCodParticipante(codParticipante);
+	}
 
 	@Override
 	public List<Integrante> listarIntegranteActivo(String estado) {

@@ -48,6 +48,8 @@ public interface ParticipanteServicio {
 	 */
 	List<Participante> listarParticipantePorSubcategoriaInstancia(Long codSubcategoria, Long codInstancia, Long codEstadoComptetencia);
 
+	List<Participante> listarParticipantePorEstadoCompetencia(Long codEstadoComptetencia);
+
 	/**
 	 * Permite obtener lista Participante
 	 * 

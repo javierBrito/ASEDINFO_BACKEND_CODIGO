@@ -18,5 +18,8 @@ public interface IntegranteRepositorio extends JpaRepository<Integrante, Long> {
 	@Query(nativeQuery = false, value = "select i from Integrante i where i.nombre = :nombre and i.participante.codigo = :codParticipante and i.estado = 'A'")
 	Integrante buscarIntegrantePorNombre(@Param("nombre") String nombre, @Param("codParticipante") Long codParticipante);
 
+	@Query(nativeQuery = true, value = "delete from wp_integrante where cod_participante = :codParticipante")
+	Integer eliminarIntegrantePorCodParticipante(@Param("codParticipante") Long codParticipante);
+
 	Integrante findByCodigo(Long codigo);
 }
