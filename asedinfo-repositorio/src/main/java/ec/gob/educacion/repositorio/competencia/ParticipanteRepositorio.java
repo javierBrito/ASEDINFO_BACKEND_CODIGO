@@ -10,7 +10,7 @@ import ec.gob.educacion.modelo.competencia.Participante;
 @Repository
 public interface ParticipanteRepositorio extends JpaRepository<Participante, Long> {
 
-	@Query(nativeQuery = false, value = "select par from Participante par where par.persona.estado = 'A' order by par.numParticipante")
+	@Query(nativeQuery = false, value = "select par from Participante par where par.persona.estado = 'A' order by par.numParticipante, par.email")
 	List<Participante> listarParticipantePorEstado(@Param("estadoPedido") String estadoPedido);
 
 	@Query(nativeQuery = false, value = "select r from Participante r where r.persona.codigo = :codPersona")

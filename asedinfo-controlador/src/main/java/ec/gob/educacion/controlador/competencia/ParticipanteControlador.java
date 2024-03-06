@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import ec.gob.educacion.controlador.util.Constantes;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
 import ec.gob.educacion.modelo.competencia.Participante;
-import ec.gob.educacion.servicio.catalogo.PersonaServicio;
 import ec.gob.educacion.servicio.competencia.ParticipanteServicio;
 import java.io.ByteArrayOutputStream;
 import java.util.zip.DataFormatException;
@@ -28,8 +27,6 @@ public class ParticipanteControlador {
 
 	@Autowired
 	private ParticipanteServicio participanteServicio;
-	@Autowired
-	private PersonaServicio personaServicio;
 
 	@GetMapping(value = "listarTodosParticipante")
 	public ResponseGenerico<Participante> listarTodosParticipante() {

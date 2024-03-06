@@ -44,6 +44,8 @@ public class Integrante implements java.io.Serializable {
 	@Transient
 	private String nombreParticipante;
 	@Transient
+	private String nombreIntegrante;
+	@Transient
 	private String correo;
 
 	public Integrante() {
@@ -101,6 +103,17 @@ public class Integrante implements java.io.Serializable {
 
 	public void setNombreParticipante(String nombreParticipante) {
 		this.nombreParticipante = nombreParticipante;
+	}
+
+	public String getNombreIntegrante() {
+		if (this.participante != null) {
+			nombreIntegrante = this.participante.getLastName();
+		}
+		return nombreIntegrante;
+	}
+
+	public void setNombreIntegrante(String nombreIntegrante) {
+		this.nombreIntegrante = nombreIntegrante;
 	}
 
 	public String getCorreo() {
