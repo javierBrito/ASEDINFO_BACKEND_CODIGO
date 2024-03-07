@@ -114,6 +114,8 @@ public class Participante implements java.io.Serializable {
 	private Long codCategoria;
 	@Transient
 	private String desCategoria;
+	@Transient
+	private int numJueces;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -505,5 +507,16 @@ public class Participante implements java.io.Serializable {
 
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public int getNumJueces() {
+		if (this.subcategoria != null) {
+			numJueces = this.subcategoria.getCategoria().getNumJueces();
+		}
+		return numJueces;
+	}
+
+	public void setNumJueces(int numJueces) {
+		this.numJueces = numJueces;
 	}
 }

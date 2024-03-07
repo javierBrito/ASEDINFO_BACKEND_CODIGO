@@ -42,7 +42,7 @@ public interface PuntajeServicio {
 	 * @param estado
 	 * @return lista Puntaje
 	 */
-	List<Puntaje> listarPuntajePorParticipanteRegTotal(Long codParticipante, Long codInstancia, Long codUsuarioJuez, Long codModeloPuntaje, Long codSubcategoria);
+	List<Puntaje> listarPuntajePorParticipanteRegTotal(Long codParticipante, Long codSubcategoria, Long codInstancia, Long codUsuarioJuez, Long codModeloPuntaje);
 
 	/**
 	 * Permite listar Puntaje Activo

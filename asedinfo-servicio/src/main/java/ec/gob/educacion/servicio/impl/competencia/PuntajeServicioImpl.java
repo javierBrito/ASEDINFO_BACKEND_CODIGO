@@ -56,8 +56,8 @@ public class PuntajeServicioImpl implements PuntajeServicio {
 	}
 	
 	@Override
-	public List<Puntaje> listarPuntajePorParticipanteRegTotal(Long codParticipante, Long codInstancia, Long codUsuarioJuez, Long codModeloPuntaje, Long codSubcategoria) {
-		return puntajeRepositorio.listarPuntajePorParticipanteRegTotal(codParticipante, codInstancia, codUsuarioJuez, codModeloPuntaje, codSubcategoria);
+	public List<Puntaje> listarPuntajePorParticipanteRegTotal(Long codParticipante, Long codSubcategoria, Long codInstancia, Long codUsuarioJuez, Long codModeloPuntaje) {
+		return puntajeRepositorio.listarPuntajePorParticipanteRegTotal(codParticipante, codSubcategoria, codInstancia, codUsuarioJuez, codModeloPuntaje);
 	}
 
 	@Override

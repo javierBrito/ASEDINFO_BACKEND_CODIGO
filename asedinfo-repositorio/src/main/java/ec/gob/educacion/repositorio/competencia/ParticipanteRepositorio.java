@@ -10,7 +10,7 @@ import ec.gob.educacion.modelo.competencia.Participante;
 @Repository
 public interface ParticipanteRepositorio extends JpaRepository<Participante, Long> {
 
-	@Query(nativeQuery = false, value = "select par from Participante par where par.persona.estado = 'A' order by par.numParticipante, par.email")
+	@Query(nativeQuery = false, value = "select par from Participante par where par.persona.estado = 'A' order by par.numParticipante, par.email, par.subcategoria.categoria.codigo, par.subcategoria.codigo")
 	List<Participante> listarParticipantePorEstado(@Param("estadoPedido") String estadoPedido);
 
 	@Query(nativeQuery = false, value = "select r from Participante r where r.persona.codigo = :codPersona")
@@ -31,7 +31,7 @@ public interface ParticipanteRepositorio extends JpaRepository<Participante, Lon
 	@Query(nativeQuery = false, value = "select r from Participante r where r.estadoCompetencia.codigo = :codEstadoCompetencia")
 	List<Participante> listarParticipantePorEstadoCompetencia(@Param("codEstadoCompetencia") Long codEstadoCompetencia);
 
-	@Query(nativeQuery = false, value = "select r from Participante r where r.email = :email and r.estadoCompetencia.codigo = 1 and r.persona.estado = 'A'")
+	@Query(nativeQuery = false, value = "select par from Participante par where par.email = :email and par.estadoCompetencia.codigo = 1 and par.persona.estado = 'A' order by par.numParticipante, par.email, par.subcategoria.categoria.codigo, par.subcategoria.codigo")
 	List<Participante> listarParticipantePorEmail(@Param("email") String email);
 
 	@Query(nativeQuery = false, value = "select max(r.numParticipante) from Participante r")
