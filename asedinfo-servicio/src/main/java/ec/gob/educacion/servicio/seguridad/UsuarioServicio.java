@@ -47,6 +47,8 @@ public interface UsuarioServicio {
 	 */
 	Usuario buscarUsuarioPorCodigo(Long codigo);
 
+	ClaveUsuario buscarClaveUsuarioPorCodUsuario(Long codUsuario);
+
 	/**
 	 * Permite obtener lista Usuario
 	 * 
@@ -70,6 +72,8 @@ public interface UsuarioServicio {
 	Usuario crearUsuario(Usuario usuario);
 
 	ClaveUsuario crearClaveUsuario(Usuario usuario, String claveEncriptada);
+
+	ClaveUsuario actualizarClaveUsuario(ClaveUsuario claveUsuario);
 
 	UsuarioDetalleAccion crearUsuarioDetalleAccion(Usuario usuario, Integer tipo);
 }

@@ -64,6 +64,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	}
 
 	@Override
+	public ClaveUsuario buscarClaveUsuarioPorCodUsuario(Long codUsuario) {
+		return usuarioRepositorio.buscarClaveUsuarioPorCodUsuario(codUsuario);
+	}
+
+	@Override
 	public List<Usuario> listarUsuarioPorIdentificacion(String identificacion) {
 		return usuarioRepositorio.listarUsuarioPorIdentificacion(identificacion);
 	}
@@ -161,6 +166,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 			System.out.println("Error al crear clave de usuario: " + e.getMessage());
 		}
 
+		return claveRepositorio.save(claveUsuario);
+	}
+
+	@Override
+	public ClaveUsuario actualizarClaveUsuario(ClaveUsuario claveUsuario) {
 		return claveRepositorio.save(claveUsuario);
 	}
 

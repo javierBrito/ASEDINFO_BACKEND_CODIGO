@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ec.gob.educacion.controlador.util.Constantes;
 import ec.gob.educacion.controlador.util.EncryptUtils;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
+import ec.gob.educacion.modelo.seguridad.ClaveUsuario;
 import ec.gob.educacion.modelo.seguridad.Usuario;
 import ec.gob.educacion.servicio.seguridad.UsuarioServicio;
 import ec.gob.educacion.venta.resources.EstadoEnum;
@@ -103,6 +104,23 @@ public class UsuarioControlador {
 	}
 
 	/**
+	 * REST para obtener ClaveUsuario
+	 * 
+	 * @return ClaveUsuario
+	 */
+	@GetMapping(value = "buscarClaveUsuarioPorCodUsuario/{codigo}")
+	public ResponseGenerico<ClaveUsuario> buscarClaveUsuarioPorCodUsuario(@PathVariable("codUsuario") Long codUsuario) {
+		ClaveUsuario claveUsuario = usuarioServicio.buscarClaveUsuarioPorCodUsuario(codUsuario);
+		// Respuesta
+		ResponseGenerico<ClaveUsuario> response = new ResponseGenerico<>();
+		response.setObjeto(claveUsuario);
+		response.setTotalRegistros((long) (1));
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
+	/**
 	 * REST para guardar o actualizar usuario
 	 * 
 	 * @return guardar
@@ -122,6 +140,43 @@ public class UsuarioControlador {
 		usuarioServicio.crearClaveUsuario(usuario, claveEncriptada);
 		// Crear Usuario Detalle Acción
 		usuarioServicio.crearUsuarioDetalleAccion(usuario, Constantes.TIPO_ACCION_CREACION);
+
+		// Respuesta
+		ResponseGenerico<Usuario> response = new ResponseGenerico<>();
+		response.setObjeto(usuario);
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK_CREADO);
+		return response;
+	}
+
+	/**
+	 * REST para guardar o actualizar usuario
+	 * 
+	 * @return guardar
+	 */
+	@PostMapping(value = "cambiarClave")
+	public ResponseGenerico<Usuario> cambiarClave(@RequestBody Usuario usuarioParametro) {
+		// Obtener el Usuario
+		Usuario usuario = usuarioServicio.buscarUsuarioPorCodigo(usuarioParametro.getCodigo());
+		// Obtener registro de Clave Usuario
+		ClaveUsuario claveUsuario = usuarioServicio.buscarClaveUsuarioPorCodUsuario(usuarioParametro.getCodigo());
+		String claveEncriptada = null;
+		try {
+			if (usuarioParametro.getCambioClave() == null) {
+				claveEncriptada = EncryptUtils.applyAlgorithm("1512", EncryptUtils.MD5, EncryptUtils.UTF);
+			} else {
+				claveEncriptada = EncryptUtils.applyAlgorithm(usuarioParametro.getCambioClave(), EncryptUtils.MD5, EncryptUtils.UTF);
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		claveUsuario.setClave(claveEncriptada);
+		// Actualizar Clave Usuario
+		usuarioServicio.actualizarClaveUsuario(claveUsuario);
+		// Crear Usuario Detalle Acción
+		//usuarioServicio.crearUsuarioDetalleAccion(usuario, Constantes.TIPO_ACCION_CREACION);
 
 		// Respuesta
 		ResponseGenerico<Usuario> response = new ResponseGenerico<>();

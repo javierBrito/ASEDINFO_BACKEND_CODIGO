@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import ec.gob.educacion.modelo.seguridad.ClaveUsuario;
 import ec.gob.educacion.modelo.seguridad.Usuario;
 
 @Repository
@@ -19,6 +20,9 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 	//List<Usuario> findByIdentificacion(String identificacion);
 	@Query(nativeQuery = false, value = "select r from Usuario r where r.persona.identificacion = :identificacion and r.estado = 'A'")
 	List<Usuario> listarUsuarioPorIdentificacion(@Param("identificacion") String identificacion);
+
+	@Query(nativeQuery = false, value = "select r from ClaveUsuario r where r.usuario.codigo = :codUsuario and r.estado = 'A'")
+	ClaveUsuario buscarClaveUsuarioPorCodUsuario(@Param("codUsuario") Long codUsuario);
 
 	Usuario findByCodigo(Long codigo);
 	

@@ -262,7 +262,7 @@ public class ClienteWPControlador {
 					// Datos por default al migrar
 					participante.setCodInstancia(1L);
 					participante.setCodEstadoCompetencia(1L);
-					participante.setCodSubcategoria(1L);
+					participante.setCodSubcategoria(82L);
 				}
 
 				// Datos de la persona relacionada

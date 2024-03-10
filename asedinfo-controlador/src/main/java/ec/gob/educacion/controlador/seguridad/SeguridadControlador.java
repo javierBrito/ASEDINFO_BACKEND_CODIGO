@@ -54,6 +54,7 @@ public class SeguridadControlador {
 	@Autowired
 	private UsuarioRolAplicacionServicio usuarioRolAplicacionServicio;
 
+	@SuppressWarnings("unused")
 	@PostMapping(value = "loginAplicacion")
 	public ResponseEntity<LoginDTO> buscarUsuarioCas(@RequestBody ParametroLoginDTO parametroLoginDTO)
 			throws NoSuchAlgorithmException, UnsupportedEncodingException {

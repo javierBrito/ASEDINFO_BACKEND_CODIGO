@@ -97,6 +97,7 @@ public class IntegranteControlador {
 	 * 
 	 * @return guardar
 	 */
+	@SuppressWarnings("unused")
 	@PostMapping(value = "guardarListaIntegrante")
 	public ResponseGenerico<Integrante> guardarListaIntegrante(@RequestBody List<Integrante> listaIntegrante) {
 		Integrante integrante = new Integrante();

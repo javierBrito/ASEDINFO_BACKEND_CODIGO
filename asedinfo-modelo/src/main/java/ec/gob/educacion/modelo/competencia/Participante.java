@@ -96,6 +96,7 @@ public class Participante implements java.io.Serializable {
 	private String correo;
 	@Transient
 	private String identificacion;
+	
 	@Transient
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")

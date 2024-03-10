@@ -11,36 +11,36 @@ import ec.gob.educacion.servicio.catalogo.CategoriaServicio;
 public class CategoriaServicioImpl implements CategoriaServicio {
 
 	@Autowired
-	private CategoriaRepositorio CategoriaRepositorio;
+	private CategoriaRepositorio categoriaRepositorio;
 
 	@Override
 	public List<Categoria> listarTodosCategoria() {
-		return CategoriaRepositorio.findAll();
+		return categoriaRepositorio.findAll();
 	}
 
 	@Override
 	public List<Categoria> listarCategoriaActivo(String estado) {
-		return CategoriaRepositorio.findByEstadoOrderByCodigo(estado);
+		return categoriaRepositorio.findByEstadoOrderByCodigo(estado);
 	}
 
 	@Override
 	public Categoria buscarCategoriaPorCodigo(Long codigo) {
-		return CategoriaRepositorio.findByCodigo(codigo);
+		return categoriaRepositorio.findByCodigo(codigo);
 	}
 
 	@Override
 	public Categoria buscarCategoriaPorDenominacion(String denominacion) {
-		return CategoriaRepositorio.findByDenominacion(denominacion);
+		return categoriaRepositorio.findByDenominacion(denominacion);
 	}
 
 	@Override
 	public Categoria registrar(Categoria categoria) {
-		return CategoriaRepositorio.save(categoria);
+		return categoriaRepositorio.save(categoria);
 	}
 
 	@Override
 	public Categoria crearCategoria(Categoria categoria) {
-		return CategoriaRepositorio.save(categoria);
+		return categoriaRepositorio.save(categoria);
 	}
 	
 }
