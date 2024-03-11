@@ -40,7 +40,8 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 	List<Object[]> listaUsuario(@Param("identificacion") String identificacion, @Param("clave") String clave);
 
 	@Query(nativeQuery = true, value = "select \r\n" + " u.codigo,\r\n" + "	p.identificacion,\r\n" + " p.cedula,\r\n"
-			+ "	concat(p.apellidos, ' ', p.nombres) as nombre,\r\n" + "	u.cod_sede,\r\n " + " p.correo\r\n "  
+			+ "	concat(p.apellidos, ' ', p.nombres) as nombre,\r\n" + "	u.cod_sede,\r\n " + " p.correo, \r\n "
+			+ " p.prefijo_telefonico, \r\n " + " p.celular \r\n"
 			+ "from \r\n" + " seg_usuario u\r\n" 
 			+ "	inner join seg_clave_usuario c on u.codigo = c.cod_usuario\r\n" 
 			+ "	inner join cat_persona p on p.codigo = u.cod_persona\r\n" 

@@ -131,6 +131,14 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 			} else {
 				cr.setCorreo(String.valueOf(objects[5]));
 			}
+			if (objects[6] == null || objects[6] == "") {
+			} else {
+				cr.setPrefijoTelefonico(String.valueOf(objects[6]));
+			}
+			if (objects[7] == null || objects[7] == "") {
+			} else {
+				cr.setCelular(String.valueOf(objects[7]));
+			}
 
 			consultas.add(cr);
 		});

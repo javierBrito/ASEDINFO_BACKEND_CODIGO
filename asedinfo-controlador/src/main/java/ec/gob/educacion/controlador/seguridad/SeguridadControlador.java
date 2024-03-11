@@ -64,6 +64,8 @@ public class SeguridadControlador {
 		String identificacion;
 		String correo;
 		String token;
+		String prefijoTelefonico;
+		String ceclular;
 
 		claveEncriptada = EncryptUtils.applyAlgorithm(parametroLoginDTO.getClave(), EncryptUtils.MD5, EncryptUtils.UTF);
 		List<LoginDTO> listaRespuesta = audSesionServicio.listaRespuestaLogin(parametroLoginDTO.getIdentificacion(),

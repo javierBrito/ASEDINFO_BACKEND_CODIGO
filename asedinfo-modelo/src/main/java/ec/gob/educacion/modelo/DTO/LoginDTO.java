@@ -13,6 +13,8 @@ public class LoginDTO {
 	private String token;
 	private String correo;
 	private Sede sede;
+	private String prefijoTelefonico;
+	private String celular;
 
 	public Long getCodigoUsuario() {
 		return codigoUsuario;
@@ -84,5 +86,21 @@ public class LoginDTO {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+
+	public String getPrefijoTelefonico() {
+		return prefijoTelefonico;
+	}
+
+	public void setPrefijoTelefonico(String prefijoTelefonico) {
+		this.prefijoTelefonico = prefijoTelefonico;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 }
