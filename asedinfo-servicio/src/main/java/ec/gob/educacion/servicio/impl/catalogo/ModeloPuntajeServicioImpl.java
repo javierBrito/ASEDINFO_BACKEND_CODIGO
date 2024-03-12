@@ -11,31 +11,31 @@ import ec.gob.educacion.servicio.catalogo.ModeloPuntajeServicio;
 public class ModeloPuntajeServicioImpl implements ModeloPuntajeServicio {
 
 	@Autowired
-	private ModeloPuntajeRepositorio ModeloPuntajeRepositorio;
+	private ModeloPuntajeRepositorio modeloPuntajeRepositorio;
 
 	@Override
 	public List<ModeloPuntaje> listarTodosModeloPuntaje() {
-		return ModeloPuntajeRepositorio.findAll();
+		return modeloPuntajeRepositorio.findAll();
 	}
 
 	@Override
 	public List<ModeloPuntaje> listarModeloPuntajeActivo(String estado) {
-		return ModeloPuntajeRepositorio.findByEstadoOrderByCodigo(estado);
+		return modeloPuntajeRepositorio.findByEstadoOrderByCodigo(estado);
 	}
 
 	@Override
 	public ModeloPuntaje buscarModeloPuntajePorCodigo(Long codigo) {
-		return ModeloPuntajeRepositorio.findByCodigo(codigo);
+		return modeloPuntajeRepositorio.findByCodigo(codigo);
 	}
 
 	@Override
 	public ModeloPuntaje registrar(ModeloPuntaje modeloPuntaje) {
-		return ModeloPuntajeRepositorio.save(modeloPuntaje);
+		return modeloPuntajeRepositorio.save(modeloPuntaje);
 	}
 
 	@Override
 	public ModeloPuntaje crearModeloPuntaje(ModeloPuntaje modeloPuntaje) {
-		return ModeloPuntajeRepositorio.save(modeloPuntaje);
+		return modeloPuntajeRepositorio.save(modeloPuntaje);
 	}
 	
 }
