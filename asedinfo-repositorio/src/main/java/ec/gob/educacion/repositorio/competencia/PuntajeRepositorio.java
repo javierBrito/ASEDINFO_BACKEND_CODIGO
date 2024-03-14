@@ -43,6 +43,7 @@ public interface PuntajeRepositorio extends JpaRepository<Puntaje, Long> {
 			+ "   from wp_puntaje wpu, wp_participante wpa "
 			+ "  where wpu.cod_modelo_puntaje = 99 and wpu.cod_participante = wpa.codigo "
 			+ "    and wpu.cod_subcategoria = :codSubcategoria and wpu.cod_instancia = :codInstancia "
+			+ "    and wpa.cod_estado_competencia = 5 "
 			+ "  group by wpu.cod_subcategoria, wpu.cod_instancia, wpu.cod_participante " ) 
 	List<Object[]> listarPuntajePorSubcategoriaInstanciaRegSUMA(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);
 
