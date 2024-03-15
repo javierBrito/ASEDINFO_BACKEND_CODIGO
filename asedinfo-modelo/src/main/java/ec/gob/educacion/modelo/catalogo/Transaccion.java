@@ -39,6 +39,9 @@ public class Transaccion implements java.io.Serializable {
 
 	@Column(name = "clave_cuenta")
 	private String claveCuenta;
+
+	@Column(name = "clave")
+	private String clave;
 	
 	@Column(name = "precio")
 	private float precio;
@@ -413,5 +416,13 @@ public class Transaccion implements java.io.Serializable {
 
 	public void setVisibleBoton(String visibleBoton) {
 		this.visibleBoton = visibleBoton;
+	}
+
+	public String getClave() {
+		return clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
 	}
 }
