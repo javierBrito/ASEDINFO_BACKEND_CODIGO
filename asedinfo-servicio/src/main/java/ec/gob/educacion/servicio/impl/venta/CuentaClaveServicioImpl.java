@@ -1,14 +1,14 @@
-package ec.gob.educacion.servicio.impl.competencia;
+package ec.gob.educacion.servicio.impl.venta;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ec.gob.educacion.modelo.catalogo.Transaccion;
-import ec.gob.educacion.modelo.competencia.CuentaClave;
-import ec.gob.educacion.repositorio.competencia.CuentaClaveRepositorio;
+import ec.gob.educacion.modelo.venta.CuentaClave;
+import ec.gob.educacion.repositorio.venta.CuentaClaveRepositorio;
 import ec.gob.educacion.servicio.catalogo.TransaccionServicio;
-import ec.gob.educacion.servicio.competencia.CuentaClaveServicio;
+import ec.gob.educacion.servicio.venta.CuentaClaveServicio;
 
 @Service
 public class CuentaClaveServicioImpl implements CuentaClaveServicio {

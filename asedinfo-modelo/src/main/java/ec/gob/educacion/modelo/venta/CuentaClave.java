@@ -1,4 +1,4 @@
-package ec.gob.educacion.modelo.competencia;
+package ec.gob.educacion.modelo.venta;
 // default package
 
 // Generated Oct 29, 2013 4:10:51 PM by Hibernate Tools 4.0.0

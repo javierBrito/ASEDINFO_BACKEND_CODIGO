@@ -1,7 +1,7 @@
-package ec.gob.educacion.servicio.competencia;
+package ec.gob.educacion.servicio.venta;
 
 import java.util.List;
-import ec.gob.educacion.modelo.competencia.CuentaClave;
+import ec.gob.educacion.modelo.venta.CuentaClave;
 
 public interface CuentaClaveServicio {
 	/**

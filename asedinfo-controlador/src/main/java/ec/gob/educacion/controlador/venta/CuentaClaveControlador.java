@@ -1,4 +1,4 @@
-package ec.gob.educacion.controlador.competencia;
+package ec.gob.educacion.controlador.venta;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ec.gob.educacion.controlador.util.Constantes;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
-import ec.gob.educacion.modelo.competencia.CuentaClave;
+import ec.gob.educacion.modelo.venta.CuentaClave;
 import ec.gob.educacion.venta.resources.EstadoEnum;
-import ec.gob.educacion.servicio.competencia.CuentaClaveServicio;
+import ec.gob.educacion.servicio.venta.CuentaClaveServicio;
 
 @RestController
-@RequestMapping("competencia/")
+@RequestMapping("venta/")
 public class CuentaClaveControlador {
 
 	@Autowired
