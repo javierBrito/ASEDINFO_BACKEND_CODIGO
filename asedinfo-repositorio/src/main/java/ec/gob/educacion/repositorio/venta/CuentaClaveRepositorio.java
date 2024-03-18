@@ -18,7 +18,7 @@ public interface CuentaClaveRepositorio extends JpaRepository<CuentaClave, Long>
 	@Query(nativeQuery = false, value = "select i from CuentaClave i where i.cuenta = :cuenta and i.transaccion.codigo = :codTransaccion and i.estado = 'A'")
 	CuentaClave buscarCuentaClavePorCuenta(@Param("cuenta") String cuenta, @Param("codTransaccion") Long codTransaccion);
 
-	@Query(nativeQuery = true, value = "delete from wp_cuenta_clave where cod_transaccion = :codTransaccion")
+	@Query(nativeQuery = true, value = "delete from ven_cuenta_clave where cod_transaccion = :codTransaccion")
 	Integer eliminarCuentaClavePorCodTransaccion(@Param("codTransaccion") Long codTransaccion);
 
 	CuentaClave findByCodigo(Long codigo);
