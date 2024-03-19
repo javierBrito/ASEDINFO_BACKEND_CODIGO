@@ -136,11 +136,11 @@ public class Transaccion implements java.io.Serializable {
 	private String visibleBoton;
 	@Transient
 	private String displayNoneListaCuentaClave;
-	/*
+	
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "transaccion", cascade = CascadeType.DETACH)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "transaccion", cascade=CascadeType.MERGE)
 	List<CuentaClave> listaCuentaClave;
-	*/
+
 	public Transaccion() {
 	}
 
@@ -439,20 +439,22 @@ public class Transaccion implements java.io.Serializable {
 	}
 
 	public String getDisplayNoneListaCuentaClave() {
-		/*
-		if (listaCuentaClave.isEmpty()) {
-			displayNoneListaCuentaClave = "none";
+		if (listaCuentaClave != null) {
+			if (listaCuentaClave.isEmpty()) {
+				displayNoneListaCuentaClave = "none";
+			} else {
+				displayNoneListaCuentaClave = "";
+			}
 		} else {
-			displayNoneListaCuentaClave = " ";
+			displayNoneListaCuentaClave = "none";
 		}
-		*/	
 		return displayNoneListaCuentaClave;
 	}
 
 	public void setDisplayNoneListaCuentaClave(String displayNoneListaCuentaClave) {
 		this.displayNoneListaCuentaClave = displayNoneListaCuentaClave;
 	}
-	/*
+
 	public List<CuentaClave> getListaCuentaClave() {
 		return listaCuentaClave;
 	}
@@ -460,5 +462,4 @@ public class Transaccion implements java.io.Serializable {
 	public void setListaCuentaClave(List<CuentaClave> listaCuentaClave) {
 		this.listaCuentaClave = listaCuentaClave;
 	}
-	*/
 }
