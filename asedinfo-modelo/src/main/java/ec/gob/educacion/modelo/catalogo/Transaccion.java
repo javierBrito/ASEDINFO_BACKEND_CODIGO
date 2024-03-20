@@ -110,6 +110,8 @@ public class Transaccion implements java.io.Serializable {
 	@Transient
 	private Long codCliente;
 	@Transient
+	private Long codPersona;
+	@Transient
 	private String nombreCliente;
 	@Transient
 	private String prefijoTelefonico;
@@ -461,5 +463,16 @@ public class Transaccion implements java.io.Serializable {
 
 	public void setListaCuentaClave(List<CuentaClave> listaCuentaClave) {
 		this.listaCuentaClave = listaCuentaClave;
+	}
+
+	public Long getCodPersona() {
+		if (cliente != null) {
+			codPersona = cliente.getPersona().getCodigo();
+		}
+		return codPersona;
+	}
+
+	public void setCodPersona(Long codPersona) {
+		this.codPersona = codPersona;
 	}
 }
