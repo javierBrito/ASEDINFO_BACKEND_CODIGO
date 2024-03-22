@@ -99,6 +99,8 @@ public class Participante implements java.io.Serializable {
 	private String correo;
 	@Transient
 	private String identificacion;
+	@Transient
+	private String prefijoTelefonico;
 	
 	@Transient
 	@Temporal(TemporalType.TIMESTAMP)
@@ -530,5 +532,16 @@ public class Participante implements java.io.Serializable {
 
 	public void setNombreEscuela(String nombreEscuela) {
 		this.nombreEscuela = nombreEscuela;
+	}
+
+	public String getPrefijoTelefonico() {
+		if (this.persona != null) {
+			prefijoTelefonico = this.persona.getPrefijoTelefonico();
+		}
+		return prefijoTelefonico;
+	}
+
+	public void setPrefijoTelefonico(String prefijoTelefonico) {
+		this.prefijoTelefonico = prefijoTelefonico;
 	}
 }
