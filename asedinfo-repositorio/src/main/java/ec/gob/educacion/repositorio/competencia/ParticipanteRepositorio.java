@@ -10,7 +10,8 @@ import ec.gob.educacion.modelo.competencia.Participante;
 @Repository
 public interface ParticipanteRepositorio extends JpaRepository<Participante, Long> {
 
-	@Query(nativeQuery = false, value = "select par from Participante par where par.persona.estado = 'A' order by par.numParticipante, par.email, par.subcategoria.categoria.codigo, par.subcategoria.codigo")
+	//@Query(nativeQuery = false, value = "select par from Participante par where par.persona.estado = 'A' order by par.numParticipante, par.email, par.subcategoria.categoria.codigo, par.subcategoria.codigo")
+	@Query(nativeQuery = false, value = "select par from Participante par where par.persona.estado = 'A' and par.subcategoria.codigo <> 82 and par.numParticipante <> 0 order by par.dateLastActive, par.numParticipante, par.email, par.subcategoria.categoria.codigo, par.subcategoria.codigo")
 	List<Participante> listarParticipantePorEstado(@Param("estadoPedido") String estadoPedido);
 
 	@Query(nativeQuery = false, value = "select r from Participante r where r.persona.codigo = :codPersona")
