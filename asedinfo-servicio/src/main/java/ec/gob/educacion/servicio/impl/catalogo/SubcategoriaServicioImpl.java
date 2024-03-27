@@ -30,7 +30,7 @@ public class SubcategoriaServicioImpl implements SubcategoriaServicio {
 
 	@Override
 	public List<Subcategoria> listarSubcategoriaActivo(String estado) {
-		return subcategoriaRepositorio.findByEstadoOrderByCodigo(estado);
+		return subcategoriaRepositorio.findByEstadoOrderByDenominacion(estado);
 	}
 
 	@Override

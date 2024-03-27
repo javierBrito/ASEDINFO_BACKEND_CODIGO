@@ -10,7 +10,7 @@ import ec.gob.educacion.modelo.catalogo.Subcategoria;
 @Repository
 public interface SubcategoriaRepositorio extends JpaRepository<Subcategoria, Long> {
 
-	List<Subcategoria> findByEstadoOrderByCodigo(String estado);
+	List<Subcategoria> findByEstadoOrderByDenominacion(String estado);
 
 	@Query(nativeQuery = false, value = "select subc from Subcategoria subc where subc.categoria.codigo = :codCategoria and subc.estado = 'A'")
 	List<Subcategoria> listarSubcategoriaPorCategoria(@Param("codCategoria") Long codCategoria);
