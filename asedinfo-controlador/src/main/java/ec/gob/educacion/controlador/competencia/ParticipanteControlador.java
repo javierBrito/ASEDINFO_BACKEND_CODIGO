@@ -187,9 +187,14 @@ public class ParticipanteControlador {
 			// Obtener el max de Participante
 			numParticipante = participanteServicio.obtenerMaxNumParticipante();
 			for (Participante participanteAux : listaParticipante) {
-				numParticipante += 1;
-				participanteAux.setNumParticipante(numParticipante);
-				participanteServicio.registrar(participanteAux);
+				// Cuando trae ya el número de Participante num_participante <> 0
+				if (participanteAux.getNumParticipante() == 0) {
+					numParticipante += 1;
+					participanteAux.setNumParticipante(numParticipante);
+					participanteServicio.registrar(participanteAux);
+				} else {
+					participanteServicio.registrar(participanteAux);
+				}
 			}
 		}
 		// Respuesta
