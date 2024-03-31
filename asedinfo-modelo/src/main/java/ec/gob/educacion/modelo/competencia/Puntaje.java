@@ -69,6 +69,9 @@ public class Puntaje implements java.io.Serializable {
 	private Long codCategoria;
 	@Transient
 	private String desCategoria;
+
+	@Transient
+	private String pathImagenTrofeo;
 	
 	@Column(name = "puntaje")
 	private Float puntaje;
@@ -274,5 +277,13 @@ public class Puntaje implements java.io.Serializable {
 	}
 	public void setCodUsuarioJuez(Long codUsuarioJuez) {
 		this.codUsuarioJuez = codUsuarioJuez;
+	}
+
+	public String getPathImagenTrofeo() {
+		return pathImagenTrofeo;
+	}
+
+	public void setPathImagenTrofeo(String pathImagenTrofeo) {
+		this.pathImagenTrofeo = pathImagenTrofeo;
 	}
 }
