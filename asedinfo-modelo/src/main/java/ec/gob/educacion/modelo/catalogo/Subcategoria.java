@@ -31,6 +31,9 @@ public class Subcategoria implements java.io.Serializable {
 	@Column(name = "denominacion")
 	private String denominacion;
 
+	@Column(name = "num_jueces")
+	private int numJueces;
+
 	@Column(name = "estado", nullable = false, length = 1)
 	private String estado;
 	
@@ -47,8 +50,6 @@ public class Subcategoria implements java.io.Serializable {
 	private Float edadMinima;
 	@Transient
 	private Float edadMaxima;
-	@Transient
-	private int numJueces;
 
 	public Subcategoria() {
 	}
@@ -130,9 +131,6 @@ public class Subcategoria implements java.io.Serializable {
 	}
 
 	public int getNumJueces() {
-		if (this.categoria != null) {
-			numJueces = this.categoria.getNumJueces();
-		}
 		return numJueces;
 	}
 

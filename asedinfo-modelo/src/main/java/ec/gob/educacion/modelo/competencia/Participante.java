@@ -517,7 +517,7 @@ public class Participante implements java.io.Serializable {
 
 	public int getNumJueces() {
 		if (this.subcategoria != null) {
-			numJueces = this.subcategoria.getCategoria().getNumJueces();
+			numJueces = this.subcategoria.getNumJueces();
 		}
 		return numJueces;
 	}
