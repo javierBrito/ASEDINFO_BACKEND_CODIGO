@@ -26,6 +26,9 @@ public interface PuntajeRepositorio extends JpaRepository<Puntaje, Long> {
 	@Query(nativeQuery = false, value = "select r from Puntaje r where r.participante.codigo = :codParticipante and r.subcategoria.codigo = :codSubcategoria and r.instancia.codigo = :codInstancia and r.codUsuarioJuez = :codUsuarioJuez")
 	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstancia(@Param("codParticipante") Long codParticipante, @Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia, @Param("codUsuarioJuez") Long codUsuarioJuez);
 
+	@Query(nativeQuery = false, value = "select r from Puntaje r where r.participante.codigo = :codParticipante and r.subcategoria.codigo = :codSubcategoria and r.instancia.codigo = :codInstancia")
+	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstanciaCriterios(@Param("codParticipante") Long codParticipante, @Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia);
+
 	@Query(nativeQuery = false, value = "select r from Puntaje r where r.participante.codigo = :codParticipante and r.instancia.codigo = :codInstancia and r.codUsuarioJuez = :codUsuarioJuez and r.modeloPuntaje.codigo = :codModeloPuntaje and r.subcategoria.codigo = :codSubcategoria")
 	List<Puntaje> listarPuntajePorParticipanteRegTotal(@Param("codParticipante") Long codParticipante, @Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia, @Param("codUsuarioJuez") Long codUsuarioJuez, @Param("codModeloPuntaje") Long codModeloPuntaje);
 	

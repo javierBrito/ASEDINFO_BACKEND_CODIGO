@@ -62,6 +62,8 @@ public interface PuntajeServicio {
 	 */
 	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstancia(Long codParticipante, Long codSubcategoria, Long codInstancia, Long codUsuarioJuez);
 
+	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstanciaCriterios(Long codParticipante, Long codSubcategoria, Long codInstancia);
+
 	/**
 	 * Permite obtener Puntaje
 	 * 
