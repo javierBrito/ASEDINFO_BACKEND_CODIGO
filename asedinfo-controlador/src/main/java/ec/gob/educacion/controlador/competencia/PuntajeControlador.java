@@ -130,6 +130,18 @@ public class PuntajeControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarPuntajePorParticipanteSubcategoriaInstanciaRegSUMA/{codSubcategoria}/{codInstancia}/{codParticipante}")
+	public ResponseGenerico<Puntaje> listarPuntajePorParticipanteSubcategoriaInstanciaRegSUMA(@PathVariable("codSubcategoria") Long codSubcategoria, @PathVariable("codInstancia") Long codInstancia, @PathVariable("codParticipante") Long codParticipante) {
+		List<Puntaje> listaPuntaje = puntajeServicio.listarPuntajePorParticipanteSubcategoriaInstanciaRegSUMA(codSubcategoria, codInstancia, codParticipante);
+		// Respuesta
+		ResponseGenerico<Puntaje> response = new ResponseGenerico<>();
+		response.setListado(listaPuntaje);
+		response.setTotalRegistros((long) listaPuntaje.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 	/**
 	 * REST para obtener Puntaje
 	 * 
@@ -180,4 +192,36 @@ public class PuntajeControlador {
 		response.setMensaje(Constantes.MENSAJE_OK_ELIMINADO);
 		return response;
 	}
+	
+	/**
+	 * REST para guardar o actualizar Puntaje
+	 * 
+	 * @return guardar
+	 */
+	@SuppressWarnings("unused")
+	@PostMapping(value = "guardarListaPuntaje")
+	public ResponseGenerico<Puntaje> guardarListaPuntaje(@RequestBody List<Puntaje> listaPuntaje) {
+		Puntaje puntaje = new Puntaje();
+		if (listaPuntaje.size() > 0) {
+			Integer respuesta = puntajeServicio.eliminarPuntajePorCodParticipante(listaPuntaje.get(0).getCodParticipante());
+			List<Puntaje> listaPuntajeParticipante = puntajeServicio.listarPuntajePorParticipanteSubcategoriaInstanciaCriterios(listaPuntaje.get(0).getCodParticipante(), listaPuntaje.get(0).getCodSubcategoria(), listaPuntaje.get(0).getCodInstancia());
+			for (Puntaje puntajeAux : listaPuntaje) {
+				for (Puntaje puntajeParticipante : listaPuntajeParticipante) {
+					if (puntajeParticipante.getCodModeloPuntaje() == puntajeAux.getCodModeloPuntaje()) {
+						puntajeParticipante.setCodUsuarioJuez(puntajeAux.getCodUsuarioJuez());
+						puntajeParticipante.setPuntaje(puntajeAux.getPuntaje());
+						puntajeAux = puntajeParticipante;
+					}
+				}
+				puntaje = puntajeServicio.registrar(puntajeAux);
+			}
+		}
+		// Respuesta
+		ResponseGenerico<Puntaje> response = new ResponseGenerico<>();
+		response.setObjeto(puntaje);
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK_CREADO);
+		return response;
+	}
+	
 }

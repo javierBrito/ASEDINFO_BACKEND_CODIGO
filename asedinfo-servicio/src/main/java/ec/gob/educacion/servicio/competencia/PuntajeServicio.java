@@ -54,6 +54,8 @@ public interface PuntajeServicio {
 
 	List<Puntaje> listarPuntajePorSubcategoriaInstanciaRegSUMA(Long codSubcategoria, Long codInstancia);
 
+	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstanciaRegSUMA(Long codSubcategoria, Long codInstancia, Long codParticipante);
+
 	/**
 	 * Permite listar Puntaje Activo
 	 * 
@@ -63,6 +65,8 @@ public interface PuntajeServicio {
 	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstancia(Long codParticipante, Long codSubcategoria, Long codInstancia, Long codUsuarioJuez);
 
 	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstanciaCriterios(Long codParticipante, Long codSubcategoria, Long codInstancia);
+
+	Integer eliminarPuntajePorCodParticipante(Long codParticipante);
 
 	/**
 	 * Permite obtener Puntaje
