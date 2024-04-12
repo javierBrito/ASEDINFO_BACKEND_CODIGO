@@ -44,8 +44,13 @@ public class GestionarArchivoServicioImpl implements GestionarArchivoServicio {
 	public void cargarArchivo(MultipartFile file, String nombreArchivo) {
 		this.iniciaPathLocation();
 		try {
+			if (file.getContentType().contains("audio/mpeg") || file.getContentType().contains("audio/mp4")) {
+			} else {
+				throw new RuntimeException("Audio debe ser mp3 o mp4");
+			}
 			// copy (que queremos copiar, a donde queremos copiar)
-			Files.copy(file.getInputStream(), this.pathLocation.resolve(nombreArchivo+"_"+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+			//Files.copy(file.getInputStream(), this.pathLocation.resolve(nombreArchivo+"_"+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(file.getInputStream(), this.pathLocation.resolve(nombreArchivo), StandardCopyOption.REPLACE_EXISTING);
 			System.out.println("Archivo guardado en la carpeta " + pathLocation +" ok...");
 		} catch (IOException e) {
 			throw new RuntimeException("No se puede guardar el archivo. Error = " + e.getMessage());
