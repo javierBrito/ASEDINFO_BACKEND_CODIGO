@@ -124,6 +124,18 @@ public class ParticipanteControlador {
 		return response;
 	}
 
+	@GetMapping(value = "listarParticipanteEnEscenario")
+	public ResponseGenerico<Participante> listarParticipanteEnEscenario() {
+		List<Participante> listaParticipante = participanteServicio.listarParticipanteEnEscenario();
+		// Respuesta
+		ResponseGenerico<Participante> response = new ResponseGenerico<>();
+		response.setListado(listaParticipante);
+		response.setTotalRegistros((long) listaParticipante.size());
+		response.setCodigoRespuesta(Constantes.CODIGO_RESPUESTA_OK);
+		response.setMensaje(Constantes.MENSAJE_OK);
+		return response;
+	}
+
 	/**
 	 * REST para obtener Participante
 	 * 

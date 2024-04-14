@@ -38,5 +38,11 @@ public interface ParticipanteRepositorio extends JpaRepository<Participante, Lon
 	@Query(nativeQuery = false, value = "select max(r.numParticipante) from Participante r")
 	Integer obtenerMaxNumParticipante();
 
+	@Query(nativeQuery = false, value = "select count(*) from Participante r where r.subcategoria.categoria.codigo < 9 and r.numParticipante <> 0 and r.estadoCompetencia.codigo = 4 and r.persona.estado = 'A'")
+	Integer obtenerNumParticipanteEnEscenario();
+
+	@Query(nativeQuery = false, value = "select r from Participante r where r.subcategoria.categoria.codigo < 9 and r.numParticipante <> 0 and r.estadoCompetencia.codigo = 4 and r.persona.estado = 'A'")
+	List<Participante> listarParticipanteEnEscenario();
+
 	Participante findByCodigo(Long codigo);
 }

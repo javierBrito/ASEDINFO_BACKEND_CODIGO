@@ -22,6 +22,8 @@ public interface ParticipanteServicio {
 
 	Integer obtenerMaxNumParticipante();
 
+	Integer obtenerNumParticipanteEnEscenario();
+
 	/**
 	 * Permite obtener lista Socio
 	 * 
@@ -29,6 +31,8 @@ public interface ParticipanteServicio {
 	 * @return listaParticipante
 	 */
 	List<Participante> listarParticipantePorPersona(Long codPersona);
+
+	List<Participante> listarParticipanteEnEscenario();
 
 	/**
 	 * Permite listar Participante Activo

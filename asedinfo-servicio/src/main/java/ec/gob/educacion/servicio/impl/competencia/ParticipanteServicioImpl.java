@@ -45,6 +45,16 @@ public class ParticipanteServicioImpl implements ParticipanteServicio {
 	}
 
 	@Override
+	public Integer obtenerNumParticipanteEnEscenario() {
+		return participanteRepositorio.obtenerNumParticipanteEnEscenario();
+	}
+
+	@Override
+	public List<Participante> listarParticipanteEnEscenario() {
+		return participanteRepositorio.listarParticipanteEnEscenario();
+	}
+
+	@Override
 	public List<Participante> listarParticipantePorPersona(Long codPersona) {
 		return participanteRepositorio.listarParticipantePorPersona(codPersona);
 	}
