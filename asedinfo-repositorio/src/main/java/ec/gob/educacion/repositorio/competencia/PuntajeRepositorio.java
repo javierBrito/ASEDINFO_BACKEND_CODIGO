@@ -61,9 +61,10 @@ public interface PuntajeRepositorio extends JpaRepository<Puntaje, Long> {
 
 	List<Object[]> listarPuntajePorParticipanteSubcategoriaInstanciaRegSUMA(@Param("codSubcategoria") Long codSubcategoria, @Param("codInstancia") Long codInstancia, @Param("codParticipante") Long codParticipante);
 
-	
-	@Query(nativeQuery = true, value = "delete from wp_puntaje where cod_participante = :codParticipante")
-	Integer eliminarPuntajePorCodParticipante(@Param("codParticipante") Long codParticipante);
+	@Query(nativeQuery = true, value = "delete from wp_puntaje where cod_participante = :codParticipante and cod_instancia = :codInstancia")
+	Integer eliminarPuntajePorParticipanteInstancia(@Param("codParticipante") Long codParticipante, @Param("codInstancia") Long codInstancia);
 
+	@Query(nativeQuery = true, value = "delete from wp_puntaje where cod_participante = :codParticipante and cod_usuario_juez = :codUsuarioJuez and cod_instancia = :codInstancia")
+	Integer eliminarPuntajePorParticipanteUsuarioJuezInstancia(@Param("codParticipante") Long codParticipante, @Param("codUsuarioJuez") Long codUsuarioJuez, @Param("codInstancia") Long codInstancia);
 
 }

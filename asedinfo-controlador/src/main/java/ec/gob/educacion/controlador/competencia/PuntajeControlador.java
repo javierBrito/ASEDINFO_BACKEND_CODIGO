@@ -11,9 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ec.gob.educacion.controlador.util.Constantes;
 import ec.gob.educacion.modelo.response.ResponseGenerico;
+import ec.gob.educacion.modelo.seguridad.Usuario;
+import ec.gob.educacion.modelo.catalogo.EstadoCompetencia;
+import ec.gob.educacion.modelo.competencia.Participante;
 import ec.gob.educacion.modelo.competencia.Puntaje;
 import ec.gob.educacion.venta.resources.EstadoEnum;
+import ec.gob.educacion.servicio.catalogo.EstadoCompetenciaServicio;
+import ec.gob.educacion.servicio.competencia.ParticipanteServicio;
 import ec.gob.educacion.servicio.competencia.PuntajeServicio;
+import ec.gob.educacion.servicio.seguridad.UsuarioServicio;
 
 @RestController
 @RequestMapping("competencia/")
@@ -21,6 +27,12 @@ public class PuntajeControlador {
 
 	@Autowired
 	private PuntajeServicio puntajeServicio;
+	@Autowired
+	private UsuarioServicio usuarioServicio;
+	@Autowired
+	private ParticipanteServicio participanteServicio;
+	@Autowired
+	private EstadoCompetenciaServicio estadoCompetenciaServicio;
 
 	@GetMapping(value = "listarTodosPuntaje")
 	public ResponseGenerico<Puntaje> listarTodosPuntaje() {
@@ -201,20 +213,47 @@ public class PuntajeControlador {
 	@SuppressWarnings("unused")
 	@PostMapping(value = "guardarListaPuntaje")
 	public ResponseGenerico<Puntaje> guardarListaPuntaje(@RequestBody List<Puntaje> listaPuntaje) {
+		boolean actualizarNumPuntajeJuez = false;
+		Participante participante = new Participante();
+		EstadoCompetencia estadoCompetencia = new EstadoCompetencia();
+		Usuario usuario = new Usuario();
 		Puntaje puntaje = new Puntaje();
 		if (listaPuntaje.size() > 0) {
-			Integer respuesta = puntajeServicio.eliminarPuntajePorCodParticipante(listaPuntaje.get(0).getCodParticipante());
-			List<Puntaje> listaPuntajeParticipante = puntajeServicio.listarPuntajePorParticipanteSubcategoriaInstanciaCriterios(listaPuntaje.get(0).getCodParticipante(), listaPuntaje.get(0).getCodSubcategoria(), listaPuntaje.get(0).getCodInstancia());
-			for (Puntaje puntajeAux : listaPuntaje) {
-				for (Puntaje puntajeParticipante : listaPuntajeParticipante) {
-					if (puntajeParticipante.getCodModeloPuntaje() == puntajeAux.getCodModeloPuntaje()) {
-						puntajeParticipante.setCodUsuarioJuez(puntajeAux.getCodUsuarioJuez());
-						puntajeParticipante.setPuntaje(puntajeAux.getPuntaje());
-						puntajeAux = puntajeParticipante;
+			// Obtener los datos del juez
+			if (listaPuntaje.get(0).getCodUsuarioJuez() != 0) {
+				usuario = usuarioServicio.buscarUsuarioPorCodigo(listaPuntaje.get(0).getCodUsuarioJuez());
+			}
+			// Validar el tipo de juez
+			if (usuario != null && usuario.getCedula().equalsIgnoreCase("JUEZADMIN")) {
+				Integer respuesta = puntajeServicio.eliminarPuntajePorParticipanteInstancia(listaPuntaje.get(0).getCodParticipante(), listaPuntaje.get(0).getCodInstancia());
+				for (Puntaje puntajeAux : listaPuntaje) {
+					puntaje = puntajeServicio.registrar(puntajeAux);
+				}
+			} else {
+				if (listaPuntaje.get(0).getCodigo() == 0) {
+					actualizarNumPuntajeJuez = true;
+				}
+				Integer respuesta = puntajeServicio.eliminarPuntajePorParticipanteUsuarioJuezInstancia(listaPuntaje.get(0).getCodParticipante(), listaPuntaje.get(0).getCodUsuarioJuez(), listaPuntaje.get(0).getCodInstancia());
+				for (Puntaje puntajeAux : listaPuntaje) {
+					puntaje = puntajeServicio.registrar(puntajeAux);
+				}
+				if (actualizarNumPuntajeJuez) {
+					// Actualizar el número de puntaje por cada juez
+					participante = participanteServicio.buscarParticipantePorCodigo(listaPuntaje.get(0).getCodParticipante());
+					if (participante != null) {
+						participante.setNumPuntajeJuez(participante.getNumPuntajeJuez() + 1);
+						// Actualizar codigo estado competencia a completado = 5
+						// NumJues numero de jueces que van a puntuar que se encuentra en la Subcategoria
+						if (participante.getNumPuntajeJuez() == participante.getNumJueces()) {
+							estadoCompetencia = estadoCompetenciaServicio.buscarEstadoCompetenciaPorCodigo(5L);
+							participante.setEstadoCompetencia(estadoCompetencia);
+						}
+						// Actualizar los datos del participante
+						participanteServicio.registrar(participante);
 					}
 				}
-				puntaje = puntajeServicio.registrar(puntajeAux);
 			}
+			
 		}
 		// Respuesta
 		ResponseGenerico<Puntaje> response = new ResponseGenerico<>();

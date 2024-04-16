@@ -99,6 +99,8 @@ public class Usuario implements java.io.Serializable {
 	private Long codSede;
 	@Transient
 	private Long codPersona;
+	@Transient
+	private String cedula;
 
 	public Usuario() {
 	}
@@ -302,6 +304,15 @@ public class Usuario implements java.io.Serializable {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-	
-	
+
+	public String getCedula() {
+		if (this.persona != null) {
+			cedula = this.persona.getCedula();
+		}
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
 }

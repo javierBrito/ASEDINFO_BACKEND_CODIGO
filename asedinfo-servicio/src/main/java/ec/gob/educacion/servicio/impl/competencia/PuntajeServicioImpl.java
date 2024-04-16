@@ -66,8 +66,13 @@ public class PuntajeServicioImpl implements PuntajeServicio {
 	}
 	
 	@Override
-	public Integer eliminarPuntajePorCodParticipante(Long codParticipante) {
-		return puntajeRepositorio.eliminarPuntajePorCodParticipante(codParticipante);
+	public Integer eliminarPuntajePorParticipanteInstancia(Long codParticipante, Long codInstancia) {
+		return puntajeRepositorio.eliminarPuntajePorParticipanteInstancia(codParticipante, codInstancia);
+	}
+	
+	@Override
+	public Integer eliminarPuntajePorParticipanteUsuarioJuezInstancia(Long codParticipante, Long codUsuarioJuez, Long codInstancia) {
+		return puntajeRepositorio.eliminarPuntajePorParticipanteUsuarioJuezInstancia(codParticipante, codUsuarioJuez, codInstancia);
 	}
 
 	@Override

@@ -66,7 +66,9 @@ public interface PuntajeServicio {
 
 	List<Puntaje> listarPuntajePorParticipanteSubcategoriaInstanciaCriterios(Long codParticipante, Long codSubcategoria, Long codInstancia);
 
-	Integer eliminarPuntajePorCodParticipante(Long codParticipante);
+	Integer eliminarPuntajePorParticipanteInstancia(Long codParticipante, Long codInstancia);
+
+	Integer eliminarPuntajePorParticipanteUsuarioJuezInstancia(Long codParticipante, Long codUsuarioJuez, Long codInstancia);
 
 	/**
 	 * Permite obtener Puntaje
