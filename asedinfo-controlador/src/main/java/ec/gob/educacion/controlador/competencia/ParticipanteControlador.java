@@ -177,7 +177,7 @@ public class ParticipanteControlador {
 	@DeleteMapping(value = "eliminarParticipantePorId/{codigo}")
 	public ResponseGenerico<Participante> eliminarParticipante(@PathVariable("codigo") Long codigo) {
 		Participante participante = participanteServicio.buscarParticipantePorCodigo(codigo);
-		//Participante.setStatus("Eliminar");
+		participante.setEstado("I");
 		participanteServicio.registrar(participante);
 		// Respuesta
 		ResponseGenerico<Participante> response = new ResponseGenerico<>();

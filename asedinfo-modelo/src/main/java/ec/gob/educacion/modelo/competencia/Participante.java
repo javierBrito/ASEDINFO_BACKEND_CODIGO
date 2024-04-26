@@ -70,6 +70,12 @@ public class Participante implements java.io.Serializable {
 	@Column(name = "nombre_escuela")
 	private String nombreEscuela;
 	
+	@Column(name = "nombre_pareja")
+	private String nombrePareja;
+	
+	@Column(name = "estado")
+	private String estado;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-EC", timezone = "America/Lima")
 	@Column(name = "date_last_active", length = 23)
@@ -252,7 +258,7 @@ public class Participante implements java.io.Serializable {
 
 	public String getNombrePersona() {
 		if (this.persona != null) {
-			nombrePersona = this.persona.getNombres() + " " + this.persona.getApellidos();
+			nombrePersona = this.persona.getNombres();
 		}
 		return nombrePersona;
 	}
@@ -543,5 +549,21 @@ public class Participante implements java.io.Serializable {
 
 	public void setPrefijoTelefonico(String prefijoTelefonico) {
 		this.prefijoTelefonico = prefijoTelefonico;
+	}
+
+	public String getNombrePareja() {
+		return nombrePareja;
+	}
+
+	public void setNombrePareja(String nombrePareja) {
+		this.nombrePareja = nombrePareja;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 }
